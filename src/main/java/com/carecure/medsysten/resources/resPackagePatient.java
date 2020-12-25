@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-public class packagePatient extends packageBase{
+public class resPackagePatient extends resPackageBase {
 
     @Id
     private long code;
@@ -58,7 +58,7 @@ public class packagePatient extends packageBase{
         this.patientCode = patientCode;
     }
 
-    public packagePatient(long code, Date dateSubscripred, long usedAmount, long remainingAmount, long patientCode) {
+    public resPackagePatient(long code, Date dateSubscripred, long usedAmount, long remainingAmount, long patientCode) {
         this.code = code;
         this.dateSubscripred = dateSubscripred;
         this.usedAmount = usedAmount;

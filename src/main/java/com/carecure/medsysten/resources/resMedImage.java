@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-public class MedImage {
+public class resMedImage {
     @Id
     private long code;
     private String image;
@@ -65,7 +65,7 @@ public class MedImage {
         this.patientName = patientName;
     }
 
-    public MedImage(long code, String image, String type, Date dateAdded, long patientCode, String patientName) {
+    public resMedImage(long code, String image, String type, Date dateAdded, long patientCode, String patientName) {
         this.code = code;
         this.image = image;
         this.type = type;
@@ -74,6 +74,6 @@ public class MedImage {
         this.patientName = patientName;
     }
 
-    public MedImage() {
+    public resMedImage() {
     }
 }

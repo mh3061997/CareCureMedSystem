@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-public class packageBase {
+public class resPackageBase {
 
     @Id
     private long code;
@@ -86,7 +86,7 @@ public class packageBase {
         Type = type;
     }
 
-    public packageBase(long code, String name, Date dateCreated, Date dateExpired, String status, long price, long unitTotal, String type) {
+    public resPackageBase(long code, String name, Date dateCreated, Date dateExpired, String status, long price, long unitTotal, String type) {
         this.code = code;
         this.name = name;
         this.dateCreated = dateCreated;
@@ -97,6 +97,6 @@ public class packageBase {
         Type = type;
     }
 
-    public packageBase() {
+    public resPackageBase() {
     }
 }

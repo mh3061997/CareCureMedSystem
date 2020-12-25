@@ -4,14 +4,15 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class patient {
+public class resDoctor {
+
     @Id
     private long code;
     private String name;
-    private String gender;
     private String email;
-    private String mobile;
+    private String Gender;
     private int age;
+    private  String Speciality;
 
     public long getCode() {
         return code;
@@ -29,14 +30,6 @@ public class patient {
         this.name = name;
     }
 
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -45,12 +38,12 @@ public class patient {
         this.email = email;
     }
 
-    public String getMobile() {
-        return mobile;
+    public String getGender() {
+        return Gender;
     }
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
+    public void setGender(String gender) {
+        Gender = gender;
     }
 
     public int getAge() {
@@ -61,23 +54,31 @@ public class patient {
         this.age = age;
     }
 
-    public patient() {
+    public String getSpeciality() {
+        return Speciality;
     }
 
-    public patient(long code, String name, String gender, String email, String mobile, int age) {
+    public void setSpeciality(String speciality) {
+        Speciality = speciality;
+    }
+
+    public resDoctor(long code, String name, String email, String gender, int age, String speciality) {
         this.code = code;
         this.name = name;
-        this.gender = gender;
         this.email = email;
-        this.mobile = mobile;
+        Gender = gender;
         this.age = age;
+        Speciality = speciality;
     }
-// appointement history
 
-    //radiology;
+    public resDoctor() {
+    }
 
-    //lab
+    //appointments;
 
-    //prescription
+    //upcoming appointements
+
+    //days available
+
 
 }

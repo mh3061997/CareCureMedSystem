@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-public class appointement {
+public class resAppointement {
 
     @Id
     private long code;

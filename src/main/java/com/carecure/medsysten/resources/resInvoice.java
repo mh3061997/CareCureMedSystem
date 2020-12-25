@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-public class invoice {
+public class resInvoice {
 
     @Id
     private long code;
@@ -29,10 +29,10 @@ public class invoice {
 
     private String paymentMethod;
 
-    public invoice() {
+    public resInvoice() {
     }
 
-    public invoice(long code, Date dateCreated, Date dateFinalized, long totalDue, long totalPaid, long totalRemaining, String status, long patientCode, long patientName, long appointementCode, String paymentMethod) {
+    public resInvoice(long code, Date dateCreated, Date dateFinalized, long totalDue, long totalPaid, long totalRemaining, String status, long patientCode, long patientName, long appointementCode, String paymentMethod) {
         this.code = code;
         this.dateCreated = dateCreated;
         this.dateFinalized = dateFinalized;
