@@ -1,4 +1,4 @@
 package com.carecure.medsysten.interfaces;
 
-public class contIntAppointement {
+public class contIntAppointment {
 }

@@ -1,4 +1,7 @@
 package com.carecure.medsysten.repositories;
 
-public class repoInvoice {
+import com.carecure.medsysten.resources.resInvoice;
+import org.springframework.data.repository.CrudRepository;
+
+public interface repoInvoice extends CrudRepository<resInvoice,Long> {
 }

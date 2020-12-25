@@ -2,11 +2,13 @@ package com.carecure.medsysten.resources;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class resPackageBase {
 
     @Id
+    @GeneratedValue( strategy=GenerationType.AUTO )
     private long code;
     private String name;
 
@@ -21,6 +23,9 @@ public class resPackageBase {
     private long price;
     private long unitTotal;
     private String Type;
+
+    @OneToMany
+    List<resPackageBase> memberships;
 
     public long getCode() {
         return code;

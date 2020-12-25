@@ -1,5 +1,12 @@
 package com.carecure.medsysten.repositories;
 
 
-public class repoPatient {
+import com.carecure.medsysten.resources.resPatient;
+import org.springframework.data.repository.CrudRepository;
+
+import java.util.List;
+
+public interface repoPatient extends CrudRepository<resPatient,Long> {
+    List<resPatient> findByName(String name);
+    List<resPatient> findByMobile(String mobile);
 }

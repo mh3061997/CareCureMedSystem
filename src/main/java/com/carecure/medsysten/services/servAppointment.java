@@ -1,4 +1,4 @@
 package com.carecure.medsysten.services;
 
-public class servAppointement {
+public class servAppointment {
 }

@@ -1,4 +1,7 @@
 package com.carecure.medsysten.repositories;
 
-public class repoPackageBase {
+import com.carecure.medsysten.resources.resPackageBase;
+import org.springframework.data.repository.CrudRepository;
+
+public interface repoPackageBase extends CrudRepository<resPackageBase,Long> {
 }

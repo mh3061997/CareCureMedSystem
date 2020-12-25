@@ -6,6 +6,7 @@ import java.util.Date;
 @Entity
 public class resMedImage {
     @Id
+    @GeneratedValue( strategy=GenerationType.AUTO )
     private long code;
     private String image;
     private String type; // prescription , radiology, lab
@@ -14,8 +15,8 @@ public class resMedImage {
     @Temporal(TemporalType.DATE)
     private Date dateAdded;
 
-    private long patientCode;
-    private String patientName;
+   @ManyToOne
+   private resPatient patient;
 
     public long getCode() {
         return code;
@@ -49,29 +50,21 @@ public class resMedImage {
         this.dateAdded = dateAdded;
     }
 
-    public long getPatientCode() {
-        return patientCode;
+
+    public resPatient getPatient() {
+        return patient;
     }
 
-    public void setPatientCode(long patientCode) {
-        this.patientCode = patientCode;
+    public void setPatient(resPatient patient) {
+        this.patient = patient;
     }
 
-    public String getPatientName() {
-        return patientName;
-    }
-
-    public void setPatientName(String patientName) {
-        this.patientName = patientName;
-    }
-
-    public resMedImage(long code, String image, String type, Date dateAdded, long patientCode, String patientName) {
+    public resMedImage(long code, String image, String type, Date dateAdded, resPatient patient) {
         this.code = code;
         this.image = image;
         this.type = type;
         this.dateAdded = dateAdded;
-        this.patientCode = patientCode;
-        this.patientName = patientName;
+        this.patient = patient;
     }
 
     public resMedImage() {

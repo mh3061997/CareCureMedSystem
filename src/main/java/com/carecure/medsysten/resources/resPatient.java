@@ -1,17 +1,27 @@
 package com.carecure.medsysten.resources;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class resPatient {
     @Id
+    @GeneratedValue( strategy= GenerationType.AUTO )
     private long code;
     private String name;
     private String gender;
     private String email;
     private String mobile;
     private int age;
+
+    @OneToMany
+    List<resPackageMembership> memberships;
+
+    @OneToMany
+    List<resAppointment> appointments;
+
+    @OneToMany
+    List<resMedImage> medImages;
 
     public long getCode() {
         return code;
@@ -72,7 +82,7 @@ public class resPatient {
         this.mobile = mobile;
         this.age = age;
     }
-// resAppointement history
+// resAppointment history
 
     //radiology;
 

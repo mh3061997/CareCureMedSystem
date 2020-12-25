@@ -7,6 +7,7 @@ import java.util.Date;
 public class resInvoice {
 
     @Id
+    @GeneratedValue( strategy=GenerationType.AUTO )
     private long code;
 
     @Basic
@@ -23,16 +24,35 @@ public class resInvoice {
 
     private String status;
 
-    private long patientCode;
-    private long patientName;
-    private long appointementCode;
+    @ManyToOne
+    private resPatient patient;
+
+    @ManyToOne
+    private resAppointment appointment;
 
     private String paymentMethod;
 
     public resInvoice() {
     }
 
-    public resInvoice(long code, Date dateCreated, Date dateFinalized, long totalDue, long totalPaid, long totalRemaining, String status, long patientCode, long patientName, long appointementCode, String paymentMethod) {
+    public resPatient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(resPatient patient) {
+        this.patient = patient;
+    }
+
+    public resAppointment getAppointment() {
+        return appointment;
+    }
+
+    public void setAppointment(resAppointment appointment) {
+        this.appointment = appointment;
+    }
+
+    public resInvoice(long code, Date dateCreated, Date dateFinalized, long totalDue, long totalPaid, long totalRemaining, String status, resPatient patient, resAppointment appointment, String paymentMethod) {
+
         this.code = code;
         this.dateCreated = dateCreated;
         this.dateFinalized = dateFinalized;
@@ -40,9 +60,8 @@ public class resInvoice {
         this.totalPaid = totalPaid;
         this.totalRemaining = totalRemaining;
         this.status = status;
-        this.patientCode = patientCode;
-        this.patientName = patientName;
-        this.appointementCode = appointementCode;
+        this.patient = patient;
+        this.appointment = appointment;
         this.paymentMethod = paymentMethod;
     }
 
@@ -100,30 +119,6 @@ public class resInvoice {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public long getPatientCode() {
-        return patientCode;
-    }
-
-    public void setPatientCode(long patientCode) {
-        this.patientCode = patientCode;
-    }
-
-    public long getPatientName() {
-        return patientName;
-    }
-
-    public void setPatientName(long patientName) {
-        this.patientName = patientName;
-    }
-
-    public long getAppointementCode() {
-        return appointementCode;
-    }
-
-    public void setAppointementCode(long appointementCode) {
-        this.appointementCode = appointementCode;
     }
 
     public String getPaymentMethod() {
