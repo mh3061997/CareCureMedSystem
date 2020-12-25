@@ -91,7 +91,15 @@ public class resPackageBase {
         Type = type;
     }
 
-    public resPackageBase(long code, String name, Date dateCreated, Date dateExpired, String status, long price, long unitTotal, String type) {
+    public List<resPackageBase> getMemberships() {
+        return memberships;
+    }
+
+    public void setMemberships(List<resPackageBase> memberships) {
+        this.memberships = memberships;
+    }
+
+    public resPackageBase(long code, String name, Date dateCreated, Date dateExpired, String status, long price, long unitTotal, String type, List<resPackageBase> memberships) {
         this.code = code;
         this.name = name;
         this.dateCreated = dateCreated;
@@ -100,6 +108,7 @@ public class resPackageBase {
         this.price = price;
         this.unitTotal = unitTotal;
         Type = type;
+        this.memberships = memberships;
     }
 
     public resPackageBase() {

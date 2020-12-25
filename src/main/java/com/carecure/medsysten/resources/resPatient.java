@@ -14,6 +14,29 @@ public class resPatient {
     private String mobile;
     private int age;
 
+    private String notes;
+
+    public resPatient(long code, String name, String gender, String email, String mobile, int age, String notes, List<resPackageMembership> memberships, List<resAppointment> appointments, List<resMedImage> medImages) {
+        this.code = code;
+        this.name = name;
+        this.gender = gender;
+        this.email = email;
+        this.mobile = mobile;
+        this.age = age;
+        this.notes = notes;
+        this.memberships = memberships;
+        this.appointments = appointments;
+        this.medImages = medImages;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
     @OneToMany
     List<resPackageMembership> memberships;
 
@@ -74,15 +97,33 @@ public class resPatient {
     public resPatient() {
     }
 
-    public resPatient(long code, String name, String gender, String email, String mobile, int age) {
-        this.code = code;
-        this.name = name;
-        this.gender = gender;
-        this.email = email;
-        this.mobile = mobile;
-        this.age = age;
+    public List<resPackageMembership> getMemberships() {
+        return memberships;
     }
-// resAppointment history
+
+    public void setMemberships(List<resPackageMembership> memberships) {
+        this.memberships = memberships;
+    }
+
+    public List<resAppointment> getAppointments() {
+        return appointments;
+    }
+
+    public void setAppointments(List<resAppointment> appointments) {
+        this.appointments = appointments;
+    }
+
+    public List<resMedImage> getMedImages() {
+        return medImages;
+    }
+
+    public void setMedImages(List<resMedImage> medImages) {
+        this.medImages = medImages;
+    }
+
+
+
+    // resAppointment history
 
     //radiology;
 

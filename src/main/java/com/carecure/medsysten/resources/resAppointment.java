@@ -18,6 +18,15 @@ public class resAppointment {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateToVisit;
     private String status;
+    private String notes;
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
 
     @ManyToOne
     private resDoctor doctor;
@@ -25,12 +34,13 @@ public class resAppointment {
     @ManyToOne
     private resPatient patient;
 
-    public resAppointment(long code, String speciality, Date dateCreated, Date dateToVisit, String status, resDoctor doctor, resPatient patient) {
+    public resAppointment(long code, String speciality, Date dateCreated, Date dateToVisit, String status, String notes, resDoctor doctor, resPatient patient) {
         this.code = code;
         this.speciality = speciality;
         this.dateCreated = dateCreated;
         this.dateToVisit = dateToVisit;
         this.status = status;
+        this.notes = notes;
         this.doctor = doctor;
         this.patient = patient;
     }

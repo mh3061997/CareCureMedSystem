@@ -10,6 +10,16 @@ public class resDoctor {
     @GeneratedValue( strategy= GenerationType.AUTO )
     private long code;
     private String name;
+    private String mobile;
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
     private String email;
     private String Gender;
     private int age;
@@ -17,9 +27,10 @@ public class resDoctor {
     @OneToMany
     List<resAppointment> appointments;
 
-    public resDoctor(long code, String name, String email, String gender, int age, String speciality, List<resAppointment> appointments) {
+    public resDoctor(long code, String name, String mobile, String email, String gender, int age, String speciality, List<resAppointment> appointments) {
         this.code = code;
         this.name = name;
+        this.mobile = mobile;
         this.email = email;
         Gender = gender;
         this.age = age;
