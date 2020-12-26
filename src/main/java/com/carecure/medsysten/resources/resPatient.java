@@ -40,7 +40,8 @@ public class resPatient {
     @OneToMany
     List<resPackageMembership> memberships;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
+
     List<resAppointment> appointments;
 
     @OneToMany

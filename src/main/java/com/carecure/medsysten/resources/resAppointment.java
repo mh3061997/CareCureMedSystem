@@ -28,10 +28,12 @@ public class resAppointment {
         this.notes = notes;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "doctor_id")
     private resDoctor doctor;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "patient_code")
     private resPatient patient;
 
     public resAppointment(long code, String speciality, Date dateCreated, Date dateToVisit, String status, String notes, resDoctor doctor, resPatient patient) {

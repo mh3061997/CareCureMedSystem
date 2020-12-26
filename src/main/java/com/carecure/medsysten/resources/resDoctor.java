@@ -21,9 +21,9 @@ public class resDoctor {
     }
 
     private String email;
-    private String Gender;
+    private String gender;
     private int age;
-    private  String Speciality;
+    private  String speciality;
     @OneToMany
     List<resAppointment> appointments;
 
@@ -32,9 +32,9 @@ public class resDoctor {
         this.name = name;
         this.mobile = mobile;
         this.email = email;
-        Gender = gender;
+        this.gender = gender;
         this.age = age;
-        Speciality = speciality;
+        this.speciality = speciality;
         this.appointments = appointments;
     }
 
@@ -71,11 +71,11 @@ public class resDoctor {
     }
 
     public String getGender() {
-        return Gender;
+        return this.gender;
     }
 
     public void setGender(String gender) {
-        Gender = gender;
+        this.gender = gender;
     }
 
     public int getAge() {
@@ -87,11 +87,11 @@ public class resDoctor {
     }
 
     public String getSpeciality() {
-        return Speciality;
+        return this.speciality;
     }
 
     public void setSpeciality(String speciality) {
-        Speciality = speciality;
+        this.speciality = speciality;
     }
 
 
