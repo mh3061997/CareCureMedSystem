@@ -24,8 +24,8 @@ public class resPackageBase {
     private long unitTotal;
     private String Type;
 
-    @OneToMany
-    List<resPackageBase> memberships;
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "packageBase")
+    private List<resPackageMembership> memberships;
 
     public long getCode() {
         return code;
@@ -91,15 +91,15 @@ public class resPackageBase {
         Type = type;
     }
 
-    public List<resPackageBase> getMemberships() {
+    public List<resPackageMembership> getMemberships() {
         return memberships;
     }
 
-    public void setMemberships(List<resPackageBase> memberships) {
+    public void setMemberships(List<resPackageMembership> memberships) {
         this.memberships = memberships;
     }
 
-    public resPackageBase(long code, String name, Date dateCreated, Date dateExpired, String status, long price, long unitTotal, String type, List<resPackageBase> memberships) {
+    public resPackageBase(long code, String name, Date dateCreated, Date dateExpired, String status, long price, long unitTotal, String type, List<resPackageMembership> memberships) {
         this.code = code;
         this.name = name;
         this.dateCreated = dateCreated;
@@ -113,4 +113,8 @@ public class resPackageBase {
 
     public resPackageBase() {
     }
+
+
+
+
 }

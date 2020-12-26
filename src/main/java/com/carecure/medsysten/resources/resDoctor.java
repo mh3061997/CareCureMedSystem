@@ -12,6 +12,16 @@ public class resDoctor {
     private String name;
     private String mobile;
 
+
+
+    private String email;
+    private String gender;
+    private int age;
+    private  String speciality;
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "doctor")
+    List<resAppointment> appointments;
+
+
     public String getMobile() {
         return mobile;
     }
@@ -19,13 +29,6 @@ public class resDoctor {
     public void setMobile(String mobile) {
         this.mobile = mobile;
     }
-
-    private String email;
-    private String gender;
-    private int age;
-    private  String speciality;
-    @OneToMany
-    List<resAppointment> appointments;
 
     public resDoctor(long code, String name, String mobile, String email, String gender, int age, String speciality, List<resAppointment> appointments) {
         this.code = code;

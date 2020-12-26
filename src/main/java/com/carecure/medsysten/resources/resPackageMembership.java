@@ -17,10 +17,13 @@ public class resPackageMembership{
     private long usedAmount;
     private long remainingAmount;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "patientCode")
     private resPatient patient;
 
-    @ManyToOne resPackageBase packageBase;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "packageCode")
+    private resPackageBase packageBase;
 
     public long getCode() {
         return code;

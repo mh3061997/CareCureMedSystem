@@ -15,7 +15,8 @@ public class resMedImage {
     @Temporal(TemporalType.DATE)
     private Date dateAdded;
 
-   @ManyToOne
+   @ManyToOne(fetch = FetchType.LAZY)
+   @JoinColumn(name = "patientCode")
    private resPatient patient;
 
     public long getCode() {

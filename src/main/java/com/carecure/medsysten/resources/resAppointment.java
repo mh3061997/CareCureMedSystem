@@ -20,6 +20,16 @@ public class resAppointment {
     private String status;
     private String notes;
 
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "doctorCode")
+    private resDoctor doctor;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "patientCode")
+    private resPatient patient;
+
+
     public String getNotes() {
         return notes;
     }
@@ -28,13 +38,6 @@ public class resAppointment {
         this.notes = notes;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "doctor_id")
-    private resDoctor doctor;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "patient_code")
-    private resPatient patient;
 
     public resAppointment(long code, String speciality, Date dateCreated, Date dateToVisit, String status, String notes, resDoctor doctor, resPatient patient) {
         this.code = code;

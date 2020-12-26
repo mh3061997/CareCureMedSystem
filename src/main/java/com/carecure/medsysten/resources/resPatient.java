@@ -16,6 +16,18 @@ public class resPatient {
 
     private String notes;
 
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "patient")
+    List<resPackageMembership> memberships;
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "patient")
+    List<resAppointment> appointments;
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "patient")
+    List<resMedImage> medImages;
+
+
+
     public resPatient(long code, String name, String gender, String email, String mobile, int age, String notes, List<resPackageMembership> memberships, List<resAppointment> appointments, List<resMedImage> medImages) {
         this.code = code;
         this.name = name;
@@ -36,16 +48,6 @@ public class resPatient {
     public void setNotes(String notes) {
         this.notes = notes;
     }
-
-    @OneToMany
-    List<resPackageMembership> memberships;
-
-    @OneToMany(fetch = FetchType.LAZY)
-
-    List<resAppointment> appointments;
-
-    @OneToMany
-    List<resMedImage> medImages;
 
     public long getCode() {
         return code;
