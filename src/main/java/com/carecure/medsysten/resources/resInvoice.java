@@ -7,7 +7,7 @@ import java.util.Date;
 public class resInvoice {
 
     @Id
-    @GeneratedValue( strategy=GenerationType.AUTO )
+    @GeneratedValue( strategy=GenerationType.IDENTITY )
     private long code;
 
     @Basic
@@ -24,10 +24,11 @@ public class resInvoice {
 
     private String status;
 
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     private resPatient patient;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private resAppointment appointment;
 
     private String paymentMethod;

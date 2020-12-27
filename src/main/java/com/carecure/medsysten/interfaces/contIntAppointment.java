@@ -20,9 +20,9 @@ public interface contIntAppointment {
     @RequestMapping(method = RequestMethod.POST)
     void addAppointment(@RequestBody resAppointment newAppointment);
 
-    @RequestMapping(method = RequestMethod.PUT,value="/{appointmentCode")
+    @RequestMapping(method = RequestMethod.PUT,value="/{appointmentCode}")
     void updateAppointment(@PathVariable("appointmentCode") long code, @RequestBody resAppointment updatedAppointment);
 
-    @RequestMapping(method= RequestMethod.DELETE,value="/{appointmentCode")
+    @RequestMapping(method= RequestMethod.DELETE,value="/{appointmentCode}")
     void deleteAppointment(@PathVariable("appointmentCode") long code);
 }

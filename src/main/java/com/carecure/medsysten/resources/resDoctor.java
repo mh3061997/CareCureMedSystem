@@ -1,5 +1,9 @@
 package com.carecure.medsysten.resources;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -7,7 +11,7 @@ import java.util.List;
 public class resDoctor {
 
     @Id
-    @GeneratedValue( strategy= GenerationType.AUTO )
+    @GeneratedValue( strategy= GenerationType.IDENTITY )
     private long code;
     private String name;
     private String mobile;
@@ -18,6 +22,8 @@ public class resDoctor {
     private String gender;
     private int age;
     private  String speciality;
+
+    //@JsonBackReference
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "doctor")
     List<resAppointment> appointments;
 

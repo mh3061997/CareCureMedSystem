@@ -26,8 +26,11 @@ public class servPatient {
     //return app by id
     public resPatient getPatientByCode(long code){
         Optional<resPatient> patient = repoPatient.findById(code);
-        if(patient.isPresent())
+        if(patient.isPresent()){
+            //System.out.println(patient.get());
             return patient.get();
+        }
+
         else
             //throw exception
             return null;

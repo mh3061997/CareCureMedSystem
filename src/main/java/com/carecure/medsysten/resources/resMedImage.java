@@ -6,7 +6,7 @@ import java.util.Date;
 @Entity
 public class resMedImage {
     @Id
-    @GeneratedValue( strategy=GenerationType.AUTO )
+    @GeneratedValue( strategy=GenerationType.IDENTITY )
     private long code;
     private String image;
     private String type; // prescription , radiology, lab

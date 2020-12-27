@@ -1,12 +1,16 @@
 package com.carecure.medsysten.resources;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 public class resPatient {
     @Id
-    @GeneratedValue( strategy= GenerationType.AUTO )
+    @GeneratedValue( strategy= GenerationType.IDENTITY )
     private long code;
     private String name;
     private String gender;
@@ -20,6 +24,7 @@ public class resPatient {
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "patient")
     List<resPackageMembership> memberships;
 
+    //@JsonBackReference
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "patient")
     List<resAppointment> appointments;
 

@@ -20,9 +20,9 @@ public interface contIntDoctor {
     @RequestMapping(method = RequestMethod.POST)
     void addDoctor(@RequestBody resDoctor newDoctor);
 
-    @RequestMapping(method = RequestMethod.PUT,value="/{doctorCode")
+    @RequestMapping(method = RequestMethod.PUT,value="/{doctorCode}")
     void updateDoctor(@PathVariable("doctorCode") long code, @RequestBody resDoctor updatedDoctor);
 
-    @RequestMapping(method= RequestMethod.DELETE,value="/{doctorCode")
+    @RequestMapping(method= RequestMethod.DELETE,value="/{doctorCode}")
     void deleteDoctor(@PathVariable("doctorCode") long code);
 }

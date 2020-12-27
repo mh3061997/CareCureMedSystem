@@ -1,6 +1,11 @@
 package com.carecure.medsysten.resources;
 
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -8,7 +13,7 @@ import java.util.Date;
 public class resAppointment {
 
     @Id
-    @GeneratedValue( strategy= GenerationType.AUTO )
+    @GeneratedValue( strategy= GenerationType.IDENTITY )
     private long code;
     private String speciality;
     @Basic
@@ -20,11 +25,12 @@ public class resAppointment {
     private String status;
     private String notes;
 
-
+    //@JsonManagedReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "doctorCode")
     private resDoctor doctor;
 
+    //@JsonManagedReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "patientCode")
     private resPatient patient;

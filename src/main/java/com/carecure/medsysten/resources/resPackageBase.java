@@ -8,7 +8,7 @@ import java.util.List;
 public class resPackageBase {
 
     @Id
-    @GeneratedValue( strategy=GenerationType.AUTO )
+    @GeneratedValue( strategy=GenerationType.IDENTITY )
     private long code;
     private String name;
 
