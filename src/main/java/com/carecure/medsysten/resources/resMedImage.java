@@ -1,5 +1,8 @@
 package com.carecure.medsysten.resources;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -17,6 +20,7 @@ public class resMedImage {
 
    @ManyToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "patientCode")
+   @JsonBackReference //never will i access medimages directly to keep controller clean
    private resPatient patient;
 
     public long getCode() {

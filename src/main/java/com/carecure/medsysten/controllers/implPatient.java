@@ -40,7 +40,6 @@ public class implPatient implements contIntPatient {
     }
 
     @Override
-    @JsonIgnoreProperties("appointments")
     public resPatient getPatientById(long code) {
         resPatient patient = servPatient.getPatientByCode(code);
         List<resAppointment> appointments = new ArrayList<>();

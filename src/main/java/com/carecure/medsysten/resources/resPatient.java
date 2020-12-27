@@ -28,6 +28,7 @@ public class resPatient {
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "patient")
     List<resAppointment> appointments;
 
+    //@JsonBackReference //never will i access medimages directly to keep controller clean
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "patient")
     List<resMedImage> medImages;
 
