@@ -8,7 +8,7 @@ import java.util.List;
 public class resPackageBase {
 
     @Id
-    @GeneratedValue( strategy=GenerationType.IDENTITY )
+    @GeneratedValue( strategy=GenerationType.IDENTITY)
     private long code;
     private String name;
 
@@ -22,7 +22,7 @@ public class resPackageBase {
     private String status; //ongoing or expired
     private long price;
     private long unitTotal;
-    private String Type;
+    private String type;
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "packageBase")
     private List<resPackageMembership> memberships;
@@ -84,11 +84,11 @@ public class resPackageBase {
     }
 
     public String getType() {
-        return Type;
+        return type;
     }
 
     public void setType(String type) {
-        Type = type;
+        this.type = type;
     }
 
     public List<resPackageMembership> getMemberships() {
@@ -107,7 +107,7 @@ public class resPackageBase {
         this.status = status;
         this.price = price;
         this.unitTotal = unitTotal;
-        Type = type;
+        this.type = type;
         this.memberships = memberships;
     }
 

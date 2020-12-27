@@ -1,9 +1,7 @@
 package com.carecure.medsysten.controllers;
 
 import com.carecure.medsysten.interfaces.contIntPatient;
-import com.carecure.medsysten.resources.resAppointment;
-import com.carecure.medsysten.resources.resDoctor;
-import com.carecure.medsysten.resources.resPatient;
+import com.carecure.medsysten.resources.*;
 import com.carecure.medsysten.services.servPatient;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +31,16 @@ public class implPatient implements contIntPatient {
                 appointments.add(appointment);
             });
             patient.setAppointments(appointments);
+
+            List<resPackageMembership> jsons = new ArrayList<>();
+            List<resPackageMembership> memberships = patient.getMemberships();
+            memberships.forEach(membership->{
+                membership.setPatient(null);
+                resPackageBase packageBase = membership.getPackageBase();
+                packageBase.setMemberships(new ArrayList<>());
+                jsons.add(membership);
+            });
+            patient.setMemberships(jsons);
             jsonPatients.add(patient);
         });
 
@@ -51,6 +59,18 @@ public class implPatient implements contIntPatient {
             appointments.add(appointment);
         });
         patient.setAppointments(appointments);
+
+        List<resPackageMembership> jsons = new ArrayList<>();
+        List<resPackageMembership> memberships = patient.getMemberships();
+        memberships.forEach(membership->{
+            membership.setPatient(null);
+            resPackageBase packageBase = membership.getPackageBase();
+            packageBase.setMemberships(new ArrayList<>());
+            jsons.add(membership);
+        });
+        patient.setMemberships(jsons);
+
+
         return patient;
         //return servPatient.getPatientByCode(code);
     }
