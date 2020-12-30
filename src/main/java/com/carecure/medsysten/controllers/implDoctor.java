@@ -29,6 +29,7 @@ public class implDoctor implements contIntDoctor {
                 appointment.setDoctor(null);
                 resPatient patient = appointment.getPatient();
                 patient.setAppointments(new ArrayList<>());
+                patient.setMemberships(new ArrayList<>());
                 appointment.setPatient(patient);
                 appointments.add(appointment);
             });
@@ -47,6 +48,7 @@ public class implDoctor implements contIntDoctor {
             appointment.setDoctor(null);
             resPatient patient =appointment.getPatient();
             patient.setAppointments(new ArrayList<>());
+            patient.setMemberships(new ArrayList<>());
             appointment.setPatient(patient);
             appointments.add(appointment);
         });

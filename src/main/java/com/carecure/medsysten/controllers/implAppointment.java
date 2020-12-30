@@ -24,6 +24,7 @@ public class implAppointment implements contIntAppointment {
          servAppointment.getAppointmentAll().forEach(appointment -> {
              resPatient patient = appointment.getPatient();
              patient.setAppointments(new ArrayList<>());
+             patient.setMemberships(new ArrayList<>());
 
              resDoctor doctor = appointment.getDoctor();
              doctor.setAppointments(new ArrayList<>());
@@ -44,6 +45,7 @@ public class implAppointment implements contIntAppointment {
 
         resPatient patient = appointment.getPatient();
         patient.setAppointments(new ArrayList<>());
+        patient.setMemberships(new ArrayList<>());
 
         resDoctor doctor = appointment.getDoctor();
         doctor.setAppointments(new ArrayList<>());
