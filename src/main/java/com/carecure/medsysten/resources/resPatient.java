@@ -8,6 +8,8 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@JsonIgnoreProperties("hibernateLazyInitializer")
+
 public class resPatient {
     @Id
     @GeneratedValue( strategy= GenerationType.IDENTITY )

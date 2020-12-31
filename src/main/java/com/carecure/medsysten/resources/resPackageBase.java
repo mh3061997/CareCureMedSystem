@@ -1,10 +1,14 @@
 package com.carecure.medsysten.resources;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
 @Entity
+@JsonIgnoreProperties("hibernateLazyInitializer")
+
 public class resPackageBase {
 
     @Id

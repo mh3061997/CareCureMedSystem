@@ -10,6 +10,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@JsonIgnoreProperties("hibernateLazyInitializer")
 public class resAppointment {
 
     @Id
