@@ -6,11 +6,13 @@ import com.carecure.medsysten.resources.resPackageMembership;
 import com.carecure.medsysten.resources.resPatient;
 import com.carecure.medsysten.services.servPackageBase;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 public class implPackageBase implements contIntPackageBase {
 
