@@ -36,6 +36,8 @@ public class resAppointment {
     @JoinColumn(name = "patientCode")
     private resPatient patient;
 
+    @OneToOne(fetch = FetchType.LAZY,mappedBy = "appointment")
+    private resInvoice invoice;
 
     public String getNotes() {
         return notes;
@@ -45,8 +47,15 @@ public class resAppointment {
         this.notes = notes;
     }
 
+    public resInvoice getInvoice() {
+        return invoice;
+    }
 
-    public resAppointment(long code, String speciality, Date dateCreated, Date dateToVisit, String status, String notes, resDoctor doctor, resPatient patient) {
+    public void setInvoice(resInvoice invoice) {
+        this.invoice = invoice;
+    }
+
+    public resAppointment(long code, String speciality, Date dateCreated, Date dateToVisit, String status, String notes, resDoctor doctor, resPatient patient, resInvoice invoice) {
         this.code = code;
         this.speciality = speciality;
         this.dateCreated = dateCreated;
@@ -55,6 +64,7 @@ public class resAppointment {
         this.notes = notes;
         this.doctor = doctor;
         this.patient = patient;
+        this.invoice = invoice;
     }
 
     public long getCode() {

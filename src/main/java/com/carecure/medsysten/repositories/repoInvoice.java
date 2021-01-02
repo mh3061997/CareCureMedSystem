@@ -10,6 +10,6 @@ public interface repoInvoice extends CrudRepository<resInvoice,Long> {
 
      List<resInvoice> findByDateCreated(Date dateCreated);
      List<resInvoice> findByStatus(String status);
-     List<resInvoice> findByPatientName(String name);
+
 
 }

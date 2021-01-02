@@ -1,16 +1,19 @@
 package com.carecure.medsysten.controllers;
 
 import com.carecure.medsysten.interfaces.contIntInvoice;
-import com.carecure.medsysten.resources.resInvoice;
+import com.carecure.medsysten.resources.*;
 import com.carecure.medsysten.services.servInvoice;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin
 @RestController
+
 public class implInvoice implements contIntInvoice {
 
     @Autowired
@@ -19,12 +22,65 @@ public class implInvoice implements contIntInvoice {
 
     @Override
     public List<resInvoice> getInvoiceAll() {
-        return servInvoice.getInvoiceAll();
+        List<resInvoice> jsonInvoice = new ArrayList<>();
+       servInvoice.getInvoiceAll().forEach(invoice ->{
+
+
+           resAppointment appointment = invoice.getAppointment();
+           resDoctor doctor = appointment.getDoctor();
+           doctor.setAppointments(new ArrayList<>());
+
+           appointment.setDoctor(doctor);
+
+           resPatient patient =appointment.getPatient();
+           patient.setMemberships(new ArrayList<>());
+           patient.setAppointments(new ArrayList<>());
+           patient.setMedImages(new ArrayList<>());
+           appointment.setPatient(patient);
+
+           invoice.setAppointment(appointment);
+
+           resPackageMembership membership = invoice.getUsedMembership();
+           membership.setPatient(null);
+           appointment.setInvoice(null);
+
+           resPackageBase  packageBase = membership.getPackageBase();
+           packageBase.setMemberships(new ArrayList<>());
+           invoice.setUsedMembership(membership);
+
+          jsonInvoice.add(invoice);
+       });
+
+       return jsonInvoice;
+
     }
 
     @Override
     public resInvoice getInvoiceById(long code) {
-        return servInvoice.getInvoiceByCode(code);
+
+        resInvoice invoice =  servInvoice.getInvoiceByCode(code);
+        resAppointment appointment = invoice.getAppointment();
+        resDoctor doctor = appointment.getDoctor();
+        doctor.setAppointments(new ArrayList<>());
+
+        appointment.setDoctor(doctor);
+
+        resPatient patient =appointment.getPatient();
+        patient.setMemberships(new ArrayList<>());
+        patient.setAppointments(new ArrayList<>());
+        patient.setMedImages(new ArrayList<>());
+        appointment.setPatient(patient);
+        appointment.setInvoice(null);
+        invoice.setAppointment(appointment);
+
+        resPackageMembership membership = invoice.getUsedMembership();
+        membership.setPatient(null);
+
+        resPackageBase  packageBase = membership.getPackageBase();
+        packageBase.setMemberships(new ArrayList<>());
+        invoice.setUsedMembership(membership);
+
+        return invoice;
     }
 
     @Override

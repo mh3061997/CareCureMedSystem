@@ -1,10 +1,8 @@
 package com.carecure.medsysten.controllers;
 
 import com.carecure.medsysten.interfaces.contIntDoctor;
-import com.carecure.medsysten.resources.resAppointment;
+import com.carecure.medsysten.resources.*;
 import com.carecure.medsysten.resources.resDoctor;
-import com.carecure.medsysten.resources.resDoctor;
-import com.carecure.medsysten.resources.resPatient;
 import com.carecure.medsysten.services.servDoctor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -34,6 +32,18 @@ public class implDoctor implements contIntDoctor {
                 patient.setAppointments(new ArrayList<>());
                 patient.setMemberships(new ArrayList<>());
                 appointment.setPatient(patient);
+
+                resInvoice invoice = appointment.getInvoice();
+                invoice.setAppointment(null);
+                resPackageMembership membership= invoice.getUsedMembership();
+                membership.setPatient(null);
+                resPackageBase packageBase = membership.getPackageBase();
+                packageBase.setMemberships(new ArrayList<>());
+                membership.setPackageBase(packageBase);
+                invoice.setUsedMembership(membership);
+
+                appointment.setInvoice(invoice);
+
                 appointments.add(appointment);
             });
             doctor.setAppointments(appointments);
@@ -49,10 +59,22 @@ public class implDoctor implements contIntDoctor {
         List<resAppointment> appointments = new ArrayList<>();
         doctor.getAppointments().forEach(appointment -> {
             appointment.setDoctor(null);
-            resPatient patient =appointment.getPatient();
+            resPatient patient = appointment.getPatient();
             patient.setAppointments(new ArrayList<>());
             patient.setMemberships(new ArrayList<>());
             appointment.setPatient(patient);
+
+            resInvoice invoice = appointment.getInvoice();
+            invoice.setAppointment(null);
+            resPackageMembership membership= invoice.getUsedMembership();
+            membership.setPatient(null);
+            resPackageBase packageBase = membership.getPackageBase();
+            packageBase.setMemberships(new ArrayList<>());
+            membership.setPackageBase(packageBase);
+            invoice.setUsedMembership(membership);
+
+            appointment.setInvoice(invoice);
+
             appointments.add(appointment);
         });
         doctor.setAppointments(appointments);

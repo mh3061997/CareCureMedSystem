@@ -4,10 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @JsonIgnoreProperties("hibernateLazyInitializer")
-
 public class resInvoice {
 
     @Id
@@ -23,29 +23,75 @@ public class resInvoice {
     private Date dateFinalized;
 
     private long totalDue;
+    private long totalAfterDiscount;
     private long totalPaid;
     private long totalRemaining;
 
     private String status;
 
+    private int discount;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private resPatient patient;
-
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "appointmentCode")
     private resAppointment appointment;
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "invoice")
+    private List<resInvoiceItem> resInvoiceItems;
+
+    @ManyToOne(fetch=FetchType.LAZY)
+    private resPackageMembership   usedMembership;
 
     private String paymentMethod;
 
     public resInvoice() {
     }
 
-    public resPatient getPatient() {
-        return patient;
+    public List<resInvoiceItem> getResInvoiceItems() {
+        return resInvoiceItems;
     }
 
-    public void setPatient(resPatient patient) {
-        this.patient = patient;
+    public void setResInvoiceItems(List<resInvoiceItem> resInvoiceItems) {
+        this.resInvoiceItems = resInvoiceItems;
+    }
+
+    public resPackageMembership getUsedMembership() {
+        return usedMembership;
+    }
+
+    public void setUsedMembership(resPackageMembership usedMembership) {
+        this.usedMembership = usedMembership;
+    }
+
+    public int getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(int discount) {
+        this.discount = discount;
+    }
+
+    public long getTotalAfterDiscount() {
+        return totalAfterDiscount;
+    }
+
+    public void setTotalAfterDiscount(long totalAfterDiscount) {
+        this.totalAfterDiscount = totalAfterDiscount;
+    }
+
+    public resInvoice(long code, Date dateCreated, Date dateFinalized, long totalDue, long totalAfterDiscount, long totalPaid, long totalRemaining, String status, int discount, resAppointment appointment, List<resInvoiceItem> resInvoiceItems, resPackageMembership usedMembership, String paymentMethod) {
+        this.code = code;
+        this.dateCreated = dateCreated;
+        this.dateFinalized = dateFinalized;
+        this.totalDue = totalDue;
+        this.totalAfterDiscount = totalAfterDiscount;
+        this.totalPaid = totalPaid;
+        this.totalRemaining = totalRemaining;
+        this.status = status;
+        this.discount = discount;
+        this.appointment = appointment;
+        this.resInvoiceItems = resInvoiceItems;
+        this.usedMembership = usedMembership;
+        this.paymentMethod = paymentMethod;
     }
 
     public resAppointment getAppointment() {
@@ -54,20 +100,6 @@ public class resInvoice {
 
     public void setAppointment(resAppointment appointment) {
         this.appointment = appointment;
-    }
-
-    public resInvoice(long code, Date dateCreated, Date dateFinalized, long totalDue, long totalPaid, long totalRemaining, String status, resPatient patient, resAppointment appointment, String paymentMethod) {
-
-        this.code = code;
-        this.dateCreated = dateCreated;
-        this.dateFinalized = dateFinalized;
-        this.totalDue = totalDue;
-        this.totalPaid = totalPaid;
-        this.totalRemaining = totalRemaining;
-        this.status = status;
-        this.patient = patient;
-        this.appointment = appointment;
-        this.paymentMethod = paymentMethod;
     }
 
     public long getCode() {
