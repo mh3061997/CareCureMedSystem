@@ -24,6 +24,7 @@ public class implPatient implements contIntPatient {
         List<resPatient> jsonPatients = new ArrayList<>();
 
         servPatient.getPatientAll().forEach(patient -> {
+            System.out.println("code"+patient.getCode());
             List<resAppointment> appointments = new ArrayList<>();
             patient.getAppointments().forEach(appointment -> {
                 appointment.setPatient(null);
@@ -31,14 +32,16 @@ public class implPatient implements contIntPatient {
                 doctor.setAppointments(new ArrayList<>());
                 appointment.setDoctor(doctor);
                 resInvoice invoice = appointment.getInvoice();
-                invoice.setAppointment(null);
-                resPackageMembership membership = invoice.getUsedMembership();
-                membership.setPatient(null);
-                resPackageBase packageBase = membership.getPackageBase();
-                packageBase.setMemberships(new ArrayList<>());
-                membership.setPackageBase(packageBase);
-                invoice.setUsedMembership(membership);
-                appointment.setInvoice(invoice);
+                if(invoice !=null){
+                    invoice.setAppointment(null);
+                    resPackageMembership membership = invoice.getUsedMembership();
+                    membership.setPatient(null);
+                    resPackageBase packageBase = membership.getPackageBase();
+                    packageBase.setMemberships(new ArrayList<>());
+                    membership.setPackageBase(packageBase);
+                    invoice.setUsedMembership(membership);
+                    appointment.setInvoice(invoice);
+                }
                 appointments.add(appointment);
             });
             patient.setAppointments(appointments);
@@ -68,14 +71,16 @@ public class implPatient implements contIntPatient {
             doctor.setAppointments(new ArrayList<>());
             appointment.setDoctor(doctor);
             resInvoice invoice = appointment.getInvoice();
-            invoice.setAppointment(null);
-            resPackageMembership membership = invoice.getUsedMembership();
-            membership.setPatient(null);
-            resPackageBase packageBase = membership.getPackageBase();
-            packageBase.setMemberships(new ArrayList<>());
-            membership.setPackageBase(packageBase);
-            invoice.setUsedMembership(membership);
-            appointment.setInvoice(invoice);
+            if(invoice !=null){
+                invoice.setAppointment(null);
+                resPackageMembership membership = invoice.getUsedMembership();
+                membership.setPatient(null);
+                resPackageBase packageBase = membership.getPackageBase();
+                packageBase.setMemberships(new ArrayList<>());
+                membership.setPackageBase(packageBase);
+                invoice.setUsedMembership(membership);
+                appointment.setInvoice(invoice);
+            }
             appointments.add(appointment);
         });
         patient.setAppointments(appointments);

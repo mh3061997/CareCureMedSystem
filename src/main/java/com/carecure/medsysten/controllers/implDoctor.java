@@ -34,15 +34,17 @@ public class implDoctor implements contIntDoctor {
                 appointment.setPatient(patient);
 
                 resInvoice invoice = appointment.getInvoice();
-                invoice.setAppointment(null);
-                resPackageMembership membership= invoice.getUsedMembership();
-                membership.setPatient(null);
-                resPackageBase packageBase = membership.getPackageBase();
-                packageBase.setMemberships(new ArrayList<>());
-                membership.setPackageBase(packageBase);
-                invoice.setUsedMembership(membership);
+                if(invoice !=null){
+                    invoice.setAppointment(null);
+                    resPackageMembership membership= invoice.getUsedMembership();
+                    membership.setPatient(null);
+                    resPackageBase packageBase = membership.getPackageBase();
+                    packageBase.setMemberships(new ArrayList<>());
+                    membership.setPackageBase(packageBase);
+                    invoice.setUsedMembership(membership);
 
-                appointment.setInvoice(invoice);
+                    appointment.setInvoice(invoice);
+                }
 
                 appointments.add(appointment);
             });
@@ -65,15 +67,17 @@ public class implDoctor implements contIntDoctor {
             appointment.setPatient(patient);
 
             resInvoice invoice = appointment.getInvoice();
-            invoice.setAppointment(null);
-            resPackageMembership membership= invoice.getUsedMembership();
-            membership.setPatient(null);
-            resPackageBase packageBase = membership.getPackageBase();
-            packageBase.setMemberships(new ArrayList<>());
-            membership.setPackageBase(packageBase);
-            invoice.setUsedMembership(membership);
+            if(invoice !=null){
+                invoice.setAppointment(null);
+                resPackageMembership membership= invoice.getUsedMembership();
+                membership.setPatient(null);
+                resPackageBase packageBase = membership.getPackageBase();
+                packageBase.setMemberships(new ArrayList<>());
+                membership.setPackageBase(packageBase);
+                invoice.setUsedMembership(membership);
 
-            appointment.setInvoice(invoice);
+                appointment.setInvoice(invoice);
+            }
 
             appointments.add(appointment);
         });

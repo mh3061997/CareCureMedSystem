@@ -36,16 +36,18 @@ public class implAppointment implements contIntAppointment {
              appointment.setDoctor(doctor);
 
              resInvoice invoice =appointment.getInvoice();
-             invoice.setAppointment(null);
-             resPackageMembership membership = invoice.getUsedMembership();
-             membership.setPatient(null);
-             resPackageBase packageBase =membership.getPackageBase();
-             packageBase.setMemberships(new ArrayList<>());
-             membership.setPackageBase(packageBase);
+            if(invoice !=null){
+                invoice.setAppointment(null);
+                resPackageMembership membership = invoice.getUsedMembership();
+                membership.setPatient(null);
+                resPackageBase packageBase =membership.getPackageBase();
+                packageBase.setMemberships(new ArrayList<>());
+                membership.setPackageBase(packageBase);
 
-             invoice.setUsedMembership(membership);
+                invoice.setUsedMembership(membership);
 
-             appointment.setInvoice(invoice);
+                appointment.setInvoice(invoice);
+            }
 
              jsonAppointments.add(appointment);
 
@@ -70,16 +72,18 @@ public class implAppointment implements contIntAppointment {
         appointment.setDoctor(doctor);
 
         resInvoice invoice =appointment.getInvoice();
-        invoice.setAppointment(null);
-        resPackageMembership membership = invoice.getUsedMembership();
-        membership.setPatient(null);
-        resPackageBase packageBase =membership.getPackageBase();
-        packageBase.setMemberships(new ArrayList<>());
-        membership.setPackageBase(packageBase);
+        if(invoice !=null){
+            invoice.setAppointment(null);
+            resPackageMembership membership = invoice.getUsedMembership();
+            membership.setPatient(null);
+            resPackageBase packageBase =membership.getPackageBase();
+            packageBase.setMemberships(new ArrayList<>());
+            membership.setPackageBase(packageBase);
 
-        invoice.setUsedMembership(membership);
+            invoice.setUsedMembership(membership);
 
-        appointment.setInvoice(invoice);
+            appointment.setInvoice(invoice);
+        }
 
 
         return appointment;
