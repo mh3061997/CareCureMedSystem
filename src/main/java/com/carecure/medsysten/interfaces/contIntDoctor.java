@@ -1,10 +1,7 @@
 package com.carecure.medsysten.interfaces;
 
 import com.carecure.medsysten.resources.resDoctor;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -13,6 +10,8 @@ public interface contIntDoctor {
 
     @RequestMapping
     List<resDoctor> getDoctorAll();
+    @RequestMapping("/speciality")
+    public List<resDoctor> getDoctorAllBySpeciality(@RequestParam String speciality);
 
     @RequestMapping("/{doctorCode}")
     resDoctor getDoctorById(@PathVariable("doctorCode") long code);

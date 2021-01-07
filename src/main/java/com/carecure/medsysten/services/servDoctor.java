@@ -23,6 +23,12 @@ public class servDoctor {
         return DoctorList;
     }
 
+    public List<resDoctor> getDoctorAllBySpeciality(String speciality){
+        List<resDoctor> DoctorList = new ArrayList<>();
+        repoDoctor.findBySpeciality(speciality).forEach(DoctorList::add);
+        return DoctorList;
+    }
+
     //return app by id
     public resDoctor getDoctorByCode(long code){
         Optional<resDoctor> doctor = repoDoctor.findById(code);

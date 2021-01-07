@@ -9,6 +9,6 @@ import java.util.List;
 public interface repoDoctor extends CrudRepository<resDoctor,Long> {
     List<resDoctor> findByName(String name);
     List<resDoctor> findBySpeciality(String speciality);
-    List<resDoctor> findByMobile(String mobile);
+   // List<resDoctor> findByMobile(String mobile);
 
 }
