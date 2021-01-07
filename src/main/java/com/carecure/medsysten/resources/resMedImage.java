@@ -14,7 +14,10 @@ public class resMedImage {
     @Id
     @GeneratedValue( strategy=GenerationType.IDENTITY )
     private long code;
+
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String image;
+
     private String type; // prescription , radiology, lab
     private String subType; //sonar , makta3y , etc.
     private String organ;   //sadr , kela .etc.
@@ -47,13 +50,6 @@ public class resMedImage {
         this.code = code;
     }
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
 
     public String getType() {
         return type;
@@ -94,6 +90,14 @@ public class resMedImage {
 
     public void setOrgan(String organ) {
         this.organ = organ;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public resMedImage(long code, String image, String type, String subType, String organ, Date dateAdded, Date dateMade, resPatient patient) {
