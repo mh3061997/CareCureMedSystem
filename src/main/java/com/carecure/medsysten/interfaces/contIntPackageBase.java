@@ -1,10 +1,7 @@
 package com.carecure.medsysten.interfaces;
 
 import com.carecure.medsysten.resources.resPackageBase;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -13,6 +10,9 @@ public interface contIntPackageBase {
 
     @RequestMapping
     List<resPackageBase> getPackageBaseAll();
+
+    @RequestMapping("/status")
+    List<resPackageBase> getPackageBaseAllByStatus(@RequestParam String status);
 
     @RequestMapping("/{packageBaseCode}")
     resPackageBase getPackageBaseById(@PathVariable("packageBaseCode") long code);
