@@ -23,6 +23,13 @@ public class servPackageBase {
         return PackageBaseList;
     }
 
+    public List<resPackageBase> getPackageBaseByStatus(String status){
+        List<resPackageBase> PackageBaseList = new ArrayList<>();
+        repoPackageBase.findByStatus(status).forEach(PackageBaseList::add);
+        return PackageBaseList;
+    }
+
+
     //return app by id
     public resPackageBase getPackageBaseByCode(long code){
         Optional<resPackageBase> packageBase = repoPackageBase.findById(code);
