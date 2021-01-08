@@ -1,5 +1,6 @@
 package com.carecure.medsysten.resources;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -16,7 +17,7 @@ public class resInvoiceItem {
     private String name;
     private int price;
 
-    @JsonIgnore
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "invoiceCode")
     private resInvoice invoice;
