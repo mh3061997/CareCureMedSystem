@@ -37,11 +37,13 @@ public class implDoctor implements contIntDoctor {
                 if(invoice !=null){
                     invoice.setAppointment(null);
                     resPackageMembership membership= invoice.getUsedMembership();
-                    membership.setPatient(null);
-                    resPackageBase packageBase = membership.getPackageBase();
-                    packageBase.setMemberships(new ArrayList<>());
-                    membership.setPackageBase(packageBase);
-                    invoice.setUsedMembership(membership);
+                    if(membership !=null){
+                        membership.setPatient(null);
+                        resPackageBase packageBase = membership.getPackageBase();
+                        packageBase.setMemberships(new ArrayList<>());
+                        membership.setPackageBase(packageBase);
+                        invoice.setUsedMembership(membership);
+                    }
 
                     appointment.setInvoice(invoice);
                 }
@@ -72,12 +74,13 @@ public class implDoctor implements contIntDoctor {
                 if(invoice !=null){
                     invoice.setAppointment(null);
                     resPackageMembership membership= invoice.getUsedMembership();
-                    membership.setPatient(null);
-                    resPackageBase packageBase = membership.getPackageBase();
-                    packageBase.setMemberships(new ArrayList<>());
-                    membership.setPackageBase(packageBase);
-                    invoice.setUsedMembership(membership);
-
+                    if(membership !=null){
+                        membership.setPatient(null);
+                        resPackageBase packageBase = membership.getPackageBase();
+                        packageBase.setMemberships(new ArrayList<>());
+                        membership.setPackageBase(packageBase);
+                        invoice.setUsedMembership(membership);
+                    }
                     appointment.setInvoice(invoice);
                 }
 
@@ -105,11 +108,14 @@ public class implDoctor implements contIntDoctor {
             if(invoice !=null){
                 invoice.setAppointment(null);
                 resPackageMembership membership= invoice.getUsedMembership();
-                membership.setPatient(null);
-                resPackageBase packageBase = membership.getPackageBase();
-                packageBase.setMemberships(new ArrayList<>());
-                membership.setPackageBase(packageBase);
-                invoice.setUsedMembership(membership);
+                if(membership !=null){
+                    membership.setPatient(null);
+                    resPackageBase packageBase = membership.getPackageBase();
+                    packageBase.setMemberships(new ArrayList<>());
+                    membership.setPackageBase(packageBase);
+                    invoice.setUsedMembership(membership);
+                }
+
 
                 appointment.setInvoice(invoice);
             }

@@ -77,11 +77,15 @@ public class implInvoice implements contIntInvoice {
         invoice.setAppointment(appointment);
 
         resPackageMembership membership = invoice.getUsedMembership();
-        membership.setPatient(null);
+        if(membership!=null){
 
-        resPackageBase  packageBase = membership.getPackageBase();
-        packageBase.setMemberships(new ArrayList<>());
-        invoice.setUsedMembership(membership);
+            membership.setPatient(null);
+
+
+            resPackageBase  packageBase = membership.getPackageBase();
+            packageBase.setMemberships(new ArrayList<>());
+            invoice.setUsedMembership(membership);
+        }
 
         return invoice;
     }

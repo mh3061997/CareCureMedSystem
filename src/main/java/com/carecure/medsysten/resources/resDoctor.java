@@ -24,6 +24,8 @@ public class resDoctor {
     private String gender;
     private int age;
     private  String speciality;
+    private int priceVisit;
+    private int priceRevisit;
 
     //@JsonBackReference
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "doctor")
@@ -38,7 +40,23 @@ public class resDoctor {
         this.mobile = mobile;
     }
 
-    public resDoctor(long code, String name, String mobile, String email, String gender, int age, String speciality, List<resAppointment> appointments) {
+    public int getPriceVisit() {
+        return priceVisit;
+    }
+
+    public void setPriceVisit(int priceVisit) {
+        this.priceVisit = priceVisit;
+    }
+
+    public int getPriceRevisit() {
+        return priceRevisit;
+    }
+
+    public void setPriceRevisit(int priceRevisit) {
+        this.priceRevisit = priceRevisit;
+    }
+
+    public resDoctor(long code, String name, String mobile, String email, String gender, int age, String speciality, int priceVisit, int priceRevisit, List<resAppointment> appointments) {
         this.code = code;
         this.name = name;
         this.mobile = mobile;
@@ -46,6 +64,8 @@ public class resDoctor {
         this.gender = gender;
         this.age = age;
         this.speciality = speciality;
+        this.priceVisit = priceVisit;
+        this.priceRevisit = priceRevisit;
         this.appointments = appointments;
     }
 

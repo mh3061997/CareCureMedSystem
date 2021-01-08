@@ -39,12 +39,14 @@ public class implAppointment implements contIntAppointment {
             if(invoice !=null){
                 invoice.setAppointment(null);
                 resPackageMembership membership = invoice.getUsedMembership();
-                membership.setPatient(null);
-                resPackageBase packageBase =membership.getPackageBase();
-                packageBase.setMemberships(new ArrayList<>());
-                membership.setPackageBase(packageBase);
+                if(membership!=null){
+                    membership.setPatient(null);
+                    resPackageBase packageBase =membership.getPackageBase();
+                    packageBase.setMemberships(new ArrayList<>());
+                    membership.setPackageBase(packageBase);
 
-                invoice.setUsedMembership(membership);
+                    invoice.setUsedMembership(membership);
+                }
 
                 appointment.setInvoice(invoice);
             }
@@ -75,12 +77,14 @@ public class implAppointment implements contIntAppointment {
         if(invoice !=null){
             invoice.setAppointment(null);
             resPackageMembership membership = invoice.getUsedMembership();
-            membership.setPatient(null);
-            resPackageBase packageBase =membership.getPackageBase();
-            packageBase.setMemberships(new ArrayList<>());
-            membership.setPackageBase(packageBase);
+            if(membership!=null){
+                membership.setPatient(null);
+                resPackageBase packageBase =membership.getPackageBase();
+                packageBase.setMemberships(new ArrayList<>());
+                membership.setPackageBase(packageBase);
 
-            invoice.setUsedMembership(membership);
+                invoice.setUsedMembership(membership);
+            }
 
             appointment.setInvoice(invoice);
         }

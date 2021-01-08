@@ -10,6 +10,7 @@ public interface contIntDoctor {
 
     @RequestMapping
     List<resDoctor> getDoctorAll();
+
     @RequestMapping("/speciality")
     public List<resDoctor> getDoctorAllBySpeciality(@RequestParam String speciality);
 
