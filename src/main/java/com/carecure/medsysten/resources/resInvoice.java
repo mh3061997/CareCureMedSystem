@@ -36,7 +36,7 @@ public class resInvoice {
     private resAppointment appointment;
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "invoice")
-    private List<resInvoiceItem> resInvoiceItems;
+    private List<resInvoiceItem> invoiceItems;
 
     @ManyToOne(fetch=FetchType.LAZY)
     private resPackageMembership   usedMembership;
@@ -46,12 +46,12 @@ public class resInvoice {
     public resInvoice() {
     }
 
-    public List<resInvoiceItem> getResInvoiceItems() {
-        return resInvoiceItems;
+    public List<resInvoiceItem> getInvoiceItems() {
+        return invoiceItems;
     }
 
-    public void setResInvoiceItems(List<resInvoiceItem> resInvoiceItems) {
-        this.resInvoiceItems = resInvoiceItems;
+    public void setInvoiceItems(List<resInvoiceItem> invoiceItems) {
+        this.invoiceItems = invoiceItems;
     }
 
     public resPackageMembership getUsedMembership() {
@@ -78,7 +78,7 @@ public class resInvoice {
         this.totalAfterDiscount = totalAfterDiscount;
     }
 
-    public resInvoice(long code, Date dateCreated, Date dateFinalized, long totalDue, long totalAfterDiscount, long totalPaid, long totalRemaining, String status, int discount, resAppointment appointment, List<resInvoiceItem> resInvoiceItems, resPackageMembership usedMembership, String paymentMethod) {
+    public resInvoice(long code, Date dateCreated, Date dateFinalized, long totalDue, long totalAfterDiscount, long totalPaid, long totalRemaining, String status, int discount, resAppointment appointment, List<resInvoiceItem> invoiceItems, resPackageMembership usedMembership, String paymentMethod) {
         this.code = code;
         this.dateCreated = dateCreated;
         this.dateFinalized = dateFinalized;
@@ -89,7 +89,7 @@ public class resInvoice {
         this.status = status;
         this.discount = discount;
         this.appointment = appointment;
-        this.resInvoiceItems = resInvoiceItems;
+        this.invoiceItems = invoiceItems;
         this.usedMembership = usedMembership;
         this.paymentMethod = paymentMethod;
     }
