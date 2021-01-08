@@ -21,6 +21,27 @@ public class implPackageBase implements contIntPackageBase {
 
 
     @Override
+    public List<resPackageBase> getPackageBaseAllByStatus(String status) {
+        List<resPackageBase> packages = new ArrayList<>();
+
+        servPackageBase.getPackageBaseByStatus(status).forEach(packageBase ->{
+
+            List<resPackageMembership> memberships = packageBase.getMemberships();
+            memberships.forEach(membership ->{
+                membership.setPackageBase(null);
+                resPatient patient =  membership.getPatient();
+                patient.setMemberships(new ArrayList<>());
+                patient.setAppointments(new ArrayList<>());
+                membership.setPatient(patient);
+            });
+            packageBase.setMemberships(memberships);
+
+            packages.add(packageBase);
+        });
+        return packages;
+    }
+
+    @Override
     public List<resPackageBase> getPackageBaseAll() {
         List<resPackageBase> packages = new ArrayList<>();
 
