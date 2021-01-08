@@ -24,6 +24,7 @@ public class resAppointment {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateToVisit;
     private String status;
+    private String type;
     private String notes;
 
     //@JsonManagedReference
@@ -38,6 +39,14 @@ public class resAppointment {
 
     @OneToOne(fetch = FetchType.LAZY,mappedBy = "appointment")
     private resInvoice invoice;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public String getNotes() {
         return notes;
@@ -55,12 +64,13 @@ public class resAppointment {
         this.invoice = invoice;
     }
 
-    public resAppointment(long code, String speciality, Date dateCreated, Date dateToVisit, String status, String notes, resDoctor doctor, resPatient patient, resInvoice invoice) {
+    public resAppointment(long code, String speciality, Date dateCreated, Date dateToVisit, String status, String type, String notes, resDoctor doctor, resPatient patient, resInvoice invoice) {
         this.code = code;
         this.speciality = speciality;
         this.dateCreated = dateCreated;
         this.dateToVisit = dateToVisit;
         this.status = status;
+        this.type = type;
         this.notes = notes;
         this.doctor = doctor;
         this.patient = patient;
