@@ -18,7 +18,7 @@ public class resServicePriceList {
 
     private String speciality;
     private String name;
-    private long price;
+    private int price;
 
     public long getCode() {
         return code;
@@ -44,18 +44,18 @@ public class resServicePriceList {
         this.name = name;
     }
 
-    public long getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(long price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
     public resServicePriceList() {
     }
 
-    public resServicePriceList(long code, String speciality, String name, long price) {
+    public resServicePriceList(long code, String speciality, String name, int price) {
         this.code = code;
         this.speciality = speciality;
         this.name = name;
