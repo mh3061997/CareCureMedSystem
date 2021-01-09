@@ -18,7 +18,7 @@ public interface contIntInvoice {
     resInvoice getInvoiceById(@PathVariable("invoiceCode") long code);
 
     @RequestMapping(method = RequestMethod.POST)
-    void addInvoice(@RequestBody resInvoice newInvoice);
+    resInvoice addInvoice(@RequestBody resInvoice newInvoice);
 
     @RequestMapping(method = RequestMethod.PUT,value="/{invoiceCode}")
     void updateInvoice(@PathVariable("invoiceCode") long code, @RequestBody resInvoice updatedInvoice);
