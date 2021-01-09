@@ -33,9 +33,10 @@ public class servInvoice {
             return null;
     }
 
-    public void  addInvoice(resInvoice newInvoice){
-        repoInvoice.save(newInvoice);
+    public resInvoice  addInvoice(resInvoice newInvoice){
+       return repoInvoice.save(newInvoice);
     }
+
 
     public void updateInvoice(long invoiceCode, resInvoice updatedInvoice){
         Optional<resInvoice> invoice = repoInvoice.findById(invoiceCode);

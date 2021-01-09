@@ -20,6 +20,9 @@ public interface contIntInvoiceItem {
     @RequestMapping(method = RequestMethod.POST)
     void addInvoiceItem(@RequestBody resInvoiceItem newInvoiceItem);
 
+    @RequestMapping(method = RequestMethod.POST,value="/addmulti")
+    void addInvoiceItemMulti(@RequestBody List<resInvoiceItem> newInvoiceItemArr);
+
     @RequestMapping(method = RequestMethod.PUT,value="/{invoiceItemCode}")
     void updateInvoiceItem(@PathVariable("invoiceItemCode") long code, @RequestBody resInvoiceItem updatedInvoiceItem);
 

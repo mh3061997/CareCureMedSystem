@@ -91,8 +91,8 @@ public class implInvoice implements contIntInvoice {
     }
 
     @Override
-    public void addInvoice(resInvoice newInvoice) {
-        servInvoice.addInvoice(newInvoice);
+    public resInvoice addInvoice(resInvoice newInvoice) {
+        return servInvoice.addInvoice(newInvoice);
     }
 
     @Override

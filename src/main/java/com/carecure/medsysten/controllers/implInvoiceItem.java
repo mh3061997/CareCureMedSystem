@@ -5,6 +5,7 @@ import com.carecure.medsysten.resources.resInvoiceItem;
 import com.carecure.medsysten.services.servInvoiceItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public class implInvoiceItem implements contIntInvoiceItem {
     @Autowired
     private servInvoiceItem servInvoiceItem;
 
-    @CrossOrigin
+
     @Override
     public List<resInvoiceItem> getInvoiceItemAll() {
         return servInvoiceItem.getInvoiceItemAll();
@@ -31,6 +32,12 @@ public class implInvoiceItem implements contIntInvoiceItem {
     public void addInvoiceItem(resInvoiceItem newInvoiceItem) {
         servInvoiceItem.addInvoiceItem(newInvoiceItem);
     }
+
+    @Override
+    public void addInvoiceItemMulti(@RequestBody List<resInvoiceItem> newInvoiceItemArr){
+         servInvoiceItem.addInvoiceItemMulti(newInvoiceItemArr);
+    }
+
 
     @Override
     public void updateInvoiceItem(long code, resInvoiceItem updatedInvoiceItem) {

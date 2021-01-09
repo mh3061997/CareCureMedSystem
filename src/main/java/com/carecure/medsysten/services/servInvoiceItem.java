@@ -55,4 +55,9 @@ public class servInvoiceItem {
             return;
     }
 
+    public void addInvoiceItemMulti(List<resInvoiceItem> newInvoiceItemArr) {
+        newInvoiceItemArr.forEach(invoiceItem ->{
+            repoInvoiceItem.save(invoiceItem);
+        });
+    }
 }
