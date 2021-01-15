@@ -23,6 +23,8 @@ public interface repoAppointment extends CrudRepository<resAppointment, Long> {
     List<resAppointment> findByDateToVisitGreaterThanEqual(Date currentDate);
     List<resAppointment> findByDateToVisitLessThanAndDoctorCode(Date currentDate,long doctorCode);
     List<resAppointment> findByDateToVisitGreaterThanEqualAndDoctorCode(Date currentDate,long doctorCode);
+    List<resAppointment> findByDateToVisitLessThanAndPatientCode(Date currentDate,long patientCode);
+    List<resAppointment> findByDateToVisitGreaterThanEqualAndPatientCode(Date currentDate,long patientCode);
 }
 
 
