@@ -5,9 +5,11 @@ import com.carecure.medsysten.resources.resAppointment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.util.*;
 
 @Service
 public class servAppointment {
@@ -22,6 +24,27 @@ public class servAppointment {
         return AppointmentList;
     }
 
+    public List<resAppointment> getAppointmentPatientDoctor(long patientCode,long doctorCode){
+        List<resAppointment> AppointmentList = new ArrayList<>();
+        repoAppointment.findByPatientCodeAndDoctorCode(patientCode,doctorCode).forEach(AppointmentList::add);
+        return AppointmentList;
+    }
+
+    public List<resAppointment> getPastAppointments() throws ParseException {
+        List<resAppointment> AppointmentList = new ArrayList<>();
+        Timestamp ts=new Timestamp(System.currentTimeMillis());
+        Date date=ts;
+        repoAppointment.findByDateToVisitLessThan(date).forEach(AppointmentList::add);
+        return AppointmentList;
+    }
+
+    public List<resAppointment> getUpcomingAppointments() throws ParseException {
+        List<resAppointment> AppointmentList = new ArrayList<>();
+        Timestamp ts=new Timestamp(System.currentTimeMillis());
+        Date date=ts;
+        repoAppointment.findByDateToVisitGreaterThanEqual(date).forEach(AppointmentList::add);
+        return AppointmentList;
+    }
     //return app by id
     public resAppointment getAppointmentByCode(long code){
         Optional<resAppointment> appointment = repoAppointment.findById(code);

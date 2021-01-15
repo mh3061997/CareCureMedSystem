@@ -1,11 +1,9 @@
 package com.carecure.medsysten.interfaces;
 
 import com.carecure.medsysten.resources.resAppointment;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 
 @RequestMapping("/appointment")
@@ -13,6 +11,16 @@ public interface contIntAppointment {
 
     @RequestMapping
     List<resAppointment> getAppointmentAll();
+
+    @RequestMapping("/patientdoctor")
+    List<resAppointment> getAppointmentPatientDoctor(@RequestParam("patientCode")long patientCode,
+                                                     @RequestParam("doctorCode")long doctorCode);
+
+    @RequestMapping("/past")
+    List<resAppointment> getPastAppointments() throws ParseException;
+
+    @RequestMapping("/upcoming")
+    List<resAppointment> getUpcomingAppointments() throws ParseException;
 
     @RequestMapping("/{appointmentCode}")
     resAppointment getAppointmentById(@PathVariable("appointmentCode") long code);

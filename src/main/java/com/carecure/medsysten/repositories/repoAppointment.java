@@ -3,6 +3,7 @@ package com.carecure.medsysten.repositories;
 import com.carecure.medsysten.resources.resAppointment;
 import org.springframework.data.repository.CrudRepository;
 
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 
@@ -17,7 +18,9 @@ public interface repoAppointment extends CrudRepository<resAppointment, Long> {
     List<resAppointment> findByDateCreatedLessThanEqual(Date dateCreated);
     List<resAppointment> findByDateCreated(Date dateCreated);
     List<resAppointment> findByDateToVisit(Date dateToVisit);
-
+    List<resAppointment> findByPatientCodeAndDoctorCode(long patientCode, long doctorCode);
+    List<resAppointment> findByDateToVisitLessThan(Date currentDate);
+    List<resAppointment> findByDateToVisitGreaterThanEqual(Date currentDate);
 }
 
 
