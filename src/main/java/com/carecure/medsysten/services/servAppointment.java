@@ -38,6 +38,14 @@ public class servAppointment {
         return AppointmentList;
     }
 
+    public List<resAppointment> getPastAppointmentsDoctor(long doctorCode) throws ParseException {
+        List<resAppointment> AppointmentList = new ArrayList<>();
+        Timestamp ts=new Timestamp(System.currentTimeMillis());
+        Date date=ts;
+        repoAppointment.findByDateToVisitLessThanAndDoctorCode(date,doctorCode).forEach(AppointmentList::add);
+        return AppointmentList;
+    }
+
     public List<resAppointment> getUpcomingAppointments() throws ParseException {
         List<resAppointment> AppointmentList = new ArrayList<>();
         Timestamp ts=new Timestamp(System.currentTimeMillis());
@@ -45,6 +53,16 @@ public class servAppointment {
         repoAppointment.findByDateToVisitGreaterThanEqual(date).forEach(AppointmentList::add);
         return AppointmentList;
     }
+
+
+    public List<resAppointment> getUpcomingAppointmentsDoctor(long doctorCode) throws ParseException {
+        List<resAppointment> AppointmentList = new ArrayList<>();
+        Timestamp ts=new Timestamp(System.currentTimeMillis());
+        Date date=ts;
+        repoAppointment.findByDateToVisitGreaterThanEqualAndDoctorCode(date,doctorCode).forEach(AppointmentList::add);
+        return AppointmentList;
+    }
+
     //return app by id
     public resAppointment getAppointmentByCode(long code){
         Optional<resAppointment> appointment = repoAppointment.findById(code);
