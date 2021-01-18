@@ -4,6 +4,7 @@ import com.carecure.medsysten.resources.resAppointment;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 
 @RequestMapping("/appointment")
@@ -33,6 +34,10 @@ public interface contIntAppointment {
 
     @RequestMapping("/past/patient/{patientCode}")
     List<resAppointment> getPastAppointmentsPatient(@PathVariable("patientCode") long patientCode) throws ParseException;
+
+
+    @RequestMapping("/date/{doctorCode}")
+    List<resAppointment> getDoctorAppointmentsByDate(@RequestParam("date") String date, @PathVariable("doctorCode") long patientCode) throws ParseException;
 
     @RequestMapping("/{appointmentCode}")
     resAppointment getAppointmentById(@PathVariable("appointmentCode") long code);
