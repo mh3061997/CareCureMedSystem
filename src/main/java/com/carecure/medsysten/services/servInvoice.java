@@ -45,7 +45,7 @@ public class servInvoice {
     public void updateInvoice(long invoiceCode, resInvoice updatedInvoice){
         Optional<resInvoice> invoice = repoInvoice.findById(invoiceCode);
         if(invoice.isPresent()){
-            if(updatedInvoice.getTotalRemaining() >0){
+            if( updatedInvoice.getStatus()=="Debt" && updatedInvoice.getTotalRemaining() >0 ){
                 resAppointment appointment = updatedInvoice.getAppointment();
                 resPatient patient = appointment.getPatient();
                 patient.setTotalDebt(patient.getTotalDebt()+updatedInvoice.getTotalRemaining());

@@ -118,4 +118,9 @@ public class implPatient implements contIntPatient {
     public void deletePatient(long code) {
         servPatient.deletePatient(code);
     }
+
+    @Override
+    public void settlePatientDebt(long code, long debtDeducted){
+    servPatient.settlePatientDebt(code,debtDeducted);
+    }
 }

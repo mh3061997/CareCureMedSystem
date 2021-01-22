@@ -23,6 +23,9 @@ public interface contIntPatient {
     @RequestMapping(method = RequestMethod.PUT,value="/{patientCode}")
     void updatePatient(@PathVariable("patientCode") long code, @RequestBody resPatient updatedPatient);
 
+    @RequestMapping(method = RequestMethod.PUT,value="/{patientCode}/debt/{debtDeducted}")
+    void settlePatientDebt(@PathVariable("patientCode") long code, @PathVariable("debtDeducted") long debtDeducted);
+
     @RequestMapping(method= RequestMethod.DELETE,value="/{patientCode}")
     void deletePatient(@PathVariable("patientCode") long code);
 }

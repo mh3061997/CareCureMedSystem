@@ -36,6 +36,19 @@ public class servPatient {
             return null;
     }
 
+    //return app by id
+    public void settlePatientDebt(long code,long debtDeducted){
+        Optional<resPatient> patientOptional = repoPatient.findById(code);
+        if(patientOptional.isPresent()){
+            resPatient patient= patientOptional.get();
+            if(debtDeducted >=0 && debtDeducted<=patient.getTotalDebt()){
+                patient.setTotalDebt(patient.getTotalDebt()-debtDeducted);
+                repoPatient.save(patient);
+            }
+        }
+
+    }
+
     public void  addPatient(resPatient newPatient){
         repoPatient.save(newPatient);
     }
