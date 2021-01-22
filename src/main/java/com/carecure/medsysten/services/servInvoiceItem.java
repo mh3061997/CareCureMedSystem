@@ -41,7 +41,6 @@ public class servInvoiceItem {
 
         repoInvoiceItem.save(newInvoiceItem);
         resInvoice invoice = newInvoiceItem.getInvoice();
-        invoice = servInvoice.getInvoiceByCode(invoice.getCode());
         invoice.setTotalDue(invoice.getTotalDue()+newInvoiceItem.getPrice());
         invoice.setTotalRemaining(invoice.getTotalRemaining()+newInvoiceItem.getPrice());
         invoice.setTotalAfterDiscount(invoice.getTotalAfterDiscount()+newInvoiceItem.getPrice());
