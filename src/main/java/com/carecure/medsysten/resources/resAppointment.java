@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @JsonIgnoreProperties("hibernateLazyInitializer")
@@ -37,6 +38,8 @@ public class resAppointment {
     @JoinColumn(name = "patientCode")
     private resPatient patient;
 
+    @OneToMany(fetch=FetchType.LAZY,mappedBy = "appointment")
+    private List<resNoteAppointment> doctorNotes;
     @OneToOne(fetch = FetchType.LAZY,mappedBy = "appointment")
     private resInvoice invoice;
 
@@ -52,6 +55,14 @@ public class resAppointment {
         return notes;
     }
 
+    public List<resNoteAppointment> getDoctorNotes() {
+        return doctorNotes;
+    }
+
+    public void setDoctorNotes(List<resNoteAppointment> doctorNotes) {
+        this.doctorNotes = doctorNotes;
+    }
+
     public void setNotes(String notes) {
         this.notes = notes;
     }
@@ -64,7 +75,7 @@ public class resAppointment {
         this.invoice = invoice;
     }
 
-    public resAppointment(long code, String speciality, Date dateCreated, Date dateToVisit, String status, String type, String notes, resDoctor doctor, resPatient patient, resInvoice invoice) {
+    public resAppointment(long code, String speciality, Date dateCreated, Date dateToVisit, String status, String type, String notes, resDoctor doctor, resPatient patient, List<resNoteAppointment> doctorNotes, resInvoice invoice) {
         this.code = code;
         this.speciality = speciality;
         this.dateCreated = dateCreated;
@@ -74,6 +85,7 @@ public class resAppointment {
         this.notes = notes;
         this.doctor = doctor;
         this.patient = patient;
+        this.doctorNotes = doctorNotes;
         this.invoice = invoice;
     }
 

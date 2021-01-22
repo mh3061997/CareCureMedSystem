@@ -19,7 +19,7 @@ public class resPatient {
     private String email;
     private String mobile;
     private int age;
-
+    private long totalDebt;
     private String notes;
 
 
@@ -32,15 +32,22 @@ public class resPatient {
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "patient")
     List<resMedImage> medImages;
 
+    public long getTotalDebt() {
+        return totalDebt;
+    }
 
+    public void setTotalDebt(long totalDebt) {
+        this.totalDebt = totalDebt;
+    }
 
-    public resPatient(long code, String name, String gender, String email, String mobile, int age, String notes, List<resPackageMembership> memberships, List<resAppointment> appointments, List<resMedImage> medImages) {
+    public resPatient(long code, String name, String gender, String email, String mobile, int age, long totalDebt, String notes, List<resPackageMembership> memberships, List<resAppointment> appointments, List<resMedImage> medImages) {
         this.code = code;
         this.name = name;
         this.gender = gender;
         this.email = email;
         this.mobile = mobile;
         this.age = age;
+        this.totalDebt = totalDebt;
         this.notes = notes;
         this.memberships = memberships;
         this.appointments = appointments;

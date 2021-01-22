@@ -40,7 +40,7 @@ public class resMedImage {
     @ManyToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "patientCode")
    @JsonBackReference //never will i access medimages directly to keep controller clean
-   private resPatient patient;
+    private resPatient patient;
 
     public long getCode() {
         return code;
