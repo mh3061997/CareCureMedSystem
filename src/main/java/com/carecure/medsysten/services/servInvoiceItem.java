@@ -1,7 +1,9 @@
 package com.carecure.medsysten.services;
 
 
+import com.carecure.medsysten.repositories.repoInvoice;
 import com.carecure.medsysten.repositories.repoInvoiceItem;
+import com.carecure.medsysten.resources.resInvoice;
 import com.carecure.medsysten.resources.resInvoiceItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,8 @@ public class servInvoiceItem {
 
     @Autowired
     repoInvoiceItem repoInvoiceItem;
+    @Autowired
+    servInvoice servInvoice;
 
     //return all invoices in db
     public List<resInvoiceItem> getInvoiceItemAll(){
@@ -34,7 +38,14 @@ public class servInvoiceItem {
     }
 
     public void  addInvoiceItem(resInvoiceItem newInvoiceItem){
+
         repoInvoiceItem.save(newInvoiceItem);
+        resInvoice invoice = newInvoiceItem.getInvoice();
+        invoice = servInvoice.getInvoiceByCode(invoice.getCode());
+        invoice.setTotalDue(invoice.getTotalDue()+newInvoiceItem.getPrice());
+        invoice.setTotalRemaining(invoice.getTotalRemaining()+newInvoiceItem.getPrice());
+        invoice.setTotalAfterDiscount(invoice.getTotalAfterDiscount()+newInvoiceItem.getPrice());
+        servInvoice.updateInvoice(invoice.getCode(),invoice);
     }
 
     public void updateInvoiceItem(long invoiceCode, resInvoiceItem updatedInvoiceItem){
@@ -47,9 +58,18 @@ public class servInvoiceItem {
 
     public void deleteInvoiceItem(long code){
 
-        Optional<resInvoiceItem> invoice = repoInvoiceItem.findById(code);
-        if(invoice.isPresent())
+        Optional<resInvoiceItem> invoiceItem = repoInvoiceItem.findById(code);
+        if(invoiceItem.isPresent()){
+
+            resInvoice invoice = invoiceItem.get().getInvoice();
+            invoice = servInvoice.getInvoiceByCode(invoice.getCode());
+            invoice.setTotalDue(invoice.getTotalDue()-invoiceItem.get().getPrice());
+            invoice.setTotalRemaining(invoice.getTotalRemaining()-invoiceItem.get().getPrice());
+            invoice.setTotalAfterDiscount(invoice.getTotalAfterDiscount()-invoiceItem.get().getPrice());
+            servInvoice.updateInvoice(invoice.getCode(),invoice);
             repoInvoiceItem.deleteById(code);
+        }
+
         else
             //throw exception
             return;
