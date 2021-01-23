@@ -1,5 +1,6 @@
 package com.carecure.medsysten.services;
 
+import com.carecure.medsysten.interfaces.doctorReservedTimes;
 import com.carecure.medsysten.repositories.repoAppointment;
 import com.carecure.medsysten.resources.resAppointment;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -116,4 +117,9 @@ public class servAppointment {
             return;
     }
 
+    public List<doctorReservedTimes> getDoctorReservedTimesByDate(long code,String date){
+        List<doctorReservedTimes> doctorReservedTimes = new ArrayList<>();
+        repoAppointment.findDoctorReservedTimesByDate(code,date).forEach(doctorReservedTimes::add);
+        return doctorReservedTimes;
+    }
 }

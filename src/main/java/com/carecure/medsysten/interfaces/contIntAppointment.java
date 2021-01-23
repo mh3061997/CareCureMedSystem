@@ -29,6 +29,8 @@ public interface contIntAppointment {
     @RequestMapping("/past/doctor/{doctorCode}")
     List<resAppointment> getPastAppointmentsDoctor(@PathVariable("doctorCode") long doctorCode) throws ParseException;
 
+
+
     @RequestMapping("/upcoming/patient/{patientCode}")
     List<resAppointment> getUpcomingAppointmentsPatient(@PathVariable("patientCode") long patientCode) throws ParseException;
 

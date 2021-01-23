@@ -1,5 +1,6 @@
 package com.carecure.medsysten.repositories;
 
+import com.carecure.medsysten.interfaces.doctorReservedTimes;
 import com.carecure.medsysten.resources.resAppointment;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.Temporal;
@@ -26,6 +27,9 @@ public interface repoAppointment extends CrudRepository<resAppointment, Long> {
 
     @Query(value="select * from resappointment app  where DATE(app.dateToVisit) = ?1 and app.doctorCode = ?2",nativeQuery=true)
     List<resAppointment> findByDateToVisitAndDoctorCode(String date, long doctorCode);
+
+    @Query(value="select dateToVisit from resappointment app  where  app.doctorCode = ?1 and app.status!='Cancelled' and DATE(app.dateToVisit) = DATE(?2)",nativeQuery=true)
+    List<doctorReservedTimes> findDoctorReservedTimesByDate(long doctorCode,String date);
 }
 
 

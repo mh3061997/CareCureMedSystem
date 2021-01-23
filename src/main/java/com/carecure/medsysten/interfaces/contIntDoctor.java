@@ -17,6 +17,10 @@ public interface contIntDoctor {
     @RequestMapping("/{doctorCode}")
     resDoctor getDoctorById(@PathVariable("doctorCode") long code);
 
+    @RequestMapping("/{doctorCode}/reservedTimes")
+    List<doctorReservedTimes> getDoctorReservedTimesByDate(@PathVariable("doctorCode") long doctorCode,@RequestParam("date") String date);
+
+
     @RequestMapping(method = RequestMethod.POST)
     void addDoctor(@RequestBody resDoctor newDoctor);
 
