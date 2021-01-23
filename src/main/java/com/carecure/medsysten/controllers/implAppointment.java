@@ -1,6 +1,7 @@
 package com.carecure.medsysten.controllers;
 
 import com.carecure.medsysten.interfaces.contIntAppointment;
+import com.carecure.medsysten.interfaces.doctorReservedTimes;
 import com.carecure.medsysten.resources.*;
 import com.carecure.medsysten.services.servAppointment;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -416,6 +417,7 @@ public class implAppointment implements contIntAppointment {
         });
         return jsonAppointments;
     }
+
 
     @Override
     public void addAppointment(resAppointment newAppointment) {
