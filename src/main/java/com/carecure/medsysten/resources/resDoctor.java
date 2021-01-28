@@ -31,6 +31,16 @@ public class resDoctor {
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "doctor")
     List<resAppointment> appointments;
 
+    @OneToMany(fetch=FetchType.LAZY,mappedBy="doctor")
+    List<resDoctorDayAvail> availableDays;
+
+    public List<resDoctorDayAvail> getAvailableDays() {
+        return availableDays;
+    }
+
+    public void setAvailableDays(List<resDoctorDayAvail> availableDays) {
+        this.availableDays = availableDays;
+    }
 
     public String getMobile() {
         return mobile;
@@ -56,7 +66,7 @@ public class resDoctor {
         this.priceRevisit = priceRevisit;
     }
 
-    public resDoctor(long code, String name, String mobile, String email, String gender, int age, String speciality, int priceVisit, int priceRevisit, List<resAppointment> appointments) {
+    public resDoctor(long code, String name, String mobile, String email, String gender, int age, String speciality, int priceVisit, int priceRevisit, List<resAppointment> appointments, List<resDoctorDayAvail> availableDays) {
         this.code = code;
         this.name = name;
         this.mobile = mobile;
@@ -67,6 +77,7 @@ public class resDoctor {
         this.priceVisit = priceVisit;
         this.priceRevisit = priceRevisit;
         this.appointments = appointments;
+        this.availableDays = availableDays;
     }
 
     public List<resAppointment> getAppointments() {
