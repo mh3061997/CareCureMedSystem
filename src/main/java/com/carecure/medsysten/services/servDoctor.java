@@ -39,8 +39,8 @@ public class servDoctor {
             return null;
     }
 
-    public void  addDoctor(resDoctor newDoctor){
-        repoDoctor.save(newDoctor);
+    public resDoctor  addDoctor(resDoctor newDoctor){
+        return repoDoctor.save(newDoctor);
     }
 
     public void updateDoctor(long doctorCode, resDoctor updatedDoctor){

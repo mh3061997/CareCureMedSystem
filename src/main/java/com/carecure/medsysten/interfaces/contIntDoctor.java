@@ -22,7 +22,7 @@ public interface contIntDoctor {
 
 
     @RequestMapping(method = RequestMethod.POST)
-    void addDoctor(@RequestBody resDoctor newDoctor);
+    resDoctor addDoctor(@RequestBody resDoctor newDoctor);
 
     @RequestMapping(method = RequestMethod.PUT,value="/{doctorCode}")
     void updateDoctor(@PathVariable("doctorCode") long code, @RequestBody resDoctor updatedDoctor);

@@ -143,8 +143,8 @@ public class implDoctor implements contIntDoctor {
     }
 
     @Override
-    public void addDoctor(resDoctor newDoctor) {
-        servDoctor.addDoctor(newDoctor);
+    public resDoctor addDoctor(resDoctor newDoctor) {
+        return servDoctor.addDoctor(newDoctor);
     }
 
     @Override
