@@ -51,7 +51,11 @@ public class servDoctorDayAvail {
         });
     }
 
-
+    public void updateDoctorDayAvailMulti(List<resDoctorDayAvail> updatedDoctorDayAvailArr) {
+        updatedDoctorDayAvailArr.forEach(doctorDayAvail ->{
+            repoDoctorDayAvail.save(doctorDayAvail);
+        });
+    }
     public void deleteDoctorDayAvail(long code){
 
         Optional<resDoctorDayAvail> doctorDayAvail = repoDoctorDayAvail.findById(code);

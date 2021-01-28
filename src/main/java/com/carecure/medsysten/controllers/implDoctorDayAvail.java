@@ -32,9 +32,20 @@ public class implDoctorDayAvail implements contIntDoctorDayAvail {
         servDoctorDayAvail.addDoctorDayAvail(newDoctorDayAvail);
     }
 
+
+    @Override
+    public void addDoctorDayMulti( List<resDoctorDayAvail> newDoctorDayAvailArr) {
+        servDoctorDayAvail.addDoctorDayAvailMulti(newDoctorDayAvailArr);
+    }
+
     @Override
     public void updateDoctorDayAvail(long code, resDoctorDayAvail updatedDoctorDayAvail) {
         servDoctorDayAvail.updateDoctorDayAvail(code,updatedDoctorDayAvail);
+    }
+
+    @Override
+    public void updateDoctorDayAvailMulti(List<resDoctorDayAvail> updatedDoctorDayAvailArr) {
+        servDoctorDayAvail.updateDoctorDayAvailMulti(updatedDoctorDayAvailArr);
     }
 
     @Override
