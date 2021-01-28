@@ -33,6 +33,12 @@ public class servDoctorDayAvail {
             return null;
     }
 
+    //return app by id
+    public List<resDoctorDayAvail> getDoctorDayAvailByDoctorCode(long code){
+        return  repoDoctorDayAvail.findByDoctorCode(code);
+    }
+
+
     public void  addDoctorDayAvail(resDoctorDayAvail newDoctorDayAvail){
         repoDoctorDayAvail.save(newDoctorDayAvail);
     }
@@ -52,6 +58,10 @@ public class servDoctorDayAvail {
     }
 
     public void updateDoctorDayAvailMulti(List<resDoctorDayAvail> updatedDoctorDayAvailArr) {
+        List<resDoctorDayAvail> days = getDoctorDayAvailByDoctorCode(updatedDoctorDayAvailArr.get(0).getDoctor().getCode());
+        days.forEach(day->{
+            repoDoctorDayAvail.deleteById(day.getCode());
+        });
         updatedDoctorDayAvailArr.forEach(doctorDayAvail ->{
             repoDoctorDayAvail.save(doctorDayAvail);
         });
