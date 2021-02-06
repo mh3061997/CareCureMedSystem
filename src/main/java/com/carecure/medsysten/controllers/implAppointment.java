@@ -67,7 +67,18 @@ public class implAppointment implements contIntAppointment {
 
         resPatient patient = appointment.getPatient();
         patient.setAppointments(new ArrayList<>());
-        patient.setMemberships(new ArrayList<>());
+
+        //
+        List<resPackageMembership> memberships = new ArrayList<>();
+        patient.getMemberships().forEach(membership->{
+            resPackageBase packageBase = membership.getPackageBase();
+            packageBase.setMemberships(new ArrayList<>());
+            membership.setPackageBase(packageBase);
+            membership.setPatient(null);
+            memberships.add(membership);
+        });
+        patient.setMemberships(memberships);
+        //
         patient.setMedImages(new ArrayList<>());
 
         resDoctor doctor = appointment.getDoctor();

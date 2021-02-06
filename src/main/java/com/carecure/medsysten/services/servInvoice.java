@@ -54,12 +54,12 @@ public class servInvoice {
 
     public void updateInvoice(long invoiceCode, resInvoice updatedInvoice){
         Optional<resInvoice> invoice = repoInvoice.findById(invoiceCode);
-        System.out.println("debt ss "+updatedInvoice.getStatus()+" "+ updatedInvoice.getTotalRemaining());
+      //  System.out.println("debt ss "+updatedInvoice.getStatus()+" "+ updatedInvoice.getTotalRemaining());
         if(invoice.isPresent()){
-            System.out.println("debt YY "+updatedInvoice.getStatus()+" "+ updatedInvoice.getTotalRemaining());
+           // System.out.println("debt YY "+updatedInvoice.getStatus()+" "+ updatedInvoice.getTotalRemaining());
 
             if(updatedInvoice.getStatus().equals("Debt") && updatedInvoice.getTotalRemaining() >0 ){
-                System.out.println("debt XX "+updatedInvoice.getStatus()+" "+ updatedInvoice.getTotalRemaining());
+            //    System.out.println("debt XX "+updatedInvoice.getStatus()+" "+ updatedInvoice.getTotalRemaining());
 
                 resAppointment appointment = updatedInvoice.getAppointment();
                 resPatient patient = appointment.getPatient();

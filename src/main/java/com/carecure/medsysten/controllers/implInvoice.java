@@ -27,18 +27,20 @@ public class implInvoice implements contIntInvoice {
 
 
            resAppointment appointment = invoice.getAppointment();
-           resDoctor doctor = appointment.getDoctor();
-           doctor.setAppointments(new ArrayList<>());
+          if(appointment != null){
+              resDoctor doctor = appointment.getDoctor();
+              doctor.setAppointments(new ArrayList<>());
 
-           appointment.setDoctor(doctor);
+              appointment.setDoctor(doctor);
 
-           resPatient patient =appointment.getPatient();
-           patient.setMemberships(new ArrayList<>());
-           patient.setAppointments(new ArrayList<>());
-           patient.setMedImages(new ArrayList<>());
-           appointment.setPatient(patient);
-           appointment.setInvoice(null);
-           invoice.setAppointment(appointment);
+              resPatient patient =appointment.getPatient();
+              patient.setMemberships(new ArrayList<>());
+              patient.setAppointments(new ArrayList<>());
+              patient.setMedImages(new ArrayList<>());
+              appointment.setPatient(patient);
+              appointment.setInvoice(null);
+              invoice.setAppointment(appointment);
+          }
 
            resPackageMembership membership = invoice.getUsedMembership();
            if(membership!=null){
@@ -65,18 +67,20 @@ public class implInvoice implements contIntInvoice {
 
 
             resAppointment appointment = invoice.getAppointment();
-            resDoctor doctor = appointment.getDoctor();
-            doctor.setAppointments(new ArrayList<>());
+            if(appointment != null){
+                resDoctor doctor = appointment.getDoctor();
+                doctor.setAppointments(new ArrayList<>());
 
-            appointment.setDoctor(doctor);
+                appointment.setDoctor(doctor);
 
-            resPatient patient =appointment.getPatient();
-            patient.setMemberships(new ArrayList<>());
-            patient.setAppointments(new ArrayList<>());
-            patient.setMedImages(new ArrayList<>());
-            appointment.setPatient(patient);
-            appointment.setInvoice(null);
-            invoice.setAppointment(appointment);
+                resPatient patient =appointment.getPatient();
+                patient.setMemberships(new ArrayList<>());
+                patient.setAppointments(new ArrayList<>());
+                patient.setMedImages(new ArrayList<>());
+                appointment.setPatient(patient);
+                appointment.setInvoice(null);
+                invoice.setAppointment(appointment);
+            }
 
             resPackageMembership membership = invoice.getUsedMembership();
             if(membership!=null){
@@ -101,18 +105,20 @@ public class implInvoice implements contIntInvoice {
 
         resInvoice invoice =  servInvoice.getInvoiceByCode(code);
         resAppointment appointment = invoice.getAppointment();
-        resDoctor doctor = appointment.getDoctor();
-        doctor.setAppointments(new ArrayList<>());
+        if(appointment != null){
+            resDoctor doctor = appointment.getDoctor();
+            doctor.setAppointments(new ArrayList<>());
 
-        appointment.setDoctor(doctor);
+            appointment.setDoctor(doctor);
 
-        resPatient patient =appointment.getPatient();
-        patient.setMemberships(new ArrayList<>());
-        patient.setAppointments(new ArrayList<>());
-        patient.setMedImages(new ArrayList<>());
-        appointment.setPatient(patient);
-        appointment.setInvoice(null);
-        invoice.setAppointment(appointment);
+            resPatient patient =appointment.getPatient();
+            patient.setMemberships(new ArrayList<>());
+            patient.setAppointments(new ArrayList<>());
+            patient.setMedImages(new ArrayList<>());
+            appointment.setPatient(patient);
+            appointment.setInvoice(null);
+            invoice.setAppointment(appointment);
+        }
 
         resPackageMembership membership = invoice.getUsedMembership();
         if(membership!=null){
