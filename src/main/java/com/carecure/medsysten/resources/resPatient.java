@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name="respatient")
 @JsonIgnoreProperties("hibernateLazyInitializer")
 
 public class resPatient {

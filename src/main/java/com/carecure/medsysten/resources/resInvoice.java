@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@Table(name="resinvoice")
+
 @JsonIgnoreProperties("hibernateLazyInitializer")
 public class resInvoice {
 
