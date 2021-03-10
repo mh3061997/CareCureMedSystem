@@ -2,8 +2,12 @@ package com.carecure.medsysten.interfaces;
 
 import com.carecure.medsysten.resources.resAppointment;
 import com.carecure.medsysten.resources.resInvoice;
+import com.lowagie.text.DocumentException;
+import freemarker.template.TemplateException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
 
@@ -27,4 +31,7 @@ public interface contIntInvoice {
 
     @RequestMapping(method= RequestMethod.DELETE,value="/{invoiceCode}")
     void deleteInvoice(@PathVariable("invoiceCode") long code);
+
+    @RequestMapping(method= RequestMethod.GET,value="/email")
+    void sendEmail(@RequestBody resInvoice invoice) throws IOException, MessagingException, TemplateException, DocumentException;
 }
