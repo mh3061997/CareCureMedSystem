@@ -18,26 +18,26 @@ import org.springframework.stereotype.Service;
 public class jwtUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private UserRepository userDao;
+    private UserRepository userRepository;
 
     @Autowired
     private PasswordEncoder bcryptEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserDao user = userDao.findByUsername(username);
+        UserDao user = userRepository.findByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException("User not found with username: " + username);
         }
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
-                new ArrayList<>());
+
+        return new userDetails(user);
     }
 
     public UserDao save(UserDto user) {
         UserDao newUser = new UserDao();
         newUser.setUsername(user.getUsername());
         newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
-        return userDao.save(newUser);
+        return userRepository.save(newUser);
     }
 
 }
