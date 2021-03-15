@@ -31,5 +31,11 @@ public class role {
         this.name = name;
     }
 
+    public role(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
+    public role() {
+    }
 }

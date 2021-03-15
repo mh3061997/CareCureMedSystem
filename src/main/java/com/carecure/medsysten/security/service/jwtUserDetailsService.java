@@ -2,12 +2,11 @@ package com.carecure.medsysten.security.service;
 
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
-import com.carecure.medsysten.security.models.UserDao;
-import com.carecure.medsysten.security.models.UserDto;
-import com.carecure.medsysten.security.models.UserRepository;
+import com.carecure.medsysten.security.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -23,6 +22,9 @@ public class jwtUserDetailsService implements UserDetailsService {
     @Autowired
     private PasswordEncoder bcryptEncoder;
 
+    @Autowired
+    private com.carecure.medsysten.security.models.roleRepository roleRepository;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserDao user = userRepository.findByUsername(username);
@@ -33,10 +35,19 @@ public class jwtUserDetailsService implements UserDetailsService {
         return new userDetails(user);
     }
 
-    public UserDao save(UserDto user) {
+    public UserDao save(userDtoRegister user) {
         UserDao newUser = new UserDao();
         newUser.setUsername(user.getUsername());
         newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
+        newUser.setPatient(user.getPatient());
+        newUser.setDoctor(user.getDoctor());
+
+        Set<role> roles = new HashSet<>();
+        user.getRoles().forEach(role->{
+            role roleDB = roleRepository.findByname(role.getName());
+            roles.add(roleDB);
+        });
+        newUser.setRoles(roles);
         return userRepository.save(newUser);
     }
 

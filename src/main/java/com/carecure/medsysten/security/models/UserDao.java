@@ -1,5 +1,7 @@
 package com.carecure.medsysten.security.models;
 
+import com.carecure.medsysten.resources.resDoctor;
+import com.carecure.medsysten.resources.resPatient;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -12,7 +14,7 @@ public class UserDao {
     @Id
     @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long code;
     @Column
     private String username;
     @Column
@@ -28,6 +30,34 @@ public class UserDao {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<role> roles = new HashSet<>();
+
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "patientCode",unique = true)
+    private resPatient patient;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "doctorCode",unique = true)
+    private resDoctor doctor;
+
+
+    public resDoctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(resDoctor doctor) {
+        this.doctor = doctor;
+    }
+
+    public UserDao(long code, String username, String password, boolean enabled, Set<role> roles, resPatient patient, resDoctor doctor) {
+        this.code = code;
+        this.username = username;
+        this.password = password;
+        this.enabled = enabled;
+        this.roles = roles;
+        this.patient = patient;
+        this.doctor = doctor;
+    }
 
     public String getUsername() {
         return username;
@@ -45,12 +75,12 @@ public class UserDao {
         this.password = password;
     }
 
-    public long getId() {
-        return id;
+    public long getCode() {
+        return code;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setCode(long code) {
+        this.code = code;
     }
 
     public boolean isEnabled() {
@@ -72,11 +102,11 @@ public class UserDao {
     public UserDao() {
     }
 
-    public UserDao(long id, String username, String password, boolean enabled, Set<role> roles) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.enabled = enabled;
-        this.roles = roles;
+    public resPatient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(resPatient patient) {
+        this.patient = patient;
     }
 }

@@ -2,7 +2,7 @@ package com.carecure.medsysten.security.controller;
 
 import java.util.Objects;
 
-import com.carecure.medsysten.security.models.UserDto;
+import com.carecure.medsysten.security.models.userDtoRegister;
 import com.carecure.medsysten.security.service.jwtUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -50,7 +50,7 @@ public class jwtAuthenticationController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public ResponseEntity<?> saveUser(@RequestBody UserDto user) throws Exception {
+    public ResponseEntity<?> saveUser(@RequestBody userDtoRegister user) throws Exception {
         return ResponseEntity.ok(userDetailsService.save(user));
     }
 
