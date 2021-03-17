@@ -6,9 +6,11 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface repoDoctor extends CrudRepository<resDoctor,Long> {
+public interface repoDoctor extends CrudRepository<resDoctor, Long> {
     List<resDoctor> findByName(String name);
+
     List<resDoctor> findBySpeciality(String speciality);
-   // List<resDoctor> findByMobile(String mobile);
+
+    resDoctor findByMobile(String mobile);
 
 }

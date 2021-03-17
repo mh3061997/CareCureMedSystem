@@ -1,10 +1,9 @@
 package com.carecure.medsysten.security.interfaces;
 
+import com.carecure.medsysten.resources.resPatient;
 import com.carecure.medsysten.security.models.UserDao;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,6 +26,11 @@ public interface contIntUserDao {
     @RequestMapping(method= RequestMethod.PUT,value="/{userDaoCode}/role")
     void changeRoleUserDao(@PathVariable("userDaoCode") long code,@RequestBody UserDao updatedUserDao);
 
+    @RequestMapping(method = RequestMethod.GET,value="/patient")
+    ResponseEntity<?> isPatientAssociatedWithAUser(@RequestParam  String mobile);
+
+    @RequestMapping(method = RequestMethod.GET,value="/doctor")
+    ResponseEntity<?> isDoctorAssociatedWithAUser(@RequestParam  String mobile);
 }
 
 

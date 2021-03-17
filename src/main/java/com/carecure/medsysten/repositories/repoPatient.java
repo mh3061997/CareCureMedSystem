@@ -6,7 +6,8 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface repoPatient extends CrudRepository<resPatient,Long> {
+public interface repoPatient extends CrudRepository<resPatient, Long> {
     List<resPatient> findByName(String name);
-    List<resPatient> findByMobile(String mobile);
+
+    resPatient findByMobile(String mobile);
 }

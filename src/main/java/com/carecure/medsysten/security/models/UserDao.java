@@ -3,8 +3,10 @@ package com.carecure.medsysten.security.models;
 import com.carecure.medsysten.resources.resDoctor;
 import com.carecure.medsysten.resources.resPatient;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -34,10 +36,12 @@ public class UserDao {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "patientCode",unique = true)
+    @JsonIgnoreProperties({"memberships","appointments","medImages","user"})
     private resPatient patient;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "doctorCode",unique = true)
+    @JsonIgnoreProperties({"appointments","availableDays","user"})
     private resDoctor doctor;
 
 
