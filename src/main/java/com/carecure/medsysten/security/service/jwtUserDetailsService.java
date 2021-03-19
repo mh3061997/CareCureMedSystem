@@ -41,7 +41,7 @@ public class jwtUserDetailsService implements UserDetailsService {
         newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
         newUser.setPatient(user.getPatient());
         newUser.setDoctor(user.getDoctor());
-
+        newUser.setName(user.getName());
         Set<role> roles = new HashSet<>();
         user.getRoles().forEach(role->{
             role roleDB = roleRepository.findByname(role.getName());

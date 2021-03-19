@@ -8,11 +8,20 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class userDtoRegister {
+    private String name;
     private String username;
     private String password;
     private resPatient patient;
     private resDoctor doctor;
     private Set<role> roles = new HashSet<>();
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public Set<role> getRoles() {
         return roles;

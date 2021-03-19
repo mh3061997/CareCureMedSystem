@@ -62,6 +62,8 @@ public class webSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .antMatchers("/servicePriceList/**").hasAnyAuthority("ADMIN")
                 .antMatchers("/userDao/**").hasAnyAuthority("ADMIN")
+                .antMatchers("/registerNonPatient").hasAnyAuthority("ADMIN")
+
                 // all other requests need to be authenticated
                         .anyRequest().authenticated().and().
                 // make sure we use stateless session; session won't be used to

@@ -18,6 +18,8 @@ public class UserDao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long code;
     @Column
+    private String name;
+    @Column
     private String username;
     @Column
     @JsonIgnore
@@ -53,8 +55,17 @@ public class UserDao {
         this.doctor = doctor;
     }
 
-    public UserDao(long code, String username, String password, boolean enabled, Set<role> roles, resPatient patient, resDoctor doctor) {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public UserDao(long code, String name, String username, String password, boolean enabled, Set<role> roles, resPatient patient, resDoctor doctor) {
         this.code = code;
+        this.name = name;
         this.username = username;
         this.password = password;
         this.enabled = enabled;
