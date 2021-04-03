@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import com.carecure.medsysten.resources.resDoctor;
+import com.carecure.medsysten.resources.resPatient;
 import com.carecure.medsysten.security.service.userDetails;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
@@ -63,6 +65,23 @@ public class jwtTokenUtil implements Serializable {
         Map<String, Object> claims = new HashMap<>();
         claims.put("role",userDetails.getAuthorities().toArray()[0]);
         claims.put("name",userDetails.getName());
+
+        resPatient patient = userDetails.getPatient();
+
+        if(patient !=null){
+            claims.put("patientCode",patient.getCode());
+        }
+
+        resDoctor doctor = userDetails.getDoctor();
+
+        if(doctor !=null){
+            claims.put("doctorCode",doctor.getCode());
+
+        }
+
+
+
+
         return doGenerateToken(claims, userDetails.getUsername());
     }
 

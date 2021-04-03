@@ -6,6 +6,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+import com.carecure.medsysten.resources.resDoctor;
+import com.carecure.medsysten.resources.resPatient;
 import com.carecure.medsysten.security.models.UserDao;
 import com.carecure.medsysten.security.models.role;
 import org.springframework.security.core.GrantedAuthority;
@@ -62,5 +64,8 @@ public class userDetails implements UserDetails {
     public boolean isEnabled() {
         return user.isEnabled();
     }
+
+    public resPatient getPatient(){return user.getPatient();}
+    public resDoctor getDoctor(){return user.getDoctor();}
 
 }
