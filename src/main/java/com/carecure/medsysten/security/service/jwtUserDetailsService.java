@@ -26,7 +26,7 @@ public class jwtUserDetailsService implements UserDetailsService {
     private com.carecure.medsysten.security.models.roleRepository roleRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public userDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserDao user = userRepository.findByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException("User not found with username: " + username);
