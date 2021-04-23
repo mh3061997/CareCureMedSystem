@@ -60,6 +60,12 @@ public class webSecurityConfig extends WebSecurityConfigurerAdapter {
                 // dont authenticate this particular request
                 .authorizeRequests().antMatchers("/login", "/register").permitAll()
                 .and().authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                .and().authorizeRequests().antMatchers(HttpMethod.POST, "/appointment").permitAll()
+                .and().authorizeRequests().antMatchers(HttpMethod.GET, "/patient").permitAll()
+                .and().authorizeRequests().antMatchers(HttpMethod.GET, "/doctor/speciality").permitAll()
+                .and().authorizeRequests().antMatchers(HttpMethod.POST, "/utils/email-appointment").permitAll()
+                .and().authorizeRequests().antMatchers(HttpMethod.POST, "/utils/email-appointment").permitAll()
+
                 .antMatchers("/servicePriceList/**").hasAnyAuthority("ADMIN")
                 .antMatchers("/userDao/**").hasAnyAuthority("ADMIN")
                 .antMatchers("/registerNonPatient").hasAnyAuthority("ADMIN")
