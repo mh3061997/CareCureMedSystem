@@ -67,7 +67,18 @@ public class implAppointment implements contIntAppointment {
 
         resPatient patient = appointment.getPatient();
         patient.setAppointments(new ArrayList<>());
-        patient.setMemberships(new ArrayList<>());
+
+        //
+        List<resPackageMembership> memberships = new ArrayList<>();
+        patient.getMemberships().forEach(membership->{
+            resPackageBase packageBase = membership.getPackageBase();
+            packageBase.setMemberships(new ArrayList<>());
+            membership.setPackageBase(packageBase);
+            membership.setPatient(null);
+            memberships.add(membership);
+        });
+        patient.setMemberships(memberships);
+        //
         patient.setMedImages(new ArrayList<>());
 
         resDoctor doctor = appointment.getDoctor();
@@ -305,6 +316,45 @@ public class implAppointment implements contIntAppointment {
         List<resAppointment> jsonAppointments = new ArrayList<>();
         servAppointment.getUpcomingAppointmentsPatient(patientCode).forEach(appointment -> {
 
+
+
+            resPatient patient = appointment.getPatient();
+            patient.setAppointments(new ArrayList<>());
+            patient.setMemberships(new ArrayList<>());
+            patient.setMedImages(new ArrayList<>());
+
+            resDoctor doctor = appointment.getDoctor();
+            doctor.setAppointments(new ArrayList<>());
+
+            appointment.setPatient(patient);
+            appointment.setDoctor(doctor);
+
+            resInvoice invoice =appointment.getInvoice();
+            if(invoice !=null){
+                invoice.setAppointment(null);
+                resPackageMembership membership = invoice.getUsedMembership();
+                if(membership!=null){
+                    membership.setPatient(null);
+                    resPackageBase packageBase =membership.getPackageBase();
+                    packageBase.setMemberships(new ArrayList<>());
+                    membership.setPackageBase(packageBase);
+
+                    invoice.setUsedMembership(membership);
+                }
+
+                appointment.setInvoice(invoice);
+            }
+
+            jsonAppointments.add(appointment);
+
+        });
+        return jsonAppointments;
+    }
+
+    @Override
+    public List<resAppointment> getDoctorAppointmentsByDate(String date) throws ParseException {
+        List<resAppointment> jsonAppointments = new ArrayList<>();
+        servAppointment.getAppointmentsByDate(date).forEach(appointment -> {
 
 
             resPatient patient = appointment.getPatient();

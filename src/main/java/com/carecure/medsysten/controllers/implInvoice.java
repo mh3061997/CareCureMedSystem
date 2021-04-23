@@ -145,7 +145,7 @@ public class implInvoice implements contIntInvoice {
             resDoctor doctor = appointment.getDoctor();
             doctor.setAppointments(new ArrayList<>());
 
-        appointment.setDoctor(doctor);
+            appointment.setDoctor(doctor);
 
             resPatient patient = appointment.getPatient();
             patient.setMemberships(new ArrayList<>());
