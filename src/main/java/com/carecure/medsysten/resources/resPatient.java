@@ -1,13 +1,16 @@
 package com.carecure.medsysten.resources;
 
+import com.carecure.medsysten.security.models.UserDao;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name="respatient")
 @JsonIgnoreProperties("hibernateLazyInitializer")
 
 public class resPatient {
@@ -32,6 +35,10 @@ public class resPatient {
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "patient")
     List<resMedImage> medImages;
 
+    @JsonIgnore
+    @OneToOne(fetch = FetchType.LAZY ,mappedBy = "patient")
+    private UserDao user;
+
     public long getTotalDebt() {
         return totalDebt;
     }
@@ -40,7 +47,15 @@ public class resPatient {
         this.totalDebt = totalDebt;
     }
 
-    public resPatient(long code, String name, String gender, String email, String mobile, int age, long totalDebt, String notes, List<resPackageMembership> memberships, List<resAppointment> appointments, List<resMedImage> medImages) {
+    public UserDao getUser() {
+        return user;
+    }
+
+    public void setUser(UserDao user) {
+        this.user = user;
+    }
+
+    public resPatient(long code, String name, String gender, String email, String mobile, int age, long totalDebt, String notes, List<resPackageMembership> memberships, List<resAppointment> appointments, List<resMedImage> medImages, UserDao user) {
         this.code = code;
         this.name = name;
         this.gender = gender;
@@ -52,6 +67,7 @@ public class resPatient {
         this.memberships = memberships;
         this.appointments = appointments;
         this.medImages = medImages;
+        this.user = user;
     }
 
     public String getNotes() {

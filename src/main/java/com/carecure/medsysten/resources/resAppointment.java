@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@Table(name="resappointment")
 @JsonIgnoreProperties("hibernateLazyInitializer")
 public class resAppointment {
 

@@ -1,13 +1,17 @@
 package com.carecure.medsysten.resources;
 
+import com.carecure.medsysten.security.models.UserDao;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name="resdoctor")
+
 @JsonIgnoreProperties("hibernateLazyInitializer")
 
 public class resDoctor {
@@ -33,6 +37,33 @@ public class resDoctor {
 
     @OneToMany(fetch=FetchType.LAZY,mappedBy="doctor")
     List<resDoctorDayAvail> availableDays;
+
+    @JsonIgnore
+    @OneToOne(fetch = FetchType.LAZY ,mappedBy = "doctor")
+    private UserDao user;
+
+    public UserDao getUser() {
+        return user;
+    }
+
+    public void setUser(UserDao user) {
+        this.user = user;
+    }
+
+    public resDoctor(long code, String name, String mobile, String email, String gender, int age, String speciality, int priceVisit, int priceRevisit, List<resAppointment> appointments, List<resDoctorDayAvail> availableDays, UserDao user) {
+        this.code = code;
+        this.name = name;
+        this.mobile = mobile;
+        this.email = email;
+        this.gender = gender;
+        this.age = age;
+        this.speciality = speciality;
+        this.priceVisit = priceVisit;
+        this.priceRevisit = priceRevisit;
+        this.appointments = appointments;
+        this.availableDays = availableDays;
+        this.user = user;
+    }
 
     public List<resDoctorDayAvail> getAvailableDays() {
         return availableDays;
@@ -64,20 +95,6 @@ public class resDoctor {
 
     public void setPriceRevisit(int priceRevisit) {
         this.priceRevisit = priceRevisit;
-    }
-
-    public resDoctor(long code, String name, String mobile, String email, String gender, int age, String speciality, int priceVisit, int priceRevisit, List<resAppointment> appointments, List<resDoctorDayAvail> availableDays) {
-        this.code = code;
-        this.name = name;
-        this.mobile = mobile;
-        this.email = email;
-        this.gender = gender;
-        this.age = age;
-        this.speciality = speciality;
-        this.priceVisit = priceVisit;
-        this.priceRevisit = priceRevisit;
-        this.appointments = appointments;
-        this.availableDays = availableDays;
     }
 
     public List<resAppointment> getAppointments() {
