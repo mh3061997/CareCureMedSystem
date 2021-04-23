@@ -207,7 +207,7 @@ public class implInvoice implements contIntInvoice {
         String html = FreeMarkerTemplateUtils.processTemplateIntoString(templateHtml, model);
         String pdf = FreeMarkerTemplateUtils.processTemplateIntoString(templatePdf, model);
 
-        helper.setTo(new String[]{"mhaitham@sumerge.com", "iuseitforhacking@gmail.com"});
+        helper.setTo(new String[]{"iuseitforhacking@gmail.com"});
         helper.setText(html, true);
         helper.setSubject("Thymeleaf Test Email");
 
