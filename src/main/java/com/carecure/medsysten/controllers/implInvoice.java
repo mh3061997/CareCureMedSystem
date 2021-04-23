@@ -27,18 +27,20 @@ public class implInvoice implements contIntInvoice {
 
 
            resAppointment appointment = invoice.getAppointment();
-           resDoctor doctor = appointment.getDoctor();
-           doctor.setAppointments(new ArrayList<>());
+          if(appointment != null){
+              resDoctor doctor = appointment.getDoctor();
+              doctor.setAppointments(new ArrayList<>());
 
-           appointment.setDoctor(doctor);
+              appointment.setDoctor(doctor);
 
-           resPatient patient =appointment.getPatient();
-           patient.setMemberships(new ArrayList<>());
-           patient.setAppointments(new ArrayList<>());
-           patient.setMedImages(new ArrayList<>());
-           appointment.setPatient(patient);
-           appointment.setInvoice(null);
-           invoice.setAppointment(appointment);
+              resPatient patient =appointment.getPatient();
+              patient.setMemberships(new ArrayList<>());
+              patient.setAppointments(new ArrayList<>());
+              patient.setMedImages(new ArrayList<>());
+              appointment.setPatient(patient);
+              appointment.setInvoice(null);
+              invoice.setAppointment(appointment);
+          }
 
            resPackageMembership membership = invoice.getUsedMembership();
            if(membership!=null){
@@ -59,22 +61,64 @@ public class implInvoice implements contIntInvoice {
     }
 
     @Override
+    public List<resInvoice> getInvoicesByDate(String date) {
+        List<resInvoice> jsonInvoice = new ArrayList<>();
+        servInvoice.getInvoicesByDate(date).forEach(invoice ->{
+
+
+            resAppointment appointment = invoice.getAppointment();
+            if(appointment != null){
+                resDoctor doctor = appointment.getDoctor();
+                doctor.setAppointments(new ArrayList<>());
+
+                appointment.setDoctor(doctor);
+
+                resPatient patient =appointment.getPatient();
+                patient.setMemberships(new ArrayList<>());
+                patient.setAppointments(new ArrayList<>());
+                patient.setMedImages(new ArrayList<>());
+                appointment.setPatient(patient);
+                appointment.setInvoice(null);
+                invoice.setAppointment(appointment);
+            }
+
+            resPackageMembership membership = invoice.getUsedMembership();
+            if(membership!=null){
+
+                membership.setPatient(null);
+
+
+                resPackageBase  packageBase = membership.getPackageBase();
+                packageBase.setMemberships(new ArrayList<>());
+                invoice.setUsedMembership(membership);
+            }
+
+            jsonInvoice.add(invoice);
+        });
+
+        return jsonInvoice;
+
+    }
+
+    @Override
     public resInvoice getInvoiceById(long code) {
 
         resInvoice invoice =  servInvoice.getInvoiceByCode(code);
         resAppointment appointment = invoice.getAppointment();
-        resDoctor doctor = appointment.getDoctor();
-        doctor.setAppointments(new ArrayList<>());
+        if(appointment != null){
+            resDoctor doctor = appointment.getDoctor();
+            doctor.setAppointments(new ArrayList<>());
 
-        appointment.setDoctor(doctor);
+            appointment.setDoctor(doctor);
 
-        resPatient patient =appointment.getPatient();
-        patient.setMemberships(new ArrayList<>());
-        patient.setAppointments(new ArrayList<>());
-        patient.setMedImages(new ArrayList<>());
-        appointment.setPatient(patient);
-        appointment.setInvoice(null);
-        invoice.setAppointment(appointment);
+            resPatient patient =appointment.getPatient();
+            patient.setMemberships(new ArrayList<>());
+            patient.setAppointments(new ArrayList<>());
+            patient.setMedImages(new ArrayList<>());
+            appointment.setPatient(patient);
+            appointment.setInvoice(null);
+            invoice.setAppointment(appointment);
+        }
 
         resPackageMembership membership = invoice.getUsedMembership();
         if(membership!=null){
