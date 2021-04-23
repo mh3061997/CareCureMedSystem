@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin
 @RestController
 public class implAppointment implements contIntAppointment {
 
@@ -98,7 +98,6 @@ public class implAppointment implements contIntAppointment {
 
 
     @Override
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public List<resAppointment> getPastAppointments() throws ParseException {
         List<resAppointment> jsonAppointments = new ArrayList<>();
         servAppointment.getPastAppointments().forEach(appointment -> {
@@ -139,8 +138,7 @@ public class implAppointment implements contIntAppointment {
     }
 
     @Override
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
-    public List<resAppointment> getUpcomingAppointments() {
+    public List<resAppointment> getUpcomingAppointments() throws ParseException {
         List<resAppointment> jsonAppointments = new ArrayList<>();
         servAppointment.getUpcomingAppointments().forEach(appointment -> {
 
@@ -180,7 +178,7 @@ public class implAppointment implements contIntAppointment {
     }
 
     @Override
-    public List<resAppointment> getUpcomingAppointmentsDoctor(long doctorCode) {
+    public List<resAppointment> getUpcomingAppointmentsDoctor(long doctorCode) throws ParseException {
         List<resAppointment> jsonAppointments = new ArrayList<>();
         servAppointment.getUpcomingAppointmentsDoctor(doctorCode).forEach(appointment -> {
 

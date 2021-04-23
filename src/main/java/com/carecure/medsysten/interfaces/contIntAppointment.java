@@ -10,7 +10,6 @@ import java.util.List;
 @RequestMapping("/appointment")
 public interface contIntAppointment {
 
-
     @RequestMapping
     List<resAppointment> getAppointmentAll();
 
@@ -18,20 +17,14 @@ public interface contIntAppointment {
     List<resAppointment> getAppointmentPatientDoctor(@RequestParam("patientCode")long patientCode,
                                                      @RequestParam("doctorCode")long doctorCode);
 
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
-    @RequestMapping("/date")
-    List<resAppointment> getDoctorAppointmentsByDate(@RequestParam("date") String date) throws ParseException;
-
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping("/past")
     List<resAppointment> getPastAppointments() throws ParseException;
 
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping("/upcoming")
-    List<resAppointment> getUpcomingAppointments();
+    List<resAppointment> getUpcomingAppointments() throws ParseException;
 
     @RequestMapping("/upcoming/doctor/{doctorCode}")
-    List<resAppointment> getUpcomingAppointmentsDoctor(@PathVariable("doctorCode") long doctorCode);
+    List<resAppointment> getUpcomingAppointmentsDoctor(@PathVariable("doctorCode") long doctorCode) throws ParseException;
 
     @RequestMapping("/past/doctor/{doctorCode}")
     List<resAppointment> getPastAppointmentsDoctor(@PathVariable("doctorCode") long doctorCode) throws ParseException;

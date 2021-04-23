@@ -54,7 +54,7 @@ public class servAppointment {
         repoAppointment.findByDateToVisitLessThanAndPatientCode(date,patientCode).forEach(AppointmentList::add);
         return AppointmentList;
     }
-    public List<resAppointment> getUpcomingAppointments()  {
+    public List<resAppointment> getUpcomingAppointments() throws ParseException {
         List<resAppointment> AppointmentList = new ArrayList<>();
         Timestamp ts=new Timestamp(System.currentTimeMillis());
         Date date=ts;
@@ -70,7 +70,7 @@ public class servAppointment {
         return AppointmentList;
     }
 
-    public List<resAppointment> getUpcomingAppointmentsDoctor(long doctorCode)  {
+    public List<resAppointment> getUpcomingAppointmentsDoctor(long doctorCode) throws ParseException {
         List<resAppointment> AppointmentList = new ArrayList<>();
         Timestamp ts=new Timestamp(System.currentTimeMillis());
         Date date=ts;
