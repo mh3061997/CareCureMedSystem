@@ -62,13 +62,6 @@ public class servAppointment {
         return AppointmentList;
     }
 
-
-    public List<resAppointment> getAppointmentsByDate(String date) throws ParseException {
-        List<resAppointment> AppointmentList = new ArrayList<>();
-        repoAppointment.findByDateToVisit(date).forEach(AppointmentList::add);
-        return AppointmentList;
-    }
-
     public List<resAppointment> getDoctorAppointmentsByDate(String date,long doctorCode) throws ParseException {
         List<resAppointment> AppointmentList = new ArrayList<>();
         Date dateObj = new SimpleDateFormat("yyyy-MM-dd").parse(date);

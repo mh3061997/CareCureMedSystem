@@ -9,10 +9,7 @@ import com.carecure.medsysten.resources.resPatient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,13 +37,6 @@ public class servInvoice {
             return null;
     }
 
-
-    public List<resInvoice> getInvoicesByDate(String date) {
-        List<resInvoice> invoiceList = new ArrayList<>();
-        repoInvoice.findByDateCreated(date).forEach(invoiceList::add);
-        return invoiceList;
-    }
-
     public resInvoice  addInvoice(resInvoice newInvoice){
        return repoInvoice.save(newInvoice);
     }
@@ -54,16 +44,10 @@ public class servInvoice {
 
     public void updateInvoice(long invoiceCode, resInvoice updatedInvoice){
         Optional<resInvoice> invoice = repoInvoice.findById(invoiceCode);
-      //  System.out.println("debt ss "+updatedInvoice.getStatus()+" "+ updatedInvoice.getTotalRemaining());
         if(invoice.isPresent()){
-           // System.out.println("debt YY "+updatedInvoice.getStatus()+" "+ updatedInvoice.getTotalRemaining());
-
-            if(updatedInvoice.getStatus().equals("Debt") && updatedInvoice.getTotalRemaining() >0 ){
-            //    System.out.println("debt XX "+updatedInvoice.getStatus()+" "+ updatedInvoice.getTotalRemaining());
-
+            if( updatedInvoice.getStatus()=="Debt" && updatedInvoice.getTotalRemaining() >0 ){
                 resAppointment appointment = updatedInvoice.getAppointment();
                 resPatient patient = appointment.getPatient();
-                System.out.println("debt"+ updatedInvoice.getTotalRemaining());
                 patient.setTotalDebt(patient.getTotalDebt()+updatedInvoice.getTotalRemaining());
                 repoPatient.save(patient);
             }

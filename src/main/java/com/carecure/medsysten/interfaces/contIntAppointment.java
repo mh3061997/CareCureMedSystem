@@ -17,9 +17,6 @@ public interface contIntAppointment {
     List<resAppointment> getAppointmentPatientDoctor(@RequestParam("patientCode")long patientCode,
                                                      @RequestParam("doctorCode")long doctorCode);
 
-    @RequestMapping("/date")
-    List<resAppointment> getDoctorAppointmentsByDate(@RequestParam("date") String date) throws ParseException;
-
     @RequestMapping("/past")
     List<resAppointment> getPastAppointments() throws ParseException;
 
