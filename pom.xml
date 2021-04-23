@@ -52,29 +52,17 @@
 <!--                    <artifactId>spring-security-test</artifactId>-->
 <!--                    <scope>test</scope>-->
 <!--                </dependency>-->
-
-        </dependency>
-            <version>9.1.20</version>
-            <artifactId>flying-saucer-pdf</artifactId>
-            <groupId>org.xhtmlrenderer</groupId>
-        <dependency>
-        </dependency>
-            <artifactId>freemarker</artifactId>
-            <groupId>org.freemarker</groupId>
-        <dependency>
-        </dependency>
-            <artifactId>spring-boot-starter-mail</artifactId>
-            <groupId>org.springframework.boot</groupId>
-        <dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
+
         <dependency>
-            <artifactId>jjwt</artifactId>
             <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
             <version>0.9.1</version>
         </dependency>
+
     </dependencies>
 
     <build>
