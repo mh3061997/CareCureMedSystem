@@ -32,6 +32,6 @@ public interface contIntInvoice {
     @RequestMapping(method= RequestMethod.DELETE,value="/{invoiceCode}")
     void deleteInvoice(@PathVariable("invoiceCode") long code);
 
-    @RequestMapping(method= RequestMethod.GET,value="/email")
-    void sendEmail(@RequestBody resInvoice invoice) throws IOException, MessagingException, TemplateException, DocumentException;
+    @RequestMapping(method= RequestMethod.POST,value="/email")
+    void sendInvoiceEmail(@RequestBody resInvoice invoice) throws IOException, MessagingException, TemplateException, DocumentException;
 }

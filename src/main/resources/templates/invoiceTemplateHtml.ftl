@@ -115,7 +115,7 @@
 <p style="text-align: left;">Dear ${invoice.appointment.patient.name},</p>
 <p style="text-align: left;">This is the invoice for your latest appointment, also a PDF version is attached to this email
 if you wish to download and print it. </p>
-<p style="text-align: left; margin-bottom: 10px;">Thanks for visiting Care And Cure Clinics.</p>
+<p style="text-align: left; margin-bottom: 10px;">Thank you for visiting Care And Cure Clinics.</p>
 <div class="invoice-box">
     <table cellpadding="0" cellspacing="0">
         <tr class="top">
@@ -124,7 +124,7 @@ if you wish to download and print it. </p>
                     <tr>
                         <td class="title">
                             <img style="width:250px;" width="250px"
-                                 src="http://www.carecureclinics.com/logocropped.jpg"/>
+                                 src="https://carecureclinics.com/assets/logo%20only.png"/>
                         </td>
 
                         <td class=" text-right">

@@ -1,5 +1,6 @@
 package com.carecure.medsysten.controllers;
 
+import com.carecure.medsysten.emailUtils.servEmail;
 import com.carecure.medsysten.interfaces.contIntAppointment;
 import com.carecure.medsysten.interfaces.doctorReservedTimes;
 import com.carecure.medsysten.resources.*;
@@ -19,7 +20,8 @@ public class implAppointment implements contIntAppointment {
 
     @Autowired
     private servAppointment servAppointment;
-
+    @Autowired
+    private com.carecure.medsysten.emailUtils.servEmail servEmail;
 
     @Override
     public List<resAppointment> getAppointmentAll() {
@@ -473,7 +475,15 @@ public class implAppointment implements contIntAppointment {
 
     @Override
     public void addAppointment(resAppointment newAppointment) {
-        servAppointment.addAppointment(newAppointment);
+
+       try {
+
+           servAppointment.addAppointment(newAppointment);
+           servEmail.sendAppointmentConfirmationEmail(newAppointment);
+
+       }catch (Exception e){
+           System.out.println("EXCEPTION THROWN " + e.getMessage());
+       }
     }
 
     @Override
