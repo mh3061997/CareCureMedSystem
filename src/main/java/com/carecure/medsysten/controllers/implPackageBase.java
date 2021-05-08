@@ -26,15 +26,15 @@ public class implPackageBase implements contIntPackageBase {
 
         servPackageBase.getPackageBaseByStatus(status).forEach(packageBase ->{
 
-            List<resPackageMembership> memberships = packageBase.getMemberships();
-            memberships.forEach(membership ->{
-                membership.setPackageBase(null);
-                resPatient patient =  membership.getPatient();
-                patient.setMemberships(new ArrayList<>());
-                patient.setAppointments(new ArrayList<>());
-                membership.setPatient(patient);
-            });
-            packageBase.setMemberships(memberships);
+//            List<resPackageMembership> memberships = packageBase.getMemberships();
+//            memberships.forEach(membership ->{
+//                membership.setPackageBase(null);
+//                resPatient patient =  membership.getPatient();
+//                patient.setMemberships(new ArrayList<>());
+//                patient.setAppointments(new ArrayList<>());
+//                membership.setPatient(patient);
+//            });
+            packageBase.setMemberships(new ArrayList<>());
 
             packages.add(packageBase);
         });
@@ -47,15 +47,15 @@ public class implPackageBase implements contIntPackageBase {
 
          servPackageBase.getPackageBaseAll().forEach(packageBase ->{
 
-             List<resPackageMembership> memberships = packageBase.getMemberships();
-             memberships.forEach(membership ->{
-                 membership.setPackageBase(null);
-                 resPatient patient =  membership.getPatient();
-                 patient.setMemberships(new ArrayList<>());
-                 patient.setAppointments(new ArrayList<>());
-                 membership.setPatient(patient);
-             });
-             packageBase.setMemberships(memberships);
+//             List<resPackageMembership> memberships = packageBase.getMemberships();
+//             memberships.forEach(membership ->{
+//                 membership.setPackageBase(null);
+//                 resPatient patient =  membership.getPatient();
+//                 patient.setMemberships(new ArrayList<>());
+//                 patient.setAppointments(new ArrayList<>());
+//                 membership.setPatient(patient);
+//             });
+             packageBase.setMemberships(new ArrayList<>());
 
              packages.add(packageBase);
          });
@@ -66,15 +66,17 @@ public class implPackageBase implements contIntPackageBase {
     public resPackageBase getPackageBaseById(long code) {
 
         resPackageBase packageBase =  servPackageBase.getPackageBaseByCode(code);
-        List<resPackageMembership> memberships = packageBase.getMemberships();
-        memberships.forEach(membership ->{
-            membership.setPackageBase(null);
-            resPatient patient =  membership.getPatient();
-            patient.setMemberships(new ArrayList<>());
-            patient.setAppointments(new ArrayList<>());
-            membership.setPatient(patient);
-        });
-        packageBase.setMemberships(memberships);
+       if(packageBase != null) {
+           List<resPackageMembership> memberships = packageBase.getMemberships();
+           memberships.forEach(membership ->{
+               membership.setPackageBase(null);
+               resPatient patient =  membership.getPatient();
+               patient.setMemberships(new ArrayList<>());
+               patient.setAppointments(new ArrayList<>());
+               membership.setPatient(patient);
+           });
+           packageBase.setMemberships(memberships);
+       }
         return packageBase;
     }
 

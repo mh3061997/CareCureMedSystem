@@ -35,33 +35,34 @@ public class implInvoice implements contIntInvoice {
         servInvoice.getInvoiceAll().forEach(invoice -> {
 
 
-            resAppointment appointment = invoice.getAppointment();
-            if (appointment != null) {
-                resDoctor doctor = appointment.getDoctor();
-                doctor.setAppointments(new ArrayList<>());
-
-                appointment.setDoctor(doctor);
-
-                resPatient patient = appointment.getPatient();
-                patient.setMemberships(new ArrayList<>());
-                patient.setAppointments(new ArrayList<>());
-                patient.setMedImages(new ArrayList<>());
-                appointment.setPatient(patient);
-                appointment.setInvoice(null);
-                invoice.setAppointment(appointment);
-            }
-
-            resPackageMembership membership = invoice.getUsedMembership();
-            if (membership != null) {
-
-                membership.setPatient(null);
-
-
-                resPackageBase packageBase = membership.getPackageBase();
-                packageBase.setMemberships(new ArrayList<>());
-                invoice.setUsedMembership(membership);
-            }
-
+//            resAppointment appointment = invoice.getAppointment();
+//            if (appointment != null) {
+//                resDoctor doctor = appointment.getDoctor();
+//                doctor.setAppointments(new ArrayList<>());
+//
+//                appointment.setDoctor(doctor);
+//
+//                resPatient patient = appointment.getPatient();
+//                patient.setMemberships(new ArrayList<>());
+//                patient.setAppointments(new ArrayList<>());
+//                patient.setMedImages(new ArrayList<>());
+//                appointment.setPatient(patient);
+//                appointment.setInvoice(null);
+//                invoice.setAppointment(appointment);
+//            }
+//
+//            resPackageMembership membership = invoice.getUsedMembership();
+//            if (membership != null) {
+//
+//                membership.setPatient(null);
+//
+//
+//                resPackageBase packageBase = membership.getPackageBase();
+//                packageBase.setMemberships(new ArrayList<>());
+//                invoice.setUsedMembership(membership);
+//            }
+            invoice.setAppointment(null);
+            invoice.setUsedMembership(null);
             jsonInvoice.add(invoice);
         });
 
@@ -75,33 +76,34 @@ public class implInvoice implements contIntInvoice {
         servInvoice.getInvoicesByDate(date).forEach(invoice -> {
 
 
-            resAppointment appointment = invoice.getAppointment();
-            if (appointment != null) {
-                resDoctor doctor = appointment.getDoctor();
-                doctor.setAppointments(new ArrayList<>());
-
-                appointment.setDoctor(doctor);
-
-                resPatient patient = appointment.getPatient();
-                patient.setMemberships(new ArrayList<>());
-                patient.setAppointments(new ArrayList<>());
-                patient.setMedImages(new ArrayList<>());
-                appointment.setPatient(patient);
-                appointment.setInvoice(null);
-                invoice.setAppointment(appointment);
-            }
-
-            resPackageMembership membership = invoice.getUsedMembership();
-            if (membership != null) {
-
-                membership.setPatient(null);
-
-
-                resPackageBase packageBase = membership.getPackageBase();
-                packageBase.setMemberships(new ArrayList<>());
-                invoice.setUsedMembership(membership);
-            }
-
+//            resAppointment appointment = invoice.getAppointment();
+//            if (appointment != null) {
+//                resDoctor doctor = appointment.getDoctor();
+//                doctor.setAppointments(new ArrayList<>());
+//
+//                appointment.setDoctor(doctor);
+//
+//                resPatient patient = appointment.getPatient();
+//                patient.setMemberships(new ArrayList<>());
+//                patient.setAppointments(new ArrayList<>());
+//                patient.setMedImages(new ArrayList<>());
+//                appointment.setPatient(patient);
+//                appointment.setInvoice(null);
+//                invoice.setAppointment(appointment);
+//            }
+//
+//            resPackageMembership membership = invoice.getUsedMembership();
+//            if (membership != null) {
+//
+//                membership.setPatient(null);
+//
+//
+//                resPackageBase packageBase = membership.getPackageBase();
+//                packageBase.setMemberships(new ArrayList<>());
+//                invoice.setUsedMembership(membership);
+//            }
+            invoice.setUsedMembership(null);
+            invoice.setAppointment(null);
             jsonInvoice.add(invoice);
         });
 

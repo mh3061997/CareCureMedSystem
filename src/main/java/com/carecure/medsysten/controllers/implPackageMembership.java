@@ -34,7 +34,7 @@ public class implPackageMembership implements contIntPackageMembership {
 
             patient.setMemberships(new ArrayList<>());
             patient.setAppointments(new ArrayList<>());
-
+            patient.setMedImages(new ArrayList<>());
             membership.setPatient(patient);
             memberships.add(membership);
 
@@ -46,15 +46,17 @@ public class implPackageMembership implements contIntPackageMembership {
     @Override
     public resPackageMembership getPackageMembershipById(long code) {
         resPackageMembership membership =  servPackageMembership.getPackageMembershipByCode(code);
-        resPackageBase packageBase = membership.getPackageBase();
-        packageBase.setMemberships(new ArrayList<>());
-        membership.setPackageBase(packageBase);
+      if( membership != null) {
+          resPackageBase packageBase = membership.getPackageBase();
+          packageBase.setMemberships(new ArrayList<>());
+          membership.setPackageBase(packageBase);
 
-        resPatient patient = membership.getPatient();
+          resPatient patient = membership.getPatient();
 
-        patient.setMemberships(new ArrayList<>());
-        patient.setAppointments(new ArrayList<>());
-        membership.setPatient(patient);
+          patient.setMemberships(new ArrayList<>());
+          patient.setAppointments(new ArrayList<>());
+          membership.setPatient(patient);
+      }
 
         return membership;
     }
