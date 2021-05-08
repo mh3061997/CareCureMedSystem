@@ -20,7 +20,7 @@ public interface contIntAppointment {
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping("/date")
-    List<resAppointment> getDoctorAppointmentsByDate(@RequestParam("date") String date) throws ParseException;
+    List<resAppointment> getAppointmentsByDate(@RequestParam("date") String date) throws ParseException;
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping("/past")
@@ -45,7 +45,7 @@ public interface contIntAppointment {
     List<resAppointment> getPastAppointmentsPatient(@PathVariable("patientCode") long patientCode) throws ParseException;
 
 
-    @RequestMapping("/date/{doctorCode}")
+    @RequestMapping("/date/doctor/{doctorCode}")
     List<resAppointment> getDoctorAppointmentsByDate(@RequestParam("date") String date, @PathVariable("doctorCode") long patientCode) throws ParseException;
 
     @RequestMapping("/{appointmentCode}")

@@ -74,7 +74,8 @@ public class jwtRequestFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
             }
             //else token expired
-//        }else {
+        }
+            //        else {
 //            //angular ignores custom headers without this header
 //
 //            response.setHeader("isJWTExpired","true");
