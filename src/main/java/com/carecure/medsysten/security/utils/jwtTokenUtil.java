@@ -11,6 +11,7 @@ import java.util.function.Function;
 import com.carecure.medsysten.resources.resDoctor;
 import com.carecure.medsysten.resources.resPatient;
 import com.carecure.medsysten.security.service.userDetails;
+import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,6 +26,7 @@ public class jwtTokenUtil implements Serializable {
 
     private static final long serialVersionUID = -2550185165626007488L;
 
+    // 5 Hours in seconds
     public static final long JWT_TOKEN_VALIDITY = 5*60*60;
 
     @Value("12345678945678945678945678/*8545646546546465464")

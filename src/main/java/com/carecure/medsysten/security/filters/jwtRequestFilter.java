@@ -33,6 +33,10 @@ public class jwtRequestFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
 
+        if(request.getMethod().equals("OPTIONS")){
+            logger.info("Options request skipping jwt verification");
+            chain.doFilter(request,response);
+        }
         final String requestTokenHeader = request.getHeader("Authorization");
 
         String username = null;
@@ -48,7 +52,9 @@ public class jwtRequestFilter extends OncePerRequestFilter {
                 System.out.println("JWT Token has expired");
             }
         } else {
+
             logger.warn("JWT Token does not begin with Bearer String");
+            logger.warn(requestTokenHeader);
         }
 
         //Once we get the token validate it.
@@ -67,7 +73,16 @@ public class jwtRequestFilter extends OncePerRequestFilter {
                 // that the current user is authenticated. So it passes the Spring Security Configurations successfully.
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
             }
+            //else token expired
         }
+            //        else {
+//            //angular ignores custom headers without this header
+//
+//            response.setHeader("isJWTExpired","true");
+////            response.setStatus(HttpServletResponse.SC_EXPECTATION_FAILED);
+////            response.getWriter().write("{isExpired:true}");
+////            response.getWriter().flush();
+//        }
         chain.doFilter(request, response);
     }
 
