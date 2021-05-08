@@ -93,7 +93,7 @@ public class implDoctor implements contIntDoctor {
 //                appointments.add(appointment);
 //            });
             doctor.setAppointments(new ArrayList<>());
-            doctor.setAvailableDays(new ArrayList<>());
+            //doctor.setAvailableDays(new ArrayList<>());
             jsonDoctors.add(doctor);
         });
 

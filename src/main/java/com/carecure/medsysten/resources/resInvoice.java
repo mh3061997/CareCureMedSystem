@@ -33,6 +33,8 @@ public class resInvoice {
 
     private int discount;
 
+    private String userFinalizedBy;
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "appointmentCode")
     private resAppointment appointment;
@@ -46,6 +48,16 @@ public class resInvoice {
     private String paymentMethod;
 
     public resInvoice() {
+    }
+
+    public String getUserFinalizedBy()
+    {
+        return userFinalizedBy;
+    }
+
+    public void setUserFinalizedBy(String userFinalizedBy)
+    {
+        this.userFinalizedBy = userFinalizedBy;
     }
 
     public List<resInvoiceItem> getInvoiceItems() {
@@ -80,7 +92,11 @@ public class resInvoice {
         this.totalAfterDiscount = totalAfterDiscount;
     }
 
-    public resInvoice(long code, Date dateCreated, Date dateFinalized, long totalDue, long totalAfterDiscount, long totalPaid, long totalRemaining, String status, int discount, resAppointment appointment, List<resInvoiceItem> invoiceItems, resPackageMembership usedMembership, String paymentMethod) {
+    public resInvoice(long code, Date dateCreated, Date dateFinalized, long totalDue, long totalAfterDiscount,
+            long totalPaid, long totalRemaining, String status, int discount, String userFinalizedBy,
+            resAppointment appointment, List<resInvoiceItem> invoiceItems, resPackageMembership usedMembership,
+            String paymentMethod)
+    {
         this.code = code;
         this.dateCreated = dateCreated;
         this.dateFinalized = dateFinalized;
@@ -90,6 +106,7 @@ public class resInvoice {
         this.totalRemaining = totalRemaining;
         this.status = status;
         this.discount = discount;
+        this.userFinalizedBy = userFinalizedBy;
         this.appointment = appointment;
         this.invoiceItems = invoiceItems;
         this.usedMembership = usedMembership;

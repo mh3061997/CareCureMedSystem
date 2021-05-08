@@ -28,7 +28,7 @@ public class resAppointment {
     private String status;
     private String type;
     private String notes;
-
+    private String userLoggerName;
     //@JsonManagedReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "doctorCode")
@@ -43,6 +43,16 @@ public class resAppointment {
     private List<resNoteAppointment> doctorNotes;
     @OneToOne(fetch = FetchType.LAZY,mappedBy = "appointment")
     private resInvoice invoice;
+
+    public String getUserLoggerName()
+    {
+        return userLoggerName;
+    }
+
+    public void setUserLoggerName(String userLoggerName)
+    {
+        this.userLoggerName = userLoggerName;
+    }
 
     public String getType() {
         return type;
@@ -76,7 +86,10 @@ public class resAppointment {
         this.invoice = invoice;
     }
 
-    public resAppointment(long code, String speciality, Date dateCreated, Date dateToVisit, String status, String type, String notes, resDoctor doctor, resPatient patient, List<resNoteAppointment> doctorNotes, resInvoice invoice) {
+    public resAppointment(long code, String speciality, Date dateCreated, Date dateToVisit, String status, String type,
+            String notes, String userLoggerName, resDoctor doctor, resPatient patient, List<resNoteAppointment> doctorNotes,
+            resInvoice invoice)
+    {
         this.code = code;
         this.speciality = speciality;
         this.dateCreated = dateCreated;
@@ -84,6 +97,7 @@ public class resAppointment {
         this.status = status;
         this.type = type;
         this.notes = notes;
+        this.userLoggerName = userLoggerName;
         this.doctor = doctor;
         this.patient = patient;
         this.doctorNotes = doctorNotes;
