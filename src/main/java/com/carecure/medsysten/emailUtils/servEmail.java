@@ -10,6 +10,7 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,8 @@ import java.util.Map;
 public class servEmail {
 
 
+    @Value("${spring.mail.username}")
+    String senderAddress;
 
     @Autowired
     private JavaMailSender javaMailSender;
@@ -47,7 +50,7 @@ public class servEmail {
 
     public void sendContactUsEmail(resContactUsData contactUsData) throws MessagingException, IOException
     {
-
+        //System.out.println(this.senderAddress);
        try{
            MimeMessage message = sender.createMimeMessage();
            MimeMessageHelper helper = new MimeMessageHelper(message,
@@ -66,7 +69,7 @@ public class servEmail {
 
            String html = FreeMarkerTemplateUtils.processTemplateIntoString(templateHtml, model);
 
-           helper.setTo(new String[]{"iuseitforhacking@gmail.com"});
+           helper.setTo(this.senderAddress);
            helper.setText(html, true);
            helper.setSubject("System - Contact Patient");
 
@@ -101,7 +104,7 @@ public class servEmail {
 
             String html = FreeMarkerTemplateUtils.processTemplateIntoString(templateHtml, model);
 
-            helper.setTo(new String[]{"iuseitforhacking@gmail.com"});
+            helper.setTo(this.senderAddress);
             helper.setText(html, true);
             helper.setSubject("System - Contact for Appointment ");
 
@@ -176,7 +179,7 @@ public class servEmail {
         String html = FreeMarkerTemplateUtils.processTemplateIntoString(templateHtml, model);
         String pdf = FreeMarkerTemplateUtils.processTemplateIntoString(templatePdf, model);
 
-        helper.setTo(new String[]{"iuseitforhacking@gmail.com"});
+        helper.setTo(new String[]{invoice.getAppointment().getPatient().getEmail()});
         helper.setText(html, true);
         helper.setSubject("Appointment Invoice");
 
