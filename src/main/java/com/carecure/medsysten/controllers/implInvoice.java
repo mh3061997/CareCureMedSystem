@@ -46,6 +46,7 @@ public class implInvoice implements contIntInvoice {
                 patient.setMemberships(new ArrayList<>());
                 patient.setAppointments(new ArrayList<>());
                 patient.setMedImages(new ArrayList<>());
+                patient.setInvoiceMemberships(new ArrayList<>());
                 appointment.setPatient(patient);
                 appointment.setInvoice(null);
                 invoice.setAppointment(appointment);
@@ -60,6 +61,17 @@ public class implInvoice implements contIntInvoice {
                 resPackageBase packageBase = membership.getPackageBase();
                 packageBase.setMemberships(new ArrayList<>());
                 invoice.setUsedMembership(membership);
+            }
+
+
+            resPatient patient = invoice.getPatientMembershipSubscriber();
+            if(patient !=null) {
+                patient.setInvoiceMemberships(new ArrayList<>());
+                patient.setMedImages(null);
+                patient.setAppointments(null);
+                patient.setMemberships(null);
+                invoice.setPatientMembershipSubscriber(patient);
+
             }
 
             jsonInvoice.add(invoice);
@@ -86,6 +98,7 @@ public class implInvoice implements contIntInvoice {
                 patient.setMemberships(new ArrayList<>());
                 patient.setAppointments(new ArrayList<>());
                 patient.setMedImages(new ArrayList<>());
+                patient.setInvoiceMemberships(new ArrayList<>());
                 appointment.setPatient(patient);
                 appointment.setInvoice(null);
                 invoice.setAppointment(appointment);
@@ -103,6 +116,18 @@ public class implInvoice implements contIntInvoice {
             }
             invoice.setUsedMembership(null);
             invoice.setAppointment(null);
+
+
+            resPatient patient = invoice.getPatientMembershipSubscriber();
+            if(patient !=null) {
+                patient.setInvoiceMemberships(new ArrayList<>());
+                patient.setMedImages(null);
+                patient.setAppointments(null);
+                patient.setMemberships(null);
+                invoice.setPatientMembershipSubscriber(patient);
+
+            }
+
             jsonInvoice.add(invoice);
         });
 
@@ -140,6 +165,16 @@ public class implInvoice implements contIntInvoice {
             packageBase.setMemberships(new ArrayList<>());
             invoice.setUsedMembership(membership);
         }
+
+
+        resPatient patient = invoice.getPatientMembershipSubscriber();
+if(patient !=null) {
+    patient.setInvoiceMemberships(new ArrayList<>());
+    patient.setMedImages(null);
+    patient.setAppointments(null);
+    patient.setMemberships(null);
+    invoice.setPatientMembershipSubscriber(patient);
+}
 
         return invoice;
     }

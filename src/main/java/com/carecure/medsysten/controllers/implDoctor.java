@@ -112,6 +112,7 @@ public class implDoctor implements contIntDoctor {
             patient.setAppointments(new ArrayList<>());
             patient.setMemberships(new ArrayList<>());
             patient.setMedImages(new ArrayList<>());
+            patient.setInvoiceMemberships(new ArrayList<>());
             appointment.setPatient(patient);
                 appointment.setInvoice(null);
 

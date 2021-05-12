@@ -45,7 +45,44 @@ public class resInvoice {
     @ManyToOne(fetch=FetchType.LAZY)
     private resPackageMembership   usedMembership;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "patientMembershipSubscriberCode")
+    private resPatient patientMembershipSubscriber;
+
+
     private String paymentMethod;
+
+    public resPatient getPatientMembershipSubscriber()
+    {
+        return patientMembershipSubscriber;
+    }
+
+    public void setPatientMembershipSubscriber(resPatient patientMembershipSubscriber)
+    {
+        this.patientMembershipSubscriber = patientMembershipSubscriber;
+    }
+
+    public resInvoice(long code, Date dateCreated, Date dateFinalized, long totalDue, long totalAfterDiscount,
+            long totalPaid, long totalRemaining, String status, int discount, String userFinalizedBy,
+            resAppointment appointment, List<resInvoiceItem> invoiceItems, resPackageMembership usedMembership,
+            resPatient patientMembershipSubscriber, String paymentMethod)
+    {
+        this.code = code;
+        this.dateCreated = dateCreated;
+        this.dateFinalized = dateFinalized;
+        this.totalDue = totalDue;
+        this.totalAfterDiscount = totalAfterDiscount;
+        this.totalPaid = totalPaid;
+        this.totalRemaining = totalRemaining;
+        this.status = status;
+        this.discount = discount;
+        this.userFinalizedBy = userFinalizedBy;
+        this.appointment = appointment;
+        this.invoiceItems = invoiceItems;
+        this.usedMembership = usedMembership;
+        this.patientMembershipSubscriber = patientMembershipSubscriber;
+        this.paymentMethod = paymentMethod;
+    }
 
     public resInvoice() {
     }
@@ -92,26 +129,7 @@ public class resInvoice {
         this.totalAfterDiscount = totalAfterDiscount;
     }
 
-    public resInvoice(long code, Date dateCreated, Date dateFinalized, long totalDue, long totalAfterDiscount,
-            long totalPaid, long totalRemaining, String status, int discount, String userFinalizedBy,
-            resAppointment appointment, List<resInvoiceItem> invoiceItems, resPackageMembership usedMembership,
-            String paymentMethod)
-    {
-        this.code = code;
-        this.dateCreated = dateCreated;
-        this.dateFinalized = dateFinalized;
-        this.totalDue = totalDue;
-        this.totalAfterDiscount = totalAfterDiscount;
-        this.totalPaid = totalPaid;
-        this.totalRemaining = totalRemaining;
-        this.status = status;
-        this.discount = discount;
-        this.userFinalizedBy = userFinalizedBy;
-        this.appointment = appointment;
-        this.invoiceItems = invoiceItems;
-        this.usedMembership = usedMembership;
-        this.paymentMethod = paymentMethod;
-    }
+
 
     public resAppointment getAppointment() {
         return appointment;

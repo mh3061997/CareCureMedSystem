@@ -92,6 +92,22 @@ public class implPatient implements contIntPatient {
         });
         patient.setAppointments(appointments);
 
+        List<resInvoice> invoiceMemberships = new ArrayList<>();
+        patient.getInvoiceMemberships().forEach(invoice -> {
+            invoice.setAppointment(null);
+            invoice.setPatientMembershipSubscriber(null);
+            resPackageMembership membership = invoice.getUsedMembership();
+            if(membership!=null){
+                membership.setPatient(null);
+                resPackageBase packageBase = membership.getPackageBase();
+                packageBase.setMemberships(new ArrayList<>());
+                membership.setPackageBase(packageBase);
+                invoice.setUsedMembership(membership);
+            }
+            invoiceMemberships.add(invoice);
+        });
+        patient.setInvoiceMemberships(invoiceMemberships);
+
         List<resPackageMembership> jsons = new ArrayList<>();
         List<resPackageMembership> memberships = patient.getMemberships();
         memberships.forEach(membership->{

@@ -24,7 +24,8 @@ public class resPatient {
     private int age;
     private long totalDebt;
     private String notes;
-
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "patientMembershipSubscriber")
+    List<resInvoice> invoiceMemberships;
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "patient")
     List<resPackageMembership> memberships;
@@ -38,6 +39,16 @@ public class resPatient {
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY ,mappedBy = "patient")
     private UserDao user;
+
+    public List<resInvoice> getInvoiceMemberships()
+    {
+        return invoiceMemberships;
+    }
+
+    public void setInvoiceMemberships(List<resInvoice> invoiceMemberships)
+    {
+        this.invoiceMemberships = invoiceMemberships;
+    }
 
     public long getTotalDebt() {
         return totalDebt;
@@ -55,7 +66,10 @@ public class resPatient {
         this.user = user;
     }
 
-    public resPatient(long code, String name, String gender, String email, String mobile, int age, long totalDebt, String notes, List<resPackageMembership> memberships, List<resAppointment> appointments, List<resMedImage> medImages, UserDao user) {
+    public resPatient(long code, String name, String gender, String email, String mobile, int age, long totalDebt,
+            String notes, List<resInvoice> invoiceMemberships, List<resPackageMembership> memberships,
+            List<resAppointment> appointments, List<resMedImage> medImages, UserDao user)
+    {
         this.code = code;
         this.name = name;
         this.gender = gender;
@@ -64,6 +78,7 @@ public class resPatient {
         this.age = age;
         this.totalDebt = totalDebt;
         this.notes = notes;
+        this.invoiceMemberships = invoiceMemberships;
         this.memberships = memberships;
         this.appointments = appointments;
         this.medImages = medImages;

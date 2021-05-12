@@ -107,6 +107,7 @@ public class servUserDao {
                 patient.setMemberships(new ArrayList<>());
                 patient.setAppointments(new ArrayList<>());
                 patient.setMedImages(new ArrayList<>());
+                patient.setInvoiceMemberships(new ArrayList<>());
                 return new ResponseEntity<>(patient, HttpStatus.ACCEPTED);
             }
 
