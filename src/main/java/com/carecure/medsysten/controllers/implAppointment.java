@@ -34,7 +34,7 @@ public class implAppointment implements contIntAppointment
 			patient.setAppointments(new ArrayList<>());
 			patient.setMemberships(new ArrayList<>());
 			patient.setMedImages(new ArrayList<>());
-
+patient.setInvoiceMemberships(new ArrayList<>());
 			resDoctor doctor = appointment.getDoctor();
 			doctor.setAppointments(new ArrayList<>());
 			doctor.setAvailableDays(new ArrayList<>());
@@ -71,7 +71,6 @@ public class implAppointment implements contIntAppointment
 		resAppointment appointment = servAppointment.getAppointmentByCode(code);
 
 		resPatient patient = appointment.getPatient();
-		patient.setAppointments(new ArrayList<>());
 
 		//
 		List<resPackageMembership> memberships = new ArrayList<>();
@@ -83,7 +82,8 @@ public class implAppointment implements contIntAppointment
 			memberships.add(membership);
 		});
 		patient.setMemberships(memberships);
-		//
+		patient.setInvoiceMemberships(new ArrayList<>());
+		patient.setAppointments(new ArrayList<>());
 		patient.setMedImages(new ArrayList<>());
 
 		resDoctor doctor = appointment.getDoctor();
@@ -124,7 +124,7 @@ public class implAppointment implements contIntAppointment
 			patient.setAppointments(new ArrayList<>());
 			patient.setMemberships(new ArrayList<>());
 			patient.setMedImages(new ArrayList<>());
-
+patient.setInvoiceMemberships(new ArrayList<>());
 			resDoctor doctor = appointment.getDoctor();
 			doctor.setAppointments(new ArrayList<>());
 			doctor.setAvailableDays(new ArrayList<>());
@@ -165,7 +165,7 @@ public class implAppointment implements contIntAppointment
 			patient.setAppointments(new ArrayList<>());
 			patient.setMemberships(new ArrayList<>());
 			patient.setMedImages(new ArrayList<>());
-
+patient.setInvoiceMemberships(new ArrayList<>());
 			resDoctor doctor = appointment.getDoctor();
 			doctor.setAppointments(new ArrayList<>());
 			doctor.setAvailableDays(new ArrayList<>());
@@ -204,7 +204,7 @@ public class implAppointment implements contIntAppointment
 			patient.setAppointments(new ArrayList<>());
 			patient.setMemberships(new ArrayList<>());
 			patient.setMedImages(new ArrayList<>());
-
+patient.setInvoiceMemberships(new ArrayList<>());
 
 
 			appointment.setPatient(patient);
@@ -244,7 +244,7 @@ public class implAppointment implements contIntAppointment
 			patient.setAppointments(new ArrayList<>());
 			patient.setMemberships(new ArrayList<>());
 			patient.setMedImages(new ArrayList<>());
-
+patient.setInvoiceMemberships(new ArrayList<>());
 
 
 			appointment.setPatient(patient);
@@ -284,7 +284,7 @@ public class implAppointment implements contIntAppointment
 			patient.setAppointments(new ArrayList<>());
 			patient.setMemberships(new ArrayList<>());
 			patient.setMedImages(new ArrayList<>());
-
+patient.setInvoiceMemberships(new ArrayList<>());
 			resDoctor doctor = appointment.getDoctor();
 			doctor.setAppointments(new ArrayList<>());
 
@@ -324,7 +324,7 @@ public class implAppointment implements contIntAppointment
 			patient.setAppointments(new ArrayList<>());
 			patient.setMemberships(new ArrayList<>());
 			patient.setMedImages(new ArrayList<>());
-
+patient.setInvoiceMemberships(new ArrayList<>());
 			resDoctor doctor = appointment.getDoctor();
 			doctor.setAppointments(new ArrayList<>());
 
@@ -364,7 +364,7 @@ public class implAppointment implements contIntAppointment
 			patient.setAppointments(new ArrayList<>());
 			patient.setMemberships(new ArrayList<>());
 			patient.setMedImages(new ArrayList<>());
-
+			patient.setInvoiceMemberships(new ArrayList<>());
 			resDoctor doctor = appointment.getDoctor();
 			doctor.setAppointments(new ArrayList<>());
 			doctor.setAvailableDays(new ArrayList<>());
@@ -406,7 +406,7 @@ public class implAppointment implements contIntAppointment
 			patient.setAppointments(new ArrayList<>());
 			patient.setMemberships(new ArrayList<>());
 			patient.setMedImages(new ArrayList<>());
-
+			patient.setInvoiceMemberships(new ArrayList<>());
 			resDoctor doctor = appointment.getDoctor();
 //			doctor.setAppointments(new ArrayList<>());
 
@@ -448,7 +448,7 @@ public class implAppointment implements contIntAppointment
 			patient.setAppointments(new ArrayList<>());
 			patient.setMemberships(new ArrayList<>());
 			patient.setMedImages(new ArrayList<>());
-
+patient.setInvoiceMemberships(new ArrayList<>());
 			resDoctor doctor = appointment.getDoctor();
 			doctor.setAppointments(new ArrayList<>());
 			doctor.setAvailableDays(new ArrayList<>());
