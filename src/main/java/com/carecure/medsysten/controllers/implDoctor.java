@@ -15,138 +15,162 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @CrossOrigin
 @RestController
-public class implDoctor implements contIntDoctor {
+public class implDoctor implements contIntDoctor
+{
 
-    @Autowired
-    private servDoctor servDoctor;
-    @Autowired
-    private servAppointment servAppointment;
+	@Autowired
+	private servDoctor servDoctor;
+	@Autowired
+	private servAppointment servAppointment;
 
-    @Override
-    public List<resDoctor> getDoctorAll() {
-        List<resDoctor> jsonDoctors = new ArrayList<>();
+	@Override
+	public List<resDoctor> getDoctorAll()
+	{
+		List<resDoctor> jsonDoctors = new ArrayList<>();
+
+		servDoctor.getDoctorAll().forEach(doctor -> {
+			//            List<resAppointment> appointments = new ArrayList<>();
+			//            doctor.getAppointments().forEach(appointment -> {
+			//                appointment.setDoctor(null);
+			//                resPatient patient = appointment.getPatient();
+			//                patient.setAppointments(new ArrayList<>());
+			//                patient.setMemberships(new ArrayList<>());
+			//                appointment.setPatient(patient);
+			//
+			//                resInvoice invoice = appointment.getInvoice();
+			//                if(invoice !=null){
+			//                    invoice.setAppointment(null);
+			//                    resPackageMembership membership= invoice.getUsedMembership();
+			//                    if(membership !=null){
+			//                        membership.setPatient(null);
+			//                        resPackageBase packageBase = membership.getPackageBase();
+			//                        packageBase.setMemberships(new ArrayList<>());
+			//                        membership.setPackageBase(packageBase);
+			//                        invoice.setUsedMembership(membership);
+			//                    }
+			//
+			//                    appointment.setInvoice(invoice);
+			//                }
+			//
+			//                appointments.add(appointment);
+			//            });
+			doctor.setAppointments(new ArrayList<>());
+			doctor.setAvailableDays(new ArrayList<>());
+			doctor.setUser(null);
+			jsonDoctors.add(doctor);
+		});
+
+		return jsonDoctors;
+	}
+
+	@Override
+	public List<resDoctor> getDoctorAllBySpeciality(String speciality)
+	{
+		List<resDoctor> jsonDoctors = new ArrayList<>();
+
+		servDoctor.getDoctorAllBySpeciality(speciality).forEach(doctor -> {
+			//            List<resAppointment> appointments = new ArrayList<>();
+			//            doctor.getAppointments().forEach(appointment -> {
+			//                appointment.setDoctor(null);
+			//                resPatient patient = appointment.getPatient();
+			//                patient.setAppointments(new ArrayList<>());
+			//                patient.setMemberships(new ArrayList<>());
+			//                appointment.setPatient(patient);
+			//
+			//                resInvoice invoice = appointment.getInvoice();
+			//                if(invoice !=null){
+			//                    invoice.setAppointment(null);
+			//                    resPackageMembership membership= invoice.getUsedMembership();
+			//                    if(membership !=null){
+			//                        membership.setPatient(null);
+			//                        resPackageBase packageBase = membership.getPackageBase();
+			//                        packageBase.setMemberships(new ArrayList<>());
+			//                        membership.setPackageBase(packageBase);
+			//                        invoice.setUsedMembership(membership);
+			//                    }
+			//                    appointment.setInvoice(invoice);
+			//                }
+
+			//                appointments.add(appointment);
+			//            });
+			doctor.setAppointments(new ArrayList<>());
+			//doctor.setAvailableDays(new ArrayList<>());
+			jsonDoctors.add(doctor);
+		});
+
+		return jsonDoctors;
+	}
+
+	@Override
+	public resDoctor getDoctorById(long code)
+	{
+		resDoctor doctor = servDoctor.getDoctorByCode(code);
+		List<resAppointment> appointments = new ArrayList<>();
+		doctor.getAppointments().forEach(appointment -> {
+			appointment.setDoctor(null);
+			resPatient patient = appointment.getPatient();
+			patient.setAppointments(new ArrayList<>());
+			patient.setMemberships(new ArrayList<>());
+			patient.setMedImages(new ArrayList<>());
+			patient.setInvoiceMemberships(new ArrayList<>());
+			appointment.setPatient(patient);
 
 
-        servDoctor.getDoctorAll().forEach(doctor -> {
-//            List<resAppointment> appointments = new ArrayList<>();
-//            doctor.getAppointments().forEach(appointment -> {
-//                appointment.setDoctor(null);
-//                resPatient patient = appointment.getPatient();
-//                patient.setAppointments(new ArrayList<>());
-//                patient.setMemberships(new ArrayList<>());
-//                appointment.setPatient(patient);
-//
-//                resInvoice invoice = appointment.getInvoice();
-//                if(invoice !=null){
-//                    invoice.setAppointment(null);
-//                    resPackageMembership membership= invoice.getUsedMembership();
-//                    if(membership !=null){
-//                        membership.setPatient(null);
-//                        resPackageBase packageBase = membership.getPackageBase();
-//                        packageBase.setMemberships(new ArrayList<>());
-//                        membership.setPackageBase(packageBase);
-//                        invoice.setUsedMembership(membership);
-//                    }
-//
-//                    appointment.setInvoice(invoice);
-//                }
-//
-//                appointments.add(appointment);
-//            });
-            doctor.setAppointments(new ArrayList<>());
-            doctor.setAvailableDays(new ArrayList<>());
-            doctor.setUser(null);
-            jsonDoctors.add(doctor);
-        });
-
-        return jsonDoctors;
-    }
-
-    @Override
-    public List<resDoctor> getDoctorAllBySpeciality(String speciality) {
-        List<resDoctor> jsonDoctors = new ArrayList<>();
-
-        servDoctor.getDoctorAllBySpeciality(speciality).forEach(doctor -> {
-//            List<resAppointment> appointments = new ArrayList<>();
-//            doctor.getAppointments().forEach(appointment -> {
-//                appointment.setDoctor(null);
-//                resPatient patient = appointment.getPatient();
-//                patient.setAppointments(new ArrayList<>());
-//                patient.setMemberships(new ArrayList<>());
-//                appointment.setPatient(patient);
-//
-//                resInvoice invoice = appointment.getInvoice();
-//                if(invoice !=null){
-//                    invoice.setAppointment(null);
-//                    resPackageMembership membership= invoice.getUsedMembership();
-//                    if(membership !=null){
-//                        membership.setPatient(null);
-//                        resPackageBase packageBase = membership.getPackageBase();
-//                        packageBase.setMemberships(new ArrayList<>());
-//                        membership.setPackageBase(packageBase);
-//                        invoice.setUsedMembership(membership);
-//                    }
-//                    appointment.setInvoice(invoice);
-//                }
-
-//                appointments.add(appointment);
-//            });
-            doctor.setAppointments(new ArrayList<>());
-            //doctor.setAvailableDays(new ArrayList<>());
-            jsonDoctors.add(doctor);
-        });
-
-        return jsonDoctors;
-    }
-
-    @Override
-    public resDoctor getDoctorById(long code) {
-        resDoctor doctor = servDoctor.getDoctorByCode(code);
-        List<resAppointment> appointments = new ArrayList<>();
-        doctor.getAppointments().forEach(appointment -> {
-            appointment.setDoctor(null);
-            resPatient patient = appointment.getPatient();
-            patient.setAppointments(new ArrayList<>());
-            patient.setMemberships(new ArrayList<>());
-            patient.setMedImages(new ArrayList<>());
-            patient.setInvoiceMemberships(new ArrayList<>());
-            appointment.setPatient(patient);
-                appointment.setInvoice(null);
+			resInvoice invoice = appointment.getInvoice();
+			if (invoice != null)
+			{
+				invoice.setAppointment(null);
+				resPackageMembership membership = invoice.getUsedMembership();
+				if (membership != null)
+				{
+					membership.setPatient(null);
+					resPackageBase packageBase = membership.getPackageBase();
+					packageBase.setMemberships(new ArrayList<>());
+					membership.setPackageBase(packageBase);
+					invoice.setUsedMembership(membership);
+				}
+				invoice.setInvoiceItems(new ArrayList<>());
+				appointment.setInvoice(invoice);
+			}
 
 
-            appointments.add(appointment);
-        });
+
+
+		appointments.add(appointment);
+	});
         doctor.setAppointments(appointments);
         return doctor;
-        //return servDoctor.getDoctorByCode(code);
-    }
+	//return servDoctor.getDoctorByCode(code);
+}
 
+	@Override
+	public List<doctorReservedTimes> getDoctorReservedTimesByDate(long doctorCode, String date)
+	{
+		List<doctorReservedTimes> reservedTimes = new ArrayList<>();
+		servAppointment.getDoctorReservedTimesByDate(doctorCode, date).forEach(reservedTime -> {
+			reservedTimes.add(reservedTime);
+		});
 
-    @Override
-    public List<doctorReservedTimes> getDoctorReservedTimesByDate(long doctorCode,String date){
-        List<doctorReservedTimes> reservedTimes = new ArrayList<>();
-        servAppointment.getDoctorReservedTimesByDate(doctorCode,date).forEach(reservedTime -> {
-            reservedTimes.add(reservedTime);
-        });
+		return reservedTimes;
+	}
 
-        return reservedTimes;
-    }
+	@Override
+	public resDoctor addDoctor(resDoctor newDoctor)
+	{
+		return servDoctor.addDoctor(newDoctor);
+	}
 
-    @Override
-    public resDoctor addDoctor(resDoctor newDoctor) {
-        return servDoctor.addDoctor(newDoctor);
-    }
+	@Override
+	public void updateDoctor(long code, resDoctor updatedDoctor)
+	{
+		servDoctor.updateDoctor(code, updatedDoctor);
+	}
 
-    @Override
-    public void updateDoctor(long code, resDoctor updatedDoctor) {
-        servDoctor.updateDoctor(code,updatedDoctor);
-    }
-
-    @Override
-    public void deleteDoctor(long code) {
-        servDoctor.deleteDoctor(code);
-    }
+	@Override
+	public void deleteDoctor(long code)
+	{
+		servDoctor.deleteDoctor(code);
+	}
 }
