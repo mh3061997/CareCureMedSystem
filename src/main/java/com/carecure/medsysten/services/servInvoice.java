@@ -62,10 +62,17 @@ public class servInvoice {
             //    System.out.println("debt XX "+updatedInvoice.getStatus()+" "+ updatedInvoice.getTotalRemaining());
 
                 resAppointment appointment = updatedInvoice.getAppointment();
-                resPatient patient = appointment.getPatient();
-                System.out.println("debt"+ updatedInvoice.getTotalRemaining());
-                patient.setTotalDebt(patient.getTotalDebt()+updatedInvoice.getTotalRemaining());
-                repoPatient.save(patient);
+                if(appointment !=null) {
+                    resPatient patient = appointment.getPatient();
+//                    System.out.println("debt"+ updatedInvoice.getTotalRemaining());
+                    patient.setTotalDebt(patient.getTotalDebt()+updatedInvoice.getTotalRemaining());
+                    repoPatient.save(patient);
+                } else if(updatedInvoice.getPatientMembershipSubscriber() != null){
+                    resPatient patient = updatedInvoice.getPatientMembershipSubscriber();
+//                    System.out.println("debt"+ updatedInvoice.getTotalRemaining());
+                    patient.setTotalDebt(patient.getTotalDebt()+updatedInvoice.getTotalRemaining());
+                    repoPatient.save(patient);
+                }
             }
             updatedInvoice.setCode(invoiceCode);
             repoInvoice.save(updatedInvoice);
