@@ -18,7 +18,7 @@ public interface contIntPatient {
     resPatient getPatientById(@PathVariable("patientCode") long code);
 
     @RequestMapping(method = RequestMethod.POST)
-    void addPatient(@RequestBody resPatient newPatient);
+    resPatient addPatient(@RequestBody resPatient newPatient);
 
     @RequestMapping(method = RequestMethod.PUT,value="/{patientCode}")
     void updatePatient(@PathVariable("patientCode") long code, @RequestBody resPatient updatedPatient);

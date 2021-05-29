@@ -99,8 +99,8 @@ public class implPatient implements contIntPatient {
     }
 
     @Override
-    public void addPatient(resPatient newPatient) {
-        servPatient.addPatient(newPatient);
+    public resPatient addPatient(resPatient newPatient) {
+        return servPatient.addPatient(newPatient);
     }
 
     @Override

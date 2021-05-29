@@ -49,8 +49,8 @@ public class servPatient {
 
     }
 
-    public void  addPatient(resPatient newPatient){
-        repoPatient.save(newPatient);
+    public resPatient  addPatient(resPatient newPatient){
+       return repoPatient.save(newPatient);
     }
 
     public void updatePatient(long patientCode, resPatient updatedPatient){
