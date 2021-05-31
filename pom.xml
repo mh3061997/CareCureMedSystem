@@ -10,12 +10,12 @@
     </parent>
     <groupId>com.carecure</groupId>
     <artifactId>medsystem</artifactId>
-    <version>1.0</version>
+    <version>1.2</version>
     <name>medsystem</name>
     <description>Medical System for Care &amp; Cure Medical center</description>
     <packaging>war</packaging>
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>11</java.version>
     </properties>
 
     <dependencies>
@@ -77,6 +77,22 @@
             <groupId>io.jsonwebtoken</groupId>
             <version>0.9.1</version>
         </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.18.20</version>
+                <scope>provided</scope>
+            </dependency>
+
+        <!-- https://mvnrepository.com/artifact/jakarta.xml.bind/jakarta.xml.bind-api -->
+        <!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.4.0-b180830.0359</version>
+        </dependency>
+
     </dependencies>
 
     <build>
