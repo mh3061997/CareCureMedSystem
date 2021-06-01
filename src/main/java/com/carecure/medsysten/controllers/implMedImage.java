@@ -22,8 +22,8 @@ public class implMedImage implements contIntMedImage
 	@Override
 	public List<resMedImage> getMedImageAll()
 	{
-//		return servMedImage.getMedImageAll();
-        return new ArrayList<>();
+		//		return servMedImage.getMedImageAll();
+		return new ArrayList<>();
 	}
 
 	@Override
