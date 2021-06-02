@@ -32,20 +32,26 @@ public class resInventoryItem
 	@Column(name = "numberOfUnits")
 	private Map<Date, Integer> expiryDates;
 
-	public void setExpiryDateCount(Date key , int count){
-		this.expiryDates.put(key,count);
+	public void setExpiryDateCount(Date key, int count)
+	{
+		this.expiryDates.put(key, count);
 	}
-	public void addExpiryDateCount(Date key , int count){
-		this.expiryDates.put(key,this.expiryDates.get(key)+count);
+
+	public void addExpiryDateCount(Date key, int count)
+	{
+		this.expiryDates.put(key, this.expiryDates.get(key) + count);
 	}
-	public boolean deductExpiryDateCount(Date key , int count){
+
+	public boolean deductExpiryDateCount(Date key, int count)
+	{
 		int currentCount = this.expiryDates.get(key);
 
-		if(currentCount >= count){
-			this.expiryDates.put(key,currentCount-count);
+		if (currentCount >= count)
+		{
+			this.expiryDates.put(key, currentCount - count);
 			return true;
 		}
-	return false;
+		return false;
 
 	}
 }
