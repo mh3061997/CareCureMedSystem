@@ -1,5 +1,6 @@
 package com.carecure.medsysten.controllers;
 
+import com.carecure.medsysten.dtos.NewInventoryItemDto;
 import com.carecure.medsysten.interfaces.contIntInventoryItem;
 import com.carecure.medsysten.resources.resInventoryItem;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +26,8 @@ public class implInventoryItem implements contIntInventoryItem
 	{
 		servInventoryItem.updateInventoryItemSellingPrice(code,updatedSellingPrice);
 	}
+
+	@Override
+	public void addNewInventoryItem(NewInventoryItemDto newItem){ servInventoryItem.addNewInventoryItem(newItem);}
 
 }

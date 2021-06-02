@@ -32,6 +32,7 @@ public class resInventoryItem
 	@Column(name = "numberOfUnits")
 	private Map<Date, Integer> expiryDates;
 
+
 	public void setExpiryDateCount(Date key, int count)
 	{
 		this.expiryDates.put(key, count);

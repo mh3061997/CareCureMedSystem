@@ -1,7 +1,9 @@
 package com.carecure.medsysten.services;
 
+import com.carecure.medsysten.dtos.NewInventoryItemDto;
 import com.carecure.medsysten.repositories.repoInventoryItem;
 import com.carecure.medsysten.resources.resInventoryItem;
+import com.carecure.medsysten.utils.mappers.InventoryItemMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,4 +26,8 @@ public class servInventoryItem
 			repoInventoryItem.updateInventoryItemSellingPrice(code,updatedSellingPrice);
 	}
 
+	public void addNewInventoryItem(NewInventoryItemDto newItem)
+	{
+		repoInventoryItem.save(InventoryItemMapper.mapNewInventoryItemDtoToDao(newItem));
+	}
 }
