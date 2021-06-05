@@ -1,10 +1,8 @@
 package com.carecure.medsysten.resources;
 
 import com.carecure.medsysten.enums.enumInventoryItemCategory;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -15,7 +13,9 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class resInventoryItem
+@JsonIgnoreProperties("hibernateLazyInitializer")
+@ToString
+public class ResInventoryItem
 {
 
 	@Id

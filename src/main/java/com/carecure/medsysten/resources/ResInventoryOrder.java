@@ -1,6 +1,7 @@
 package com.carecure.medsysten.resources;
 
-import com.carecure.medsysten.enums.enumInventoryOrderType;
+import com.carecure.medsysten.enums.EnumInventoryOrderType;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,8 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class resInventoryOrder
+@JsonIgnoreProperties("hibernateLazyInitializer")
+public class ResInventoryOrder
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,11 +30,11 @@ public class resInventoryOrder
 	private Date orderDate;
 	private String supplierName;
 	@Enumerated(EnumType.STRING)
-	private enumInventoryOrderType type;
+	private EnumInventoryOrderType type;
 	private String userMadeBy;
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	private resInventoryItem item;
+	private boolean isCancelled;
+	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	private ResInventoryItem item;
 
 
 }
