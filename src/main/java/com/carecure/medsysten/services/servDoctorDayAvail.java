@@ -2,7 +2,6 @@
 package com.carecure.medsysten.services;
 
 import com.carecure.medsysten.resources.resDoctorDayAvail;
-import com.carecure.medsysten.resources.resDoctorDayAvail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -57,8 +56,10 @@ public class servDoctorDayAvail {
         });
     }
 
-    public void updateDoctorDayAvailMulti(List<resDoctorDayAvail> updatedDoctorDayAvailArr) {
-        List<resDoctorDayAvail> days = getDoctorDayAvailByDoctorCode(updatedDoctorDayAvailArr.get(0).getDoctor().getCode());
+    public void updateDoctorDayAvailMulti(long doctorCode,List<resDoctorDayAvail> updatedDoctorDayAvailArr) {
+
+        List<resDoctorDayAvail> days = getDoctorDayAvailByDoctorCode(doctorCode);
+
         days.forEach(day->{
             repoDoctorDayAvail.deleteById(day.getCode());
         });

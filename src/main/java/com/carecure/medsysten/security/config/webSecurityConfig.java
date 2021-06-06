@@ -1,9 +1,7 @@
 package com.carecure.medsysten.security.config;
 
-
-import com.carecure.medsysten.security.filters.jwtRequestFilter;
-import com.carecure.medsysten.security.utils.jwtAuthenticationEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -22,63 +20,76 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class webSecurityConfig extends WebSecurityConfigurerAdapter {
+public class webSecurityConfig extends WebSecurityConfigurerAdapter
+{
 
-    @Autowired
-    private com.carecure.medsysten.security.utils.jwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+	@Value("${spring.profiles.active:unknown}")
+	private String activeProfile;
 
-    @Autowired
-    private UserDetailsService jwtUserDetailsService;
+	@Autowired
+	private com.carecure.medsysten.security.utils.jwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
-    @Autowired
-    private com.carecure.medsysten.security.filters.jwtRequestFilter jwtRequestFilter;
+	@Autowired
+	private UserDetailsService jwtUserDetailsService;
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        // configure AuthenticationManager so that it knows from where to load
-        // user for matching credentials
-        // Use BCryptPasswordEncoder
-        auth.userDetailsService(jwtUserDetailsService).passwordEncoder(passwordEncoder());
-    }
+	@Autowired
+	private com.carecure.medsysten.security.filters.jwtRequestFilter jwtRequestFilter;
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+	@Autowired
+	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception
+	{
+		// configure AuthenticationManager so that it knows from where to load
+		// user for matching credentials
+		// Use BCryptPasswordEncoder
+		auth.userDetailsService(jwtUserDetailsService).passwordEncoder(passwordEncoder());
+	}
 
-    @Bean
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
+	@Bean
+	public PasswordEncoder passwordEncoder()
+	{
+		return new BCryptPasswordEncoder();
+	}
 
-    @Override
-    protected void configure(HttpSecurity httpSecurity) throws Exception {
-        // We don't need CSRF for this example
-        httpSecurity.csrf().disable()
-                .cors().disable()
-                // dont authenticate this particular request
-                .authorizeRequests().antMatchers("/login", "/register").permitAll()
-                .and().authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .and().authorizeRequests().antMatchers(HttpMethod.POST, "/appointment").permitAll()
-                .and().authorizeRequests().antMatchers(HttpMethod.GET, "/patient").permitAll()
-                .and().authorizeRequests().antMatchers(HttpMethod.POST, "/patient").permitAll()
-                .and().authorizeRequests().antMatchers(HttpMethod.GET, "/doctor/speciality").permitAll()
-                .and().authorizeRequests().antMatchers(HttpMethod.POST, "/utils/**").permitAll()
-                .and().authorizeRequests().antMatchers(HttpMethod.GET, "/userDao/patient").permitAll()
+	@Bean
+	@Override
+	public AuthenticationManager authenticationManagerBean() throws Exception
+	{
+		return super.authenticationManagerBean();
+	}
 
-                .antMatchers("/servicePriceList/**").hasAnyAuthority("ADMIN")
-                .antMatchers("/userDao/**").hasAnyAuthority("ADMIN")
-                .antMatchers("/registerNonPatient").hasAnyAuthority("ADMIN")
+	@Override
+	protected void configure(HttpSecurity httpSecurity) throws Exception
+	{
 
-                // all other requests need to be authenticated
-                        .anyRequest().authenticated().and().
-                // make sure we use stateless session; session won't be used to
-                // store user's state.
-                        exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		if (this.activeProfile.equalsIgnoreCase("dev"))
+		{
+			httpSecurity.csrf().disable().cors().disable().authorizeRequests().antMatchers("/**").permitAll();
+		}
+		else
+		{
+			httpSecurity.csrf().disable().cors().disable()
+					// dont authenticate this particular request
+					.authorizeRequests().antMatchers("/login", "/register").permitAll().and().authorizeRequests()
+					.antMatchers(HttpMethod.OPTIONS, "/**").permitAll().and().authorizeRequests()
+					.antMatchers(HttpMethod.POST, "/appointment").permitAll().and().authorizeRequests()
+					.antMatchers(HttpMethod.GET, "/patient").permitAll().and().authorizeRequests()
+					.antMatchers(HttpMethod.POST, "/patient").permitAll().and().authorizeRequests()
+					.antMatchers(HttpMethod.GET, "/doctor/speciality").permitAll().and().authorizeRequests()
+					.antMatchers(HttpMethod.POST, "/utils/**").permitAll().and().authorizeRequests()
+					.antMatchers(HttpMethod.GET, "/userDao/patient").permitAll()
+					.antMatchers("/servicePriceList/**").hasAnyAuthority("ADMIN").antMatchers("/userDao/**")
+					.hasAnyAuthority("ADMIN").antMatchers("/registerNonPatient").hasAnyAuthority("ADMIN")
 
-        // Add a filter to validate the tokens with every request
-        httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-    }
+					// all other requests need to be authenticated
+					.anyRequest().authenticated().and().
+					// make sure we use stateless session; session won't be used to
+					// store user's state.
+							exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and()
+					.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+			// Add a filter to validate the tokens with every request
+			httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+		}
+
+	}
 }
