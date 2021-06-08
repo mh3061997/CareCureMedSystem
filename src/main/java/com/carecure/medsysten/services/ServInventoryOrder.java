@@ -1,6 +1,9 @@
 package com.carecure.medsysten.services;
 
+import com.carecure.medsysten.enums.EnumInventoryOrderType;
+import com.carecure.medsysten.repositories.RepoInventoryItem;
 import com.carecure.medsysten.repositories.RepoInventoryOrder;
+import com.carecure.medsysten.resources.ResInventoryItem;
 import com.carecure.medsysten.resources.ResInventoryOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -8,7 +11,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -17,6 +22,8 @@ public class ServInventoryOrder
 {
 	@Autowired
 	RepoInventoryOrder repoInventoryOrder;
+	@Autowired
+	RepoInventoryItem repoInventoryItem;
 
 	public List<ResInventoryOrder> getOrders(int pageNumber, int pageSize, String sortColumn, String sortDirection)
 	{
@@ -30,28 +37,91 @@ public class ServInventoryOrder
 		return StreamSupport.stream(iterable.spliterator(), false).collect(Collectors.toList());
 	}
 
-	public void addNewSupplyOrder(ResInventoryOrder newOrder)
+	public ResInventoryOrder addNewSupplyOrder(ResInventoryOrder newOrder) throws ParseException
 	{
 		//we can do this in one line as java passes primitives by value but objects be reference in memory
 		//but if object copy is set to null original remains the same
-		newOrder.getItem().setAvailableUnits(3245);
-		repoInventoryOrder.save(newOrder);
+		if (newOrder.getUnits() > 0)
+		{
+			Optional<ResInventoryItem> itemOptional = repoInventoryItem.findById(newOrder.getItem().getCode());
+			if (itemOptional.isPresent() == false)
+			{
+				return null;
+			}
+			ResInventoryItem item = itemOptional.get();
+
+			int availableUnits = item.getAvailableUnits();
+			item.setAvailableUnits(availableUnits + newOrder.getUnits());
+			item.addExpiryDateCount(newOrder.getOrderDate(), newOrder.getUnits());
+			newOrder.setItem(item);
+			repoInventoryItem.save(item);
+			return repoInventoryOrder.save(newOrder);
+		}
+		return null;
 	}
 
-	public boolean addNewSellOrder(ResInventoryOrder newOrder)
+	public ResInventoryOrder addNewSellOrder(ResInventoryOrder newOrder) throws ParseException
 	{
-		if (newOrder.getUnits() < newOrder.getItem().getAvailableUnits())
+		Optional<ResInventoryItem> itemOptional = repoInventoryItem.findById(newOrder.getItem().getCode());
+		if (itemOptional.isPresent() == false)
+		{
+			return null;
+		}
+		ResInventoryItem item = itemOptional.get();
+		int availableUnits = item.getAvailableUnits();
+
+		if (newOrder.getUnits() > availableUnits)
+		{
+			return null;
+		}
+
+		item.setAvailableUnits(availableUnits - newOrder.getUnits());
+		item.deductExpiryDateCount(newOrder.getOrderDate(), newOrder.getUnits());
+		newOrder.setItem(item);
+		repoInventoryItem.save(item);
+		return repoInventoryOrder.save(newOrder);
+
+	}
+
+	public boolean reverseOrder(long code) throws ParseException
+	{
+		Optional<ResInventoryOrder> orderOptional = repoInventoryOrder.findById(code);
+		if (orderOptional.isPresent() == false)
 		{
 			return false;
 		}
+		ResInventoryOrder order = orderOptional.get();
 
-		newOrder.getItem().setName("safsdf");
-		repoInventoryOrder.save(newOrder);
-		return true;
-	}
+		if (order.getType().equals(EnumInventoryOrderType.SUPPLY))
+		{
+			ResInventoryItem item = order.getItem();
 
-	public boolean reverseOrder(ResInventoryOrder newOrder)
-	{
+			int availableUnits = item.getAvailableUnits();
+
+			if (order.getUnits() > availableUnits)
+			{
+				return false;
+			}
+
+			item.setAvailableUnits(availableUnits - order.getUnits());
+			item.deductExpiryDateCount(order.getOrderDate(), order.getUnits());
+			order.setCancelled(true);
+			repoInventoryOrder.save(order);
+			repoInventoryItem.save(item);
+			return true;
+		}
+		else if (order.getType().equals(EnumInventoryOrderType.SELL))
+		{
+			ResInventoryItem item = order.getItem();
+
+
+			item.setAvailableUnits(item.getAvailableUnits() + order.getUnits());
+			item.addExpiryDateCount(order.getOrderDate(), order.getUnits());
+			order.setCancelled(true);
+			repoInventoryOrder.save(order);
+			repoInventoryItem.save(item);
+			return true;
+		}
 		return false;
 	}
 }

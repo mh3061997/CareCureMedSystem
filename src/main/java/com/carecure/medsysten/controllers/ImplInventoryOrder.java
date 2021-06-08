@@ -7,6 +7,7 @@ import com.carecure.medsysten.services.ServInventoryOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -23,20 +24,20 @@ public class ImplInventoryOrder implements ContIntInventoryOrder
 	}
 
 	@Override
-	public void addNewOrder(ResInventoryOrder newOrder)
+	public ResInventoryOrder addNewOrder(ResInventoryOrder newOrder) throws ParseException
 	{
 
 		if(newOrder.getType().equals(EnumInventoryOrderType.SUPPLY)) {
-			servInventoryOrder.addNewSupplyOrder(newOrder);
+			return servInventoryOrder.addNewSupplyOrder(newOrder);
 		} else if (newOrder.getType().equals(EnumInventoryOrderType.SELL)){
-			servInventoryOrder.addNewSellOrder(newOrder);
+			return servInventoryOrder.addNewSellOrder(newOrder);
 		}
-
+		return null;
 	}
 
 	@Override
-	public void reverseOrder(long code)
+	public boolean reverseOrder(long code) throws ParseException
 	{
-
+		return servInventoryOrder.reverseOrder(code);
 	}
 }

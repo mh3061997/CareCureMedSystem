@@ -3,6 +3,7 @@ package com.carecure.medsysten.interfaces;
 import com.carecure.medsysten.resources.ResInventoryOrder;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 
 @RequestMapping("/inventory/order")
@@ -14,8 +15,8 @@ public interface ContIntInventoryOrder
 			@RequestParam String sortColumn, @RequestParam String sortDirection);
 
 	@RequestMapping(method = RequestMethod.POST)
-	public void addNewOrder(@RequestBody ResInventoryOrder newOrder);
+	public ResInventoryOrder addNewOrder(@RequestBody ResInventoryOrder newOrder) throws ParseException;
 
 	@RequestMapping(method = RequestMethod.DELETE, value = "/{code}")
-	public void reverseOrder(@PathVariable("code") long code);
+	public boolean reverseOrder(@PathVariable("code") long code) throws ParseException;
 }
