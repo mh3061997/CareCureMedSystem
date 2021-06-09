@@ -5,6 +5,8 @@ import com.carecure.medsysten.repositories.RepoInventoryItem;
 import com.carecure.medsysten.repositories.RepoInventoryOrder;
 import com.carecure.medsysten.resources.ResInventoryItem;
 import com.carecure.medsysten.resources.ResInventoryOrder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -24,6 +26,8 @@ public class ServInventoryOrder
 	RepoInventoryOrder repoInventoryOrder;
 	@Autowired
 	RepoInventoryItem repoInventoryItem;
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(ServInventoryOrder.class.getName());
 
 	public List<ResInventoryOrder> getOrders(int pageNumber, int pageSize, String sortColumn, String sortDirection)
 	{
@@ -100,6 +104,7 @@ public class ServInventoryOrder
 
 			if (order.getUnits() > availableUnits)
 			{
+				LOGGER.error("Available units less than reversal amount !");
 				return false;
 			}
 
@@ -113,8 +118,6 @@ public class ServInventoryOrder
 		else if (order.getType().equals(EnumInventoryOrderType.SELL))
 		{
 			ResInventoryItem item = order.getItem();
-
-
 			item.setAvailableUnits(item.getAvailableUnits() + order.getUnits());
 			item.addExpiryDateCount(order.getOrderDate(), order.getUnits());
 			order.setCancelled(true);
@@ -122,6 +125,7 @@ public class ServInventoryOrder
 			repoInventoryItem.save(item);
 			return true;
 		}
+		LOGGER.error("Invalid order type could not reverse order");
 		return false;
 	}
 }
