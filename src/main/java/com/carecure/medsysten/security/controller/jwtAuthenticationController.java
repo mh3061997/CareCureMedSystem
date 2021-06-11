@@ -1,15 +1,10 @@
 package com.carecure.medsysten.security.controller;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
-
-import com.carecure.medsysten.repositories.repoDoctor;
-import com.carecure.medsysten.repositories.repoPatient;
 import com.carecure.medsysten.security.models.*;
 import com.carecure.medsysten.security.service.jwtUserDetailsService;
 import com.carecure.medsysten.security.service.userDetails;
+import com.carecure.medsysten.security.utils.jwtTokenUtil;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,18 +12,15 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.carecure.medsysten.security.utils.jwtTokenUtil;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 @RestController
 @CrossOrigin
+@Api(tags = "Authentication")
 public class jwtAuthenticationController {
 
     @Autowired
