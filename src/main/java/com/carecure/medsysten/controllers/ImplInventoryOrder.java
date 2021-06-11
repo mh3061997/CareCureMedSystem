@@ -1,5 +1,6 @@
 package com.carecure.medsysten.controllers;
 
+import com.carecure.medsysten.dtos.NewInventoryOrderDto;
 import com.carecure.medsysten.enums.EnumInventoryOrderType;
 import com.carecure.medsysten.interfaces.ContIntInventoryOrder;
 import com.carecure.medsysten.resources.ResInventoryOrder;
@@ -24,7 +25,7 @@ public class ImplInventoryOrder implements ContIntInventoryOrder
 	}
 
 	@Override
-	public ResInventoryOrder addNewOrder(ResInventoryOrder newOrder) throws ParseException
+	public ResInventoryOrder addNewOrder(NewInventoryOrderDto newOrder) throws ParseException
 	{
 
 		if(newOrder.getType().equals(EnumInventoryOrderType.SUPPLY)) {

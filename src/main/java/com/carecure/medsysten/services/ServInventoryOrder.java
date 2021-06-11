@@ -1,10 +1,12 @@
 package com.carecure.medsysten.services;
 
+import com.carecure.medsysten.dtos.NewInventoryOrderDto;
 import com.carecure.medsysten.enums.EnumInventoryOrderType;
 import com.carecure.medsysten.repositories.RepoInventoryItem;
 import com.carecure.medsysten.repositories.RepoInventoryOrder;
 import com.carecure.medsysten.resources.ResInventoryItem;
 import com.carecure.medsysten.resources.ResInventoryOrder;
+import com.carecure.medsysten.utils.mappers.InventoryOrderMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,13 +43,13 @@ public class ServInventoryOrder
 		return StreamSupport.stream(iterable.spliterator(), false).collect(Collectors.toList());
 	}
 
-	public ResInventoryOrder addNewSupplyOrder(ResInventoryOrder newOrder) throws ParseException
+	public ResInventoryOrder addNewSupplyOrder(NewInventoryOrderDto newOrderDto) throws ParseException
 	{
 		//we can do this in one line as java passes primitives by value but objects be reference in memory
 		//but if object copy is set to null original remains the same
-		if (newOrder.getUnits() > 0)
+		if (newOrderDto.getUnits() > 0)
 		{
-			Optional<ResInventoryItem> itemOptional = repoInventoryItem.findById(newOrder.getItem().getCode());
+			Optional<ResInventoryItem> itemOptional = repoInventoryItem.findById(newOrderDto.getItemCode());
 			if (itemOptional.isPresent() == false)
 			{
 				return null;
@@ -55,18 +57,17 @@ public class ServInventoryOrder
 			ResInventoryItem item = itemOptional.get();
 
 			int availableUnits = item.getAvailableUnits();
-			item.setAvailableUnits(availableUnits + newOrder.getUnits());
-			item.addExpiryDateCount(newOrder.getOrderDate(), newOrder.getUnits());
-			newOrder.setItem(item);
+			item.setAvailableUnits(availableUnits + newOrderDto.getUnits());
+			item.addExpiryDateCount(newOrderDto.getOrderDate(), newOrderDto.getUnits());
 			repoInventoryItem.save(item);
-			return repoInventoryOrder.save(newOrder);
+			return repoInventoryOrder.save(InventoryOrderMapper.mapNewInventoryOrderDtoToDao(newOrderDto));
 		}
 		return null;
 	}
 
-	public ResInventoryOrder addNewSellOrder(ResInventoryOrder newOrder) throws ParseException
+	public ResInventoryOrder addNewSellOrder(NewInventoryOrderDto newOrderDto) throws ParseException
 	{
-		Optional<ResInventoryItem> itemOptional = repoInventoryItem.findById(newOrder.getItem().getCode());
+		Optional<ResInventoryItem> itemOptional = repoInventoryItem.findById(newOrderDto.getItemCode());
 		if (itemOptional.isPresent() == false)
 		{
 			return null;
@@ -74,16 +75,15 @@ public class ServInventoryOrder
 		ResInventoryItem item = itemOptional.get();
 		int availableUnits = item.getAvailableUnits();
 
-		if (newOrder.getUnits() > availableUnits)
+		if (newOrderDto.getUnits() > availableUnits)
 		{
 			return null;
 		}
 
-		item.setAvailableUnits(availableUnits - newOrder.getUnits());
-		item.deductExpiryDateCount(newOrder.getOrderDate(), newOrder.getUnits());
-		newOrder.setItem(item);
+		item.setAvailableUnits(availableUnits - newOrderDto.getUnits());
+		item.deductExpiryDateCount(newOrderDto.getOrderDate(), newOrderDto.getUnits());
 		repoInventoryItem.save(item);
-		return repoInventoryOrder.save(newOrder);
+		return repoInventoryOrder.save(InventoryOrderMapper.mapNewInventoryOrderDtoToDao(newOrderDto));
 
 	}
 

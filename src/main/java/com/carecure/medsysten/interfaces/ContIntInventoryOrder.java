@@ -1,5 +1,6 @@
 package com.carecure.medsysten.interfaces;
 
+import com.carecure.medsysten.dtos.NewInventoryOrderDto;
 import com.carecure.medsysten.resources.ResInventoryOrder;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +16,7 @@ public interface ContIntInventoryOrder
 			@RequestParam String sortColumn, @RequestParam String sortDirection);
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResInventoryOrder addNewOrder(@RequestBody ResInventoryOrder newOrder) throws ParseException;
+	public ResInventoryOrder addNewOrder(@RequestBody NewInventoryOrderDto newOrder) throws ParseException;
 
 	@RequestMapping(method = RequestMethod.DELETE, value = "/{code}")
 	public boolean reverseOrder(@PathVariable("code") long code) throws ParseException;
