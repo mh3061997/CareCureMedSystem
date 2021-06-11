@@ -23,7 +23,7 @@ public class SwaggerConfig implements WebMvcConfigurer
 	public Docket api()
 	{
 		return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo())
-				.select().apis(RequestHandlerSelectors.any())
+				.select().apis(RequestHandlerSelectors.basePackage("com.carecure.medsysten"))
 				.paths(PathSelectors.any())
 				.build();
 	}
