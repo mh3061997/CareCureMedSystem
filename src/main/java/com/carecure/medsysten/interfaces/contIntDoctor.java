@@ -1,23 +1,25 @@
 package com.carecure.medsysten.interfaces;
 
 import com.carecure.medsysten.resources.resDoctor;
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RequestMapping("/doctor")
+@Api(tags = "Doctor")
 public interface contIntDoctor {
 
-    @RequestMapping
+    @RequestMapping(method = RequestMethod.GET)
     List<resDoctor> getDoctorAll();
 
-    @RequestMapping("/speciality")
+    @RequestMapping(method = RequestMethod.GET,value = "/speciality")
     public List<resDoctor> getDoctorAllBySpeciality(@RequestParam String speciality);
 
-    @RequestMapping("/{doctorCode}")
+    @RequestMapping(method = RequestMethod.GET,value = "/{doctorCode}")
     resDoctor getDoctorById(@PathVariable("doctorCode") long code);
 
-    @RequestMapping("/{doctorCode}/reservedTimes")
+    @RequestMapping(method = RequestMethod.GET,value = "/{doctorCode}/reservedTimes")
     List<doctorReservedTimes> getDoctorReservedTimesByDate(@PathVariable("doctorCode") long doctorCode,@RequestParam("date") String date);
 
 

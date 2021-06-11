@@ -1,19 +1,21 @@
 package com.carecure.medsysten.interfaces;
 
 import com.carecure.medsysten.resources.resServicePriceList;
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RequestMapping("/servicePriceList")
+@Api(tags = "Service Price List")
 public interface contIntServicePriceList {
 
 
 
-        @RequestMapping
+        @RequestMapping(method = RequestMethod.GET)
         List<resServicePriceList> getServicePriceListAll();
 
-        @RequestMapping("/speciality")
+        @RequestMapping(method = RequestMethod.GET,value = "/speciality")
         List<resServicePriceList> getServicePriceListBySpeciality(@RequestParam("speciality")String speciality);
 
         @RequestMapping(method = RequestMethod.POST)

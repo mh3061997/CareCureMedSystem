@@ -1,20 +1,22 @@
 package com.carecure.medsysten.interfaces;
 
 import com.carecure.medsysten.resources.resPackageBase;
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RequestMapping("/packageBase")
+@Api(tags = "Package")
 public interface contIntPackageBase {
 
-    @RequestMapping
+    @RequestMapping(method = RequestMethod.GET)
     List<resPackageBase> getPackageBaseAll();
 
-    @RequestMapping("/status")
+    @RequestMapping(method = RequestMethod.GET,value = "/status")
     List<resPackageBase> getPackageBaseAllByStatus(@RequestParam String status);
 
-    @RequestMapping("/{packageBaseCode}")
+    @RequestMapping(method = RequestMethod.GET,value = "/{packageBaseCode}")
     resPackageBase getPackageBaseById(@PathVariable("packageBaseCode") long code);
 
     @RequestMapping(method = RequestMethod.POST)

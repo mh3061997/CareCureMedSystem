@@ -1,26 +1,26 @@
 package com.carecure.medsysten.interfaces;
 
-import com.carecure.medsysten.resources.resAppointment;
 import com.carecure.medsysten.resources.resInvoice;
 import com.lowagie.text.DocumentException;
 import freemarker.template.TemplateException;
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.List;
 
 @RequestMapping("/invoice")
+@Api(tags = "Invoice")
 public interface contIntInvoice {
 
-    @RequestMapping
+    @RequestMapping(method = RequestMethod.GET)
     List<resInvoice> getInvoiceAll();
 
-    @RequestMapping("/{invoiceCode}")
+    @RequestMapping(method = RequestMethod.GET,value = "/{invoiceCode}")
     resInvoice getInvoiceById(@PathVariable("invoiceCode") long code);
 
-    @RequestMapping("/date")
+    @RequestMapping(method = RequestMethod.GET,value = "/date")
     List<resInvoice> getInvoicesByDate(@RequestParam("date") String date);
 
     @RequestMapping(method = RequestMethod.POST)

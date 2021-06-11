@@ -1,6 +1,7 @@
 package com.carecure.medsysten.interfaces;
 
 import com.carecure.medsysten.resources.resDoctorDayAvail;
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,12 +11,13 @@ import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RequestMapping("/doctorDayAvail")
+@Api(tags = "Working Days Doctor")
 public interface contIntDoctorDayAvail {
 
-    @RequestMapping
+    @RequestMapping(method = RequestMethod.GET)
     List<resDoctorDayAvail> getDoctorDayAvailAll();
 
-    @RequestMapping("/{doctorDayAvailCode}")
+    @RequestMapping(method = RequestMethod.GET,value = "/{doctorDayAvailCode}")
     resDoctorDayAvail getDoctorDayAvailById(@PathVariable("doctorDayAvailCode") long code);
 
     @RequestMapping(method = RequestMethod.POST)

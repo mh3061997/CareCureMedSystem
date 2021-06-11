@@ -2,12 +2,14 @@ package com.carecure.medsysten.interfaces;
 
 import com.carecure.medsysten.dtos.NewInventoryOrderDto;
 import com.carecure.medsysten.resources.ResInventoryOrder;
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.util.List;
 
 @RequestMapping("/inventory/order")
+@Api(tags = "Inventory Order")
 public interface ContIntInventoryOrder
 {
 

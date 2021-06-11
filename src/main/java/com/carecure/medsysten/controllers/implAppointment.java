@@ -1,8 +1,6 @@
 package com.carecure.medsysten.controllers;
 
-import com.carecure.medsysten.emailUtils.servEmail;
 import com.carecure.medsysten.interfaces.contIntAppointment;
-import com.carecure.medsysten.interfaces.doctorReservedTimes;
 import com.carecure.medsysten.resources.*;
 import com.carecure.medsysten.services.servAppointment;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")

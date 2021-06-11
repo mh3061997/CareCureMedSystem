@@ -1,16 +1,18 @@
 package com.carecure.medsysten.security.interfaces;
 
-import com.carecure.medsysten.resources.resPatient;
 import com.carecure.medsysten.security.models.UserDao;
+import io.swagger.annotations.Api;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RequestMapping("/userDao")
+
+@Api(tags = "User")
 public interface contIntUserDao {
 
-    @RequestMapping
+    @RequestMapping(method = RequestMethod.GET)
     List<UserDao> getUserDaoAll();
 
 

@@ -1,6 +1,7 @@
 package com.carecure.medsysten.interfaces;
 
 import com.carecure.medsysten.resources.resInvoiceItem;
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,12 +10,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.List;
 
 @RequestMapping("/invoiceItem")
+@Api(tags = "Invoice")
 public interface contIntInvoiceItem {
 
-    @RequestMapping
+    @RequestMapping(method = RequestMethod.GET)
     List<resInvoiceItem> getInvoiceItemAll();
 
-    @RequestMapping("/{invoiceItemCode}")
+    @RequestMapping(method = RequestMethod.GET,value="/{invoiceItemCode}")
     resInvoiceItem getInvoiceItemById(@PathVariable("invoiceItemCode") long code);
 
     @RequestMapping(method = RequestMethod.POST)

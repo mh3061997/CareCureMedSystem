@@ -1,6 +1,7 @@
 package com.carecure.medsysten.interfaces;
 
 import com.carecure.medsysten.resources.resPatient;
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,12 +10,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.List;
 
 @RequestMapping("/patient")
+@Api(tags = "Patient")
 public interface contIntPatient {
 
-    @RequestMapping
+    @RequestMapping(method = RequestMethod.GET)
     List<resPatient> getPatientAll();
 
-    @RequestMapping("/{patientCode}")
+    @RequestMapping(method = RequestMethod.GET,value = "/{patientCode}")
     resPatient getPatientById(@PathVariable("patientCode") long code);
 
     @RequestMapping(method = RequestMethod.POST)

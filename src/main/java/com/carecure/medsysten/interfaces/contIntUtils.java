@@ -2,16 +2,16 @@ package com.carecure.medsysten.interfaces;
 
 import com.carecure.medsysten.resources.Utils.resContactAppointmentData;
 import com.carecure.medsysten.resources.Utils.resContactUsData;
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
-import java.lang.invoke.MethodType;
 
 @RequestMapping("/utils")
+@Api(tags = "Email Utilities")
 public interface contIntUtils
 {
 

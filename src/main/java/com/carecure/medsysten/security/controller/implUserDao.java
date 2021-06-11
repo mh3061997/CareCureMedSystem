@@ -5,8 +5,6 @@ import com.carecure.medsysten.resources.resPatient;
 import com.carecure.medsysten.security.interfaces.contIntUserDao;
 import com.carecure.medsysten.security.models.UserDao;
 import com.carecure.medsysten.security.service.servUserDao;
-import com.carecure.medsysten.services.servDoctor;
-import com.carecure.medsysten.services.servPatient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
