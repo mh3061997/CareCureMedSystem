@@ -25,12 +25,12 @@ import java.util.stream.StreamSupport;
 @Service
 public class ServInventoryOrder
 {
+	private static final Logger logger = LoggerFactory.getLogger(ServInventoryOrder.class.getName());
+
 	@Autowired
 	RepoInventoryOrder repoInventoryOrder;
 	@Autowired
 	RepoInventoryItem repoInventoryItem;
-
-	private static final Logger LOGGER = LoggerFactory.getLogger(ServInventoryOrder.class.getName());
 
 	public List<ResInventoryOrder> getOrders(int pageNumber, int pageSize, String sortColumn, String sortDirection)
 	{
@@ -43,7 +43,7 @@ public class ServInventoryOrder
 		finalSortColumn = Arrays.stream(ResInventoryOrder.class.getFields()).anyMatch(f -> f.getName().equals(sortColumn)) ?
 				finalSortColumn : "code";
 
-		LOGGER.info(
+		logger.info(
 				"Getting Orders by Pagination using , PageNumber: {} , pageSize: {} , sortColumn: {} , sortDirection: {} ",
 				pageNumber, pageSize, finalSortColumn, direction);
 
@@ -59,7 +59,7 @@ public class ServInventoryOrder
 	public long getAllOrdersCount()
 	{
 		long count = repoInventoryOrder.count();
-		LOGGER.info("Getting Inventory Orders count: {}", count);
+		logger.info("Getting Inventory Orders count: {}", count);
 		return count;
 	}
 
@@ -124,7 +124,7 @@ public class ServInventoryOrder
 
 			if (order.getUnits() > availableUnits)
 			{
-				LOGGER.error("Available units less than reversal amount !");
+				logger.error("Available units less than reversal amount !");
 				return false;
 			}
 
@@ -145,7 +145,7 @@ public class ServInventoryOrder
 			repoInventoryItem.save(item);
 			return true;
 		}
-		LOGGER.error("Invalid order type could not reverse order");
+		logger.error("Invalid order type could not reverse order");
 		return false;
 	}
 }
