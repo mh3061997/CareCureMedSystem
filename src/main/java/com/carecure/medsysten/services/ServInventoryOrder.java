@@ -16,6 +16,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -36,11 +37,30 @@ public class ServInventoryOrder
 		Sort.Direction direction =
 				sortDirection.equalsIgnoreCase("ASC") || sortDirection.equalsIgnoreCase("ASCENDING") ? Sort.Direction.ASC :
 						Sort.Direction.DESC;
-		pageNumber = pageNumber >= 0 ? pageNumber : 0;
-		pageSize = pageSize >= 1 ? pageSize : 1;
-		Pageable pageRequest = PageRequest.of(pageNumber, pageSize, Sort.by(direction, sortColumn));
+
+		String finalSortColumn = sortColumn;
+
+		finalSortColumn = Arrays.stream(ResInventoryOrder.class.getFields()).anyMatch(f -> f.getName().equals(sortColumn)) ?
+				finalSortColumn : "code";
+
+		LOGGER.info(
+				"Getting Orders by Pagination using , PageNumber: {} , pageSize: {} , sortColumn: {} , sortDirection: {} ",
+				pageNumber, pageSize, finalSortColumn, direction);
+
+		pageNumber = Math.max(pageNumber, 0);
+		pageSize = Math.max(pageSize, 1);
+
+		Pageable pageRequest = PageRequest.of(pageNumber, pageSize, Sort.by(direction, finalSortColumn));
 		Iterable<ResInventoryOrder> iterable = repoInventoryOrder.findAll(pageRequest);
+
 		return StreamSupport.stream(iterable.spliterator(), false).collect(Collectors.toList());
+	}
+
+	public long getAllOrdersCount()
+	{
+		long count = repoInventoryOrder.count();
+		LOGGER.info("Getting Inventory Orders count: {}", count);
+		return count;
 	}
 
 	public ResInventoryOrder addNewSupplyOrder(NewInventoryOrderDto newOrderDto) throws ParseException

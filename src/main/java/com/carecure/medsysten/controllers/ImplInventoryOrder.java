@@ -6,6 +6,8 @@ import com.carecure.medsysten.interfaces.ContIntInventoryOrder;
 import com.carecure.medsysten.resources.ResInventoryOrder;
 import com.carecure.medsysten.services.ServInventoryOrder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.text.ParseException;
@@ -19,18 +21,27 @@ public class ImplInventoryOrder implements ContIntInventoryOrder
 	ServInventoryOrder servInventoryOrder;
 
 	@Override
-	public List<ResInventoryOrder> getOrders(int pageNumber, int pageSize, String sortColumn, String sortDirection)
+	public ResponseEntity<?> getOrders(int pageNumber, int pageSize, String sortColumn, String sortDirection)
 	{
-		return servInventoryOrder.getOrders(pageNumber, pageSize, sortColumn, sortDirection);
+		List<ResInventoryOrder> orders = servInventoryOrder.getOrders(pageNumber, pageSize, sortColumn, sortDirection);
+
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.set("X-Total-Count",Long.toString(servInventoryOrder.getAllOrdersCount()));
+
+		return ResponseEntity.ok().headers(responseHeaders).body(orders);
+
 	}
 
 	@Override
 	public ResInventoryOrder addNewOrder(NewInventoryOrderDto newOrder) throws ParseException
 	{
 
-		if(newOrder.getType().equals(EnumInventoryOrderType.SUPPLY)) {
+		if (newOrder.getType().equals(EnumInventoryOrderType.SUPPLY))
+		{
 			return servInventoryOrder.addNewSupplyOrder(newOrder);
-		} else if (newOrder.getType().equals(EnumInventoryOrderType.SELL)){
+		}
+		else if (newOrder.getType().equals(EnumInventoryOrderType.SELL))
+		{
 			return servInventoryOrder.addNewSellOrder(newOrder);
 		}
 		return null;

@@ -3,10 +3,10 @@ package com.carecure.medsysten.interfaces;
 import com.carecure.medsysten.dtos.NewInventoryOrderDto;
 import com.carecure.medsysten.resources.ResInventoryOrder;
 import io.swagger.annotations.Api;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
-import java.util.List;
 
 @RequestMapping("/inventory/order")
 @Api(tags = "Inventory Order")
@@ -14,7 +14,7 @@ public interface ContIntInventoryOrder
 {
 
 	@RequestMapping(method = RequestMethod.GET)
-	public List<ResInventoryOrder> getOrders(@RequestParam int pageNumber, @RequestParam int pageSize,
+	public ResponseEntity<?> getOrders(@RequestParam int pageNumber, @RequestParam int pageSize,
 			@RequestParam String sortColumn, @RequestParam String sortDirection);
 
 	@RequestMapping(method = RequestMethod.POST)
