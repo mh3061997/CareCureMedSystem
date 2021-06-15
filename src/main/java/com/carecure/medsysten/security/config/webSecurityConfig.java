@@ -57,13 +57,15 @@ public class webSecurityConfig extends WebSecurityConfigurerAdapter
 		return super.authenticationManagerBean();
 	}
 
+
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception
 	{
 
 		if (this.activeProfile.equalsIgnoreCase("dev"))
 		{
-			httpSecurity.csrf().disable().cors().disable().authorizeRequests().antMatchers("/**").permitAll();
+			httpSecurity.csrf().disable().authorizeRequests().antMatchers("/**").permitAll();
+
 		}
 		else
 		{
