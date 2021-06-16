@@ -1,6 +1,6 @@
 package com.carecure.medsysten.resources;
 
-import com.carecure.medsysten.enums.enumInventoryItemCategory;
+import com.carecure.medsysten.enums.Inventory.enumInventoryItemCategory;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 

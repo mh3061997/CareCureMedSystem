@@ -1,7 +1,7 @@
 package com.carecure.medsysten.services;
 
 import com.carecure.medsysten.dtos.inventory.order.NewInventoryOrderDto;
-import com.carecure.medsysten.enums.EnumInventoryOrderType;
+import com.carecure.medsysten.enums.Inventory.EnumInventoryOrderType;
 import com.carecure.medsysten.repositories.RepoInventoryItem;
 import com.carecure.medsysten.repositories.RepoInventoryOrder;
 import com.carecure.medsysten.resources.ResInventoryItem;
