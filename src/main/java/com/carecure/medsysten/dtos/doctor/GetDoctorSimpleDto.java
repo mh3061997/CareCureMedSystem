@@ -5,8 +5,9 @@ import com.carecure.medsysten.enums.misc.EnumSpeciality;
 import lombok.Data;
 
 @Data
-public class NewDoctorDto
+public class GetDoctorSimpleDto
 {
+	private long code;
 	private String name;
 	private String mobile;
 	private String email;
