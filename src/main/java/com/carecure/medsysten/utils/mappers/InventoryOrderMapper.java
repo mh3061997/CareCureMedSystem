@@ -1,6 +1,6 @@
 package com.carecure.medsysten.utils.mappers;
 
-import com.carecure.medsysten.dtos.inventory.NewInventoryOrderDto;
+import com.carecure.medsysten.dtos.inventory.order.NewInventoryOrderDto;
 import com.carecure.medsysten.resources.ResInventoryItem;
 import com.carecure.medsysten.resources.ResInventoryOrder;
 

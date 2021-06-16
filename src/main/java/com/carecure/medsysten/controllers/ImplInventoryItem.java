@@ -1,7 +1,7 @@
 
 package com.carecure.medsysten.controllers;
 
-import com.carecure.medsysten.dtos.inventory.NewInventoryItemDto;
+import com.carecure.medsysten.dtos.inventory.item.NewInventoryItemDto;
 import com.carecure.medsysten.interfaces.ContIntInventoryItem;
 import com.carecure.medsysten.resources.ResInventoryItem;
 import org.springframework.beans.factory.annotation.Autowired;

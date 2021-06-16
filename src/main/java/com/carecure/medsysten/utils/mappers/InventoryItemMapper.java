@@ -1,6 +1,6 @@
 package com.carecure.medsysten.utils.mappers;
 
-import com.carecure.medsysten.dtos.inventory.NewInventoryItemDto;
+import com.carecure.medsysten.dtos.inventory.item.NewInventoryItemDto;
 import com.carecure.medsysten.resources.ResInventoryItem;
 
 public class InventoryItemMapper
