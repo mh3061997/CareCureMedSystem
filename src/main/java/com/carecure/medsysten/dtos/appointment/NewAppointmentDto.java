@@ -1,6 +1,5 @@
 package com.carecure.medsysten.dtos.appointment;
 
-import com.carecure.medsysten.enums.appointment.EnumAppointmentStatus;
 import com.carecure.medsysten.enums.appointment.EnumAppointmentType;
 import com.carecure.medsysten.enums.misc.EnumSpeciality;
 import lombok.Data;
@@ -19,6 +18,4 @@ public class NewAppointmentDto
 	private String userCreatedBy;
 	private long patientCode;
 	private long doctorCode;
-	private EnumAppointmentStatus status = EnumAppointmentStatus.RESERVED;
-
 }

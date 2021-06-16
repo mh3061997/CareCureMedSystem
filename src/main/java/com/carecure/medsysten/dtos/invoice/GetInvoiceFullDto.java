@@ -2,7 +2,7 @@ package com.carecure.medsysten.dtos.invoice;
 
 import com.carecure.medsysten.dtos.appointment.GetAppointmentSimpleDto;
 import com.carecure.medsysten.dtos.membership.GetMembershipSimpleDto;
-import com.carecure.medsysten.dtos.patient.GetAllPatientDto;
+import com.carecure.medsysten.dtos.patient.GetPatientSimpleDto;
 import com.carecure.medsysten.enums.invoice.EnumInvoiceStatus;
 import com.carecure.medsysten.enums.misc.EnumPaymentMethod;
 import lombok.Data;
@@ -27,5 +27,5 @@ public class GetInvoiceFullDto
 	private EnumPaymentMethod paymentMethod;
 	private List<GetInvoiceSimpleDto> invoiceItems;
 	private GetMembershipSimpleDto usedMembership;
-	private GetAllPatientDto patientMembershipSubscriber;
+	private GetPatientSimpleDto patientMembershipSubscriber;
 }
