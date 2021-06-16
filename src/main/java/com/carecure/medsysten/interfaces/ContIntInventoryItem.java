@@ -1,6 +1,6 @@
 package com.carecure.medsysten.interfaces;
 
-import com.carecure.medsysten.dtos.NewInventoryItemDto;
+import com.carecure.medsysten.dtos.inventory.NewInventoryItemDto;
 import io.swagger.annotations.Api;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;

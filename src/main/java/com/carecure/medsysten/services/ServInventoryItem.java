@@ -1,6 +1,6 @@
 package com.carecure.medsysten.services;
 
-import com.carecure.medsysten.dtos.NewInventoryItemDto;
+import com.carecure.medsysten.dtos.inventory.NewInventoryItemDto;
 import com.carecure.medsysten.repositories.RepoInventoryItem;
 import com.carecure.medsysten.resources.ResInventoryItem;
 import com.carecure.medsysten.utils.mappers.InventoryItemMapper;

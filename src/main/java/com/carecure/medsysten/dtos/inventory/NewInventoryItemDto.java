@@ -1,4 +1,4 @@
-package com.carecure.medsysten.dtos;
+package com.carecure.medsysten.dtos.inventory;
 
 import com.carecure.medsysten.enums.enumInventoryItemCategory;
 import lombok.Data;
