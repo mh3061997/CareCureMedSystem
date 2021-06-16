@@ -1,4 +1,4 @@
-package com.carecure.medsysten.enums;
+package com.carecure.medsysten.enums.Inventory;
 
 public enum EnumInventoryOrderType
 {

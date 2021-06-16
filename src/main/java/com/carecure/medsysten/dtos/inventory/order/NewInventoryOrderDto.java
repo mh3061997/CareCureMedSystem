@@ -1,6 +1,6 @@
 package com.carecure.medsysten.dtos.inventory.order;
 
-import com.carecure.medsysten.enums.EnumInventoryOrderType;
+import com.carecure.medsysten.enums.Inventory.EnumInventoryOrderType;
 import lombok.Data;
 
 import java.util.Date;

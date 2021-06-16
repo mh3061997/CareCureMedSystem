@@ -1,6 +1,6 @@
 package com.carecure.medsysten.dtos.inventory.item;
 
-import com.carecure.medsysten.enums.enumInventoryItemCategory;
+import com.carecure.medsysten.enums.Inventory.enumInventoryItemCategory;
 import lombok.Data;
 
 @Data
