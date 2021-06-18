@@ -21,12 +21,14 @@ public class ImplInventoryOrder implements ContIntInventoryOrder
 	ServInventoryOrder servInventoryOrder;
 
 	@Override
-	public ResponseEntity<?> getOrders(int pageNumber, int pageSize, String sortColumn, String sortDirection)
+	public ResponseEntity<?> getOrders(int pageNumber, int pageSize, String sortColumn, String sortDirection,
+			EnumInventoryOrderType type, String startDate, String endDate)
 	{
-		List<ResInventoryOrder> orders = servInventoryOrder.getOrders(pageNumber, pageSize, sortColumn, sortDirection);
+		List<ResInventoryOrder> orders =
+				servInventoryOrder.getOrders(pageNumber, pageSize, sortColumn, sortDirection, type, startDate, endDate);
 
 		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.set("X-Total-Count",Long.toString(servInventoryOrder.getAllOrdersCount()));
+		responseHeaders.set("X-Total-Count", Long.toString(servInventoryOrder.getAllOrdersCount()));
 
 		return ResponseEntity.ok().headers(responseHeaders).body(orders);
 
