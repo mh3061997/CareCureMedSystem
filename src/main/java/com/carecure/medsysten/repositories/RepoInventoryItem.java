@@ -1,6 +1,8 @@
 package com.carecure.medsysten.repositories;
 
 import com.carecure.medsysten.resources.ResInventoryItem;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -12,4 +14,9 @@ public interface RepoInventoryItem extends PagingAndSortingRepository<ResInvento
 	@Transactional
 	@Query("update ResInventoryItem item set item.sellingPrice = ?2 where item.code = ?1")
 	void updateInventoryItemSellingPrice(long code, int newPrice);
+
+	@Query(value = "select * from ResInventoryItem item  where  item.category = ?1", nativeQuery = true)
+	Page<ResInventoryItem> findAllByCategory(String category, Pageable pageable);
+
+
 }

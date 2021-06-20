@@ -1,6 +1,7 @@
 package com.carecure.medsysten.interfaces;
 
 import com.carecure.medsysten.dtos.NewInventoryItemDto;
+import com.carecure.medsysten.enums.EnumInventoryItemCategory;
 import io.swagger.annotations.Api;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,11 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface ContIntInventoryItem
 {
 	@RequestMapping(method = RequestMethod.GET)
-	ResponseEntity<?> getItems(int pageNumber, int pageSize, String sortColumn, String sortDirection);
+	ResponseEntity<?> getItems(@RequestParam int pageNumber, @RequestParam int pageSize, @RequestParam String sortColumn,
+			@RequestParam String sortDirection, @RequestParam(required = false) EnumInventoryItemCategory category);
 
-	@RequestMapping(method = RequestMethod.PUT,value = "/sellingPrice")
+	@RequestMapping(method = RequestMethod.PUT, value = "/sellingPrice")
 	void updateInventoryItemSellingPrice(@RequestParam long code, @RequestParam int updatedSellingPrice);
 
-	@RequestMapping(method = RequestMethod.POST,value = "")
-	void addNewInventoryItem( @RequestBody  NewInventoryItemDto newItem);
+	@RequestMapping(method = RequestMethod.POST, value = "")
+	void addNewInventoryItem(@RequestBody NewInventoryItemDto newItem);
 }
