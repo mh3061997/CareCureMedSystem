@@ -6,18 +6,16 @@ import com.carecure.medsysten.repositories.RepoInventoryItem;
 import com.carecure.medsysten.repositories.RepoInventoryOrder;
 import com.carecure.medsysten.resources.ResInventoryItem;
 import com.carecure.medsysten.resources.ResInventoryOrder;
+import com.carecure.medsysten.utils.PaginationUtil;
 import com.carecure.medsysten.utils.mappers.InventoryOrderMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
-import java.util.Arrays;
 import java.util.Optional;
 
 @Service
@@ -33,38 +31,20 @@ public class ServInventoryOrder
 	public Page<ResInventoryOrder> getOrders(int pageNumber, int pageSize, String sortColumn, String sortDirection,
 			EnumInventoryOrderType type, String startDate, String endDate)
 	{
-		if (sortDirection == null)
-		{
-			sortDirection = "DESC";
-		}
-		Sort.Direction direction =
-				sortDirection.equalsIgnoreCase("ASC") || sortDirection.equalsIgnoreCase("ASCENDING") ? Sort.Direction.ASC :
-						Sort.Direction.DESC;
 
-		String finalSortColumn = sortColumn;
-
-		finalSortColumn = Arrays.stream(ResInventoryOrder.class.getFields()).anyMatch(f -> f.getName().equals(sortColumn)) ?
-				finalSortColumn : "code";
-
-		logger.info(
-				"Getting Orders by Pagination using , PageNumber: {} , pageSize: {} , sortColumn: {} , sortDirection: {} ",
-				pageNumber, pageSize, finalSortColumn, direction);
-
-		pageNumber = Math.max(pageNumber, 0);
-		pageSize = Math.max(pageSize, 1);
-
-		Pageable pageRequest = PageRequest.of(pageNumber, pageSize, Sort.by(direction, finalSortColumn));
+		Pageable pageRequest = PaginationUtil.createPageRequest(ResInventoryOrder.class,pageNumber, pageSize, sortColumn, sortDirection);
 
 		if (startDate != null && !startDate.isEmpty() && endDate != null && !endDate.isEmpty() && type != null && !type
 				.toString().isEmpty())
 		{
 			if (startDate.equals(endDate))
 			{
-				logger.info("Criteria by type and on date, type:{}  on date {}", type,startDate);
+				logger.info("Criteria by type and on date, type:{}  on date {}", type, startDate);
 				return repoInventoryOrder.findAllByTypeAndOrderDate(startDate, type.toString(), pageRequest);
 
 			}
-			logger.info("Criteria by date between  and type, type:{} , startDate: {} , endDate:{}", type, startDate, endDate);
+			logger.info("Criteria by date between  and type, type:{} , startDate: {} , endDate:{}", type, startDate,
+					endDate);
 			return repoInventoryOrder.findAllByTypeAndOrderDateBetween(startDate, endDate, type.toString(), pageRequest);
 		}
 		else if (startDate != null && !startDate.isEmpty() && endDate != null && !endDate.isEmpty() && (type == null || type
