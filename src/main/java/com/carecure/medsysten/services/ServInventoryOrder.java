@@ -73,13 +73,6 @@ public class ServInventoryOrder
 
 	}
 
-	public long getAllOrdersCount()
-	{
-		long count = repoInventoryOrder.count();
-		logger.info("Getting Inventory Orders count: {}", count);
-		return count;
-	}
-
 	public ResInventoryOrder addNewSupplyOrder(NewInventoryOrderDto newOrderDto) throws ParseException
 	{
 		//we can do this in one line as java passes primitives by value but objects be reference in memory
