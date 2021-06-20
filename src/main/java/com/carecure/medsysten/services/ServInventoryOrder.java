@@ -10,6 +10,7 @@ import com.carecure.medsysten.utils.mappers.InventoryOrderMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -17,10 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @Service
 public class ServInventoryOrder
@@ -32,11 +30,12 @@ public class ServInventoryOrder
 	@Autowired
 	RepoInventoryItem repoInventoryItem;
 
-	public List<ResInventoryOrder> getOrders(int pageNumber, int pageSize, String sortColumn, String sortDirection,
+	public Page<ResInventoryOrder> getOrders(int pageNumber, int pageSize, String sortColumn, String sortDirection,
 			EnumInventoryOrderType type, String startDate, String endDate)
 	{
-		if(sortDirection ==null){
-			sortDirection="DESC";
+		if (sortDirection == null)
+		{
+			sortDirection = "DESC";
 		}
 		Sort.Direction direction =
 				sortDirection.equalsIgnoreCase("ASC") || sortDirection.equalsIgnoreCase("ASCENDING") ? Sort.Direction.ASC :
@@ -55,36 +54,43 @@ public class ServInventoryOrder
 		pageSize = Math.max(pageSize, 1);
 
 		Pageable pageRequest = PageRequest.of(pageNumber, pageSize, Sort.by(direction, finalSortColumn));
-		Iterable<ResInventoryOrder> iterable;
+
 		if (startDate != null && !startDate.isEmpty() && endDate != null && !endDate.isEmpty() && type != null && !type
 				.toString().isEmpty())
 		{
-			logger.info("Criteria by date and type, type:{} , startDate: {} , endDate:{}",type,startDate,endDate);
-			iterable = repoInventoryOrder.findAllByTypeAndOrderDateBetween(startDate,endDate,type.toString(),pageRequest);
-			logger.info(iterable.toString());
+			if (startDate.equals(endDate))
+			{
+				logger.info("Criteria by type and on date, type:{}  on date {}", type,startDate);
+				return repoInventoryOrder.findAllByTypeAndOrderDate(startDate, type.toString(), pageRequest);
+
+			}
+			logger.info("Criteria by date between  and type, type:{} , startDate: {} , endDate:{}", type, startDate, endDate);
+			return repoInventoryOrder.findAllByTypeAndOrderDateBetween(startDate, endDate, type.toString(), pageRequest);
 		}
 		else if (startDate != null && !startDate.isEmpty() && endDate != null && !endDate.isEmpty() && (type == null || type
 				.toString().isEmpty()))
 		{
-			logger.info("Criteria by date, startDate: {} , endDate:{}",startDate,endDate);
-			iterable = repoInventoryOrder.findAllByOrderDateBetween(startDate,endDate,pageRequest);
+			if (startDate.equals(endDate))
+			{
+				logger.info("Criteria by on date: {}", startDate);
+				return repoInventoryOrder.findAllByOrderDate(startDate, pageRequest);
+			}
+
+			logger.info("Criteria by date between, startDate: {} , endDate:{}", startDate, endDate);
+			return repoInventoryOrder.findAllByOrderDateBetween(startDate, endDate, pageRequest);
 
 		}
 		else if (type != null && !type.toString().isEmpty())
 		{
-			logger.info("Criteria by type, type:{}",type);
+			logger.info("Criteria by type, type:{}", type);
 
-			iterable = repoInventoryOrder.findAllByType(type.toString(),pageRequest);
-
-		}
-		else
-		{
-			logger.info("getting with no date or type criteria");
-			iterable = repoInventoryOrder.findAll(pageRequest);
+			return repoInventoryOrder.findAllByType(type.toString(), pageRequest);
 
 		}
 
-		return StreamSupport.stream(iterable.spliterator(), false).collect(Collectors.toList());
+		logger.info("getting with no date or type criteria");
+		return repoInventoryOrder.findAll(pageRequest);
+
 	}
 
 	public long getAllOrdersCount()
