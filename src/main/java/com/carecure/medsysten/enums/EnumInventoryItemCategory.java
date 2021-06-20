@@ -1,6 +1,6 @@
 package com.carecure.medsysten.enums;
 
-public enum enumInventoryItemCategory
+public enum EnumInventoryItemCategory
 {
 	GENERAL,DENTAL,DERMATOLOGY
 }

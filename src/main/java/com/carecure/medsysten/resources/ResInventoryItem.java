@@ -1,6 +1,6 @@
 package com.carecure.medsysten.resources;
 
-import com.carecure.medsysten.enums.enumInventoryItemCategory;
+import com.carecure.medsysten.enums.EnumInventoryItemCategory;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
@@ -27,7 +27,7 @@ public class ResInventoryItem
 	private String name;
 	private int availableUnits;
 	@Enumerated(EnumType.STRING)
-	private enumInventoryItemCategory category;
+	private EnumInventoryItemCategory category;
 	private int sellingPrice;
 
 	@ElementCollection
