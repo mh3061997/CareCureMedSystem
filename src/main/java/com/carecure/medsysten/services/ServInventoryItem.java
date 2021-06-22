@@ -2,6 +2,7 @@ package com.carecure.medsysten.services;
 
 import com.carecure.medsysten.dtos.NewInventoryItemDto;
 import com.carecure.medsysten.enums.EnumInventoryItemCategory;
+import com.carecure.medsysten.projections.ProjInventoryItemNameAndCode;
 import com.carecure.medsysten.repositories.RepoInventoryItem;
 import com.carecure.medsysten.resources.ResInventoryItem;
 import com.carecure.medsysten.utils.PaginationUtil;
@@ -12,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ServInventoryItem
@@ -36,6 +39,9 @@ public class ServInventoryItem
 
 	}
 
+	public List<ProjInventoryItemNameAndCode> getItemsByCategoryLookup(EnumInventoryItemCategory category){
+		return repoInventoryItem.findAllByCategoryLookup(category.toString());
+	}
 	public void updateInventoryItemSellingPrice(long code, int updatedSellingPrice)
 	{
 		repoInventoryItem.updateInventoryItemSellingPrice(code, updatedSellingPrice);

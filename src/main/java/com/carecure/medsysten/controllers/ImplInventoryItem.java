@@ -3,6 +3,7 @@ package com.carecure.medsysten.controllers;
 import com.carecure.medsysten.dtos.NewInventoryItemDto;
 import com.carecure.medsysten.enums.EnumInventoryItemCategory;
 import com.carecure.medsysten.interfaces.ContIntInventoryItem;
+import com.carecure.medsysten.projections.ProjInventoryItemNameAndCode;
 import com.carecure.medsysten.resources.ResInventoryItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 public class ImplInventoryItem implements ContIntInventoryItem
@@ -33,6 +36,12 @@ public class ImplInventoryItem implements ContIntInventoryItem
 		logger.info("Setting X-Total-Count Header to {}", totalCount);
 		responseHeaders.set("X-Total-Count", Long.toString(totalCount));
 		return ResponseEntity.ok().headers(responseHeaders).body(itemsPage.getContent());
+	}
+
+	@Override
+	public List<ProjInventoryItemNameAndCode> getItemsByCategoryLookup(EnumInventoryItemCategory category)
+	{
+		return servInventoryItem.getItemsByCategoryLookup(category);
 	}
 
 	@Override
