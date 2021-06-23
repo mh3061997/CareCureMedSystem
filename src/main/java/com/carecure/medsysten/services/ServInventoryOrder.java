@@ -75,6 +75,8 @@ public class ServInventoryOrder
 
 	public ResInventoryOrder addNewSupplyOrder(NewInventoryOrderDto newOrderDto) throws ParseException
 	{
+		logger.info("Creating New Supply Order with DTO: {}",newOrderDto);
+
 		//we can do this in one line as java passes primitives by value but objects be reference in memory
 		//but if object copy is set to null original remains the same
 		if (newOrderDto.getUnits() > 0)
@@ -82,13 +84,18 @@ public class ServInventoryOrder
 			Optional<ResInventoryItem> itemOptional = repoInventoryItem.findById(newOrderDto.getItemCode());
 			if (itemOptional.isPresent() == false)
 			{
+				logger.warn("item #{} not found",newOrderDto.getItemCode());
+
 				return null;
 			}
 			ResInventoryItem item = itemOptional.get();
+			logger.info("Using item: {}",item);
 
 			int availableUnits = item.getAvailableUnits();
+
+			logger.info("Adding {} units to {} from item #{}",newOrderDto.getUnits(),item.getAvailableUnits(),item.getCode());
 			item.setAvailableUnits(availableUnits + newOrderDto.getUnits());
-			item.addExpiryDateCount(newOrderDto.getOrderDate(), newOrderDto.getUnits());
+			item.addExpiryDateCount(newOrderDto.getItemExpiryDate(), newOrderDto.getUnits());
 			repoInventoryItem.save(item);
 			return repoInventoryOrder.save(InventoryOrderMapper.mapNewInventoryOrderDtoToDao(newOrderDto));
 		}
@@ -97,21 +104,29 @@ public class ServInventoryOrder
 
 	public ResInventoryOrder addNewSellOrder(NewInventoryOrderDto newOrderDto) throws ParseException
 	{
+		logger.info("Creating New Sell Order with DTO: {}",newOrderDto);
+
 		Optional<ResInventoryItem> itemOptional = repoInventoryItem.findById(newOrderDto.getItemCode());
 		if (itemOptional.isPresent() == false)
 		{
+			logger.warn("item #{} not found",newOrderDto.getItemCode());
 			return null;
 		}
+
 		ResInventoryItem item = itemOptional.get();
+		logger.info("Using item: {}",item);
+
 		int availableUnits = item.getAvailableUnits();
 
 		if (newOrderDto.getUnits() > availableUnits)
 		{
+			logger.warn("Failed Trying to sell {} units less than available {} units",newOrderDto.getUnits(),availableUnits);
 			return null;
 		}
 
+		logger.info("Deducting {} units from {} from item #{}",newOrderDto.getUnits(),item.getAvailableUnits(),item.getCode());
 		item.setAvailableUnits(availableUnits - newOrderDto.getUnits());
-		item.deductExpiryDateCount(newOrderDto.getOrderDate(), newOrderDto.getUnits());
+		item.deductExpiryDateCountOldest(newOrderDto.getUnits());
 		repoInventoryItem.save(item);
 		return repoInventoryOrder.save(InventoryOrderMapper.mapNewInventoryOrderDtoToDao(newOrderDto));
 
@@ -119,15 +134,20 @@ public class ServInventoryOrder
 
 	public boolean reverseOrder(long code) throws ParseException
 	{
+
 		Optional<ResInventoryOrder> orderOptional = repoInventoryOrder.findById(code);
 		if (orderOptional.isPresent() == false)
 		{
+			logger.warn("order #{} not found",code);
 			return false;
 		}
 		ResInventoryOrder order = orderOptional.get();
 
+		logger.info("Reversing {} Order #{}",order.getType(),code);
+
 		if (order.getType().equals(EnumInventoryOrderType.SUPPLY))
 		{
+
 			ResInventoryItem item = order.getItem();
 
 			int availableUnits = item.getAvailableUnits();
@@ -137,9 +157,15 @@ public class ServInventoryOrder
 				logger.error("Available units less than reversal amount !");
 				return false;
 			}
+			logger.info("Deducting {} units of {} from item #{}",order.getUnits(),availableUnits,item.getCode());
 
 			item.setAvailableUnits(availableUnits - order.getUnits());
-			item.deductExpiryDateCount(order.getOrderDate(), order.getUnits());
+			boolean isDeducted = item.deductExpiryDateCountFromDate(order.getOrderDate(), order.getUnits());
+			if(!isDeducted){
+				logger.info("Deduction Failed");
+				return false;
+			}
+			logger.info("Deducted");
 			order.setCancelled(true);
 			repoInventoryOrder.save(order);
 			repoInventoryItem.save(item);
@@ -148,6 +174,8 @@ public class ServInventoryOrder
 		else if (order.getType().equals(EnumInventoryOrderType.SELL))
 		{
 			ResInventoryItem item = order.getItem();
+
+			logger.info("Adding {} units to {} from item #{}",order.getUnits(),item.getAvailableUnits(),item.getCode());
 			item.setAvailableUnits(item.getAvailableUnits() + order.getUnits());
 			item.addExpiryDateCount(order.getOrderDate(), order.getUnits());
 			order.setCancelled(true);
