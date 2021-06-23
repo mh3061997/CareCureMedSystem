@@ -1,6 +1,6 @@
 package com.carecure.medsysten.repositories;
 
-import com.carecure.medsysten.projections.ProjInventoryItemNameAndCode;
+import com.carecure.medsysten.projections.ProjInventoryItemLookup;
 import com.carecure.medsysten.resources.ResInventoryItem;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,7 +21,7 @@ public interface RepoInventoryItem extends PagingAndSortingRepository<ResInvento
 	@Query(value = "select * from ResInventoryItem item  where  item.category = ?1", nativeQuery = true)
 	Page<ResInventoryItem> findAllByCategory(String category, Pageable pageable);
 
-	@Query(value = "select name,code from ResInventoryItem item  where  item.category = ?1", nativeQuery = true)
-	List<ProjInventoryItemNameAndCode> findAllByCategoryLookup(String category);
+	@Query(value = "select name,code,sellingPrice from ResInventoryItem item  where  item.category = ?1", nativeQuery = true)
+	List<ProjInventoryItemLookup> findAllByCategoryLookup(String category);
 
 }
