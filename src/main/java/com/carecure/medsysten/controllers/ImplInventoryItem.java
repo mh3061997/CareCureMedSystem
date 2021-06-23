@@ -3,7 +3,7 @@ package com.carecure.medsysten.controllers;
 import com.carecure.medsysten.dtos.NewInventoryItemDto;
 import com.carecure.medsysten.enums.EnumInventoryItemCategory;
 import com.carecure.medsysten.interfaces.ContIntInventoryItem;
-import com.carecure.medsysten.projections.ProjInventoryItemNameAndCode;
+import com.carecure.medsysten.projections.ProjInventoryItemLookup;
 import com.carecure.medsysten.resources.ResInventoryItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +39,7 @@ public class ImplInventoryItem implements ContIntInventoryItem
 	}
 
 	@Override
-	public List<ProjInventoryItemNameAndCode> getItemsByCategoryLookup(EnumInventoryItemCategory category)
+	public List<ProjInventoryItemLookup> getItemsByCategoryLookup(EnumInventoryItemCategory category)
 	{
 		return servInventoryItem.getItemsByCategoryLookup(category);
 	}

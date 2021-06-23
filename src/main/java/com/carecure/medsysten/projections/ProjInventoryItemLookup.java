@@ -1,7 +1,8 @@
 package com.carecure.medsysten.projections;
 
-public interface ProjInventoryItemNameAndCode
+public interface ProjInventoryItemLookup
 {
 	Long getCode();
 	String getName();
+	int getSellingPrice();
 }

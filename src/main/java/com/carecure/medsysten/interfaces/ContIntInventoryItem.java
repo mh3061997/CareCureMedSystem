@@ -2,7 +2,7 @@ package com.carecure.medsysten.interfaces;
 
 import com.carecure.medsysten.dtos.NewInventoryItemDto;
 import com.carecure.medsysten.enums.EnumInventoryItemCategory;
-import com.carecure.medsysten.projections.ProjInventoryItemNameAndCode;
+import com.carecure.medsysten.projections.ProjInventoryItemLookup;
 import io.swagger.annotations.Api;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,7 +21,7 @@ public interface ContIntInventoryItem
 			@RequestParam String sortDirection, @RequestParam(required = false) EnumInventoryItemCategory category);
 
 	@RequestMapping(method = RequestMethod.GET,value = "/lookup")
-	List<ProjInventoryItemNameAndCode> getItemsByCategoryLookup(@RequestParam EnumInventoryItemCategory category);
+	List<ProjInventoryItemLookup> getItemsByCategoryLookup(@RequestParam EnumInventoryItemCategory category);
 
 	@RequestMapping(method = RequestMethod.PUT)
 	void updateInventoryItemSellingPrice(@RequestParam long code, @RequestParam int updatedSellingPrice);

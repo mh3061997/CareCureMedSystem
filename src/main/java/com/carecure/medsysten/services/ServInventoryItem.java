@@ -2,7 +2,7 @@ package com.carecure.medsysten.services;
 
 import com.carecure.medsysten.dtos.NewInventoryItemDto;
 import com.carecure.medsysten.enums.EnumInventoryItemCategory;
-import com.carecure.medsysten.projections.ProjInventoryItemNameAndCode;
+import com.carecure.medsysten.projections.ProjInventoryItemLookup;
 import com.carecure.medsysten.repositories.RepoInventoryItem;
 import com.carecure.medsysten.resources.ResInventoryItem;
 import com.carecure.medsysten.utils.PaginationUtil;
@@ -39,7 +39,7 @@ public class ServInventoryItem
 
 	}
 
-	public List<ProjInventoryItemNameAndCode> getItemsByCategoryLookup(EnumInventoryItemCategory category){
+	public List<ProjInventoryItemLookup> getItemsByCategoryLookup(EnumInventoryItemCategory category){
 		return repoInventoryItem.findAllByCategoryLookup(category.toString());
 	}
 	public void updateInventoryItemSellingPrice(long code, int updatedSellingPrice)
@@ -52,10 +52,5 @@ public class ServInventoryItem
 		repoInventoryItem.save(InventoryItemMapper.mapNewInventoryItemDtoToDao(newItem));
 	}
 
-	public long getAllItemsCount()
-	{
-		long count = repoInventoryItem.count();
-		logger.info("Getting Inventory Items count: {}", count);
-		return count;
-	}
+
 }
