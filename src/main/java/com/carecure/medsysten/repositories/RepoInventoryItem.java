@@ -21,7 +21,7 @@ public interface RepoInventoryItem extends PagingAndSortingRepository<ResInvento
 	@Query(value = "select * from ResInventoryItem item  where  item.category = ?1", nativeQuery = true)
 	Page<ResInventoryItem> findAllByCategory(String category, Pageable pageable);
 
-	@Query(value = "select name,code,sellingPrice,availableUnits from ResInventoryItem item  where  item.category = ?1", nativeQuery = true)
+	@Query(value = "select name,code,sellingPrice,availableUnits from ResInventoryItem item  where  item.category = ?1 and item.availableUnits > 0", nativeQuery = true)
 	List<ProjInventoryItemLookup> findAllByCategoryLookup(String category);
 
 }
