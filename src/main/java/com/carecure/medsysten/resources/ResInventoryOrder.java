@@ -36,6 +36,6 @@ public class ResInventoryOrder
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "itemCode",referencedColumnName = "code",nullable = false)
 	private ResInventoryItem item;
-
+	private String note;
 
 }

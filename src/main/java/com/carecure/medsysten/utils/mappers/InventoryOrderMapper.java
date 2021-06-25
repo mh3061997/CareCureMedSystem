@@ -21,7 +21,7 @@ public class InventoryOrderMapper
 		orderDao.setType(orderDto.getType());
 		orderDao.setUserMadeBy(orderDto.getUserMadeBy());
 		orderDao.setUnits(orderDto.getUnits());
-
+		orderDao.setNote(orderDto.getNote());
 		return  orderDao;
 	}
 }

@@ -16,4 +16,5 @@ public class NewInventoryOrderDto
 	private EnumInventoryOrderType type;
 	private String userMadeBy;
 	private long itemCode;
+	private String note;
 }
