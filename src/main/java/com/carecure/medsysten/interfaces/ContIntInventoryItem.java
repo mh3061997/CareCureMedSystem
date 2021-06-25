@@ -1,6 +1,6 @@
 package com.carecure.medsysten.interfaces;
 
-import com.carecure.medsysten.dtos.NewInventoryItemDto;
+import com.carecure.medsysten.dtos.inventory.item.NewInventoryItemDto;
 import com.carecure.medsysten.enums.EnumInventoryItemCategory;
 import com.carecure.medsysten.projections.ProjInventoryItemLookup;
 import io.swagger.annotations.Api;
