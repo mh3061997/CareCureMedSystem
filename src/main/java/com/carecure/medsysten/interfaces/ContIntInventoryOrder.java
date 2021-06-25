@@ -1,7 +1,7 @@
 package com.carecure.medsysten.interfaces;
 
-import com.carecure.medsysten.dtos.NewInventoryOrderDto;
-import com.carecure.medsysten.enums.EnumInventoryOrderType;
+import com.carecure.medsysten.dtos.inventory.order.NewInventoryOrderDto;
+import com.carecure.medsysten.enums.Inventory.EnumInventoryOrderType;
 import com.carecure.medsysten.resources.ResInventoryOrder;
 import io.swagger.annotations.Api;
 import org.springframework.http.ResponseEntity;
