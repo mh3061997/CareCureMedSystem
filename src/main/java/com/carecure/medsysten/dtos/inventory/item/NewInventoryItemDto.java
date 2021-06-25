@@ -1,12 +1,12 @@
-package com.carecure.medsysten.dtos.inventory.item;
+package com.carecure.medsysten.dtos;
 
-import com.carecure.medsysten.enums.Inventory.enumInventoryItemCategory;
+import com.carecure.medsysten.enums.EnumInventoryItemCategory;
 import lombok.Data;
 
 @Data
 public class NewInventoryItemDto
 {
 	private String name;
-	private enumInventoryItemCategory category;
+	private EnumInventoryItemCategory category;
 	private int sellingPrice;
 }
