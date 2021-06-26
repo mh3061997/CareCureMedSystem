@@ -1,8 +1,5 @@
 package com.carecure.medsysten.dtos.appointment;
 
-import com.carecure.medsysten.enums.appointment.EnumAppointmentStatus;
-import com.carecure.medsysten.enums.appointment.EnumAppointmentType;
-import com.carecure.medsysten.enums.misc.EnumSpeciality;
 import lombok.Data;
 
 import java.util.Date;
@@ -11,15 +8,16 @@ import java.util.Date;
 public class GetAppointmentSimpleDto
 {
 	private long code;
-	private EnumSpeciality speciality;
+	private String speciality;
 	private Date dateCreated;
 	private Date dateToVisit;
-	private EnumAppointmentType type;
-	private EnumAppointmentStatus status;
+	private String type;
+	private String status;
 	private String notes;
-	private String userLoggerName;
 	private long patientCode;
 	private String patientName;
+	private long doctorCode;
 	private String doctorName;
+	private String userLoggerName;
 
 }
