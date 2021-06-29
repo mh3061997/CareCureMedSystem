@@ -1,10 +1,6 @@
 package com.carecure.medsysten.resources;
 
-
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -30,12 +26,12 @@ public class resAppointment {
     private String notes;
     private String userLoggerName;
     //@JsonManagedReference
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "doctorCode")
     private resDoctor doctor;
 
     //@JsonManagedReference
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "patientCode")
     private resPatient patient;
 
