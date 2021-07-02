@@ -1,6 +1,5 @@
 package com.carecure.medsysten.repositories;
 
-import com.carecure.medsysten.resources.reports.ReportResponse;
 import org.hibernate.query.internal.NativeQueryImpl;
 import org.hibernate.transform.AliasToEntityMapResultTransformer;
 import org.springframework.stereotype.Repository;
@@ -18,8 +17,6 @@ public class RepoReports
 	public EntityManager entityManager;
 
 	public List<?> getMonthSpecialitiesIncome() {
-
-		ReportResponse itemResponse=new ReportResponse();
 
 		String queryString = "select speciality,DATE_FORMAT(resinvoice.dateFinalized, '01-%m-%Y') as Date ,sum(totalAfterDiscount) as Total\n"
 				+ "from resinvoice\n" + "inner join resappointment r on resinvoice.appointmentCode = r.code\n"
