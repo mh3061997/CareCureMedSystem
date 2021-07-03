@@ -18,7 +18,7 @@ public class RepoReports
 
 	public List<?> getMonthSpecialitiesIncome() {
 
-		String queryString = "select speciality,DATE_FORMAT(resinvoice.dateFinalized, '01-%m-%Y') as Date ,sum(totalAfterDiscount) as Total\n"
+		String queryString = "select speciality,DATE_FORMAT(resinvoice.dateFinalized, '%m-01-%Y') as date ,sum(totalAfterDiscount) as total\n"
 				+ "from resinvoice\n" + "inner join resappointment r on resinvoice.appointmentCode = r.code\n"
 				+ "group by speciality,DATE_FORMAT(resinvoice.dateFinalized, '%m-%Y')\n"
 				+ "order by speciality,YEAR(resinvoice.dateFinalized),MONTH(resinvoice.dateFinalized);";

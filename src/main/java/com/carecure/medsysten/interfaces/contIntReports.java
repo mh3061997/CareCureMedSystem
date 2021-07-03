@@ -10,6 +10,6 @@ import java.util.List;
 @Api(tags = "Reports")
 public interface contIntReports
 {
-	@RequestMapping(method = RequestMethod.GET,value = "monthlySpecialitiesIncome")
+	@RequestMapping(method = RequestMethod.GET,value = "/monthlySpecialitiesIncome")
 	public List<?> getMonthlySpecialitiesIncome();
 }
