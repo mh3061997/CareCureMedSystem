@@ -5,7 +5,7 @@ import com.carecure.medsysten.services.ServReports;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import java.util.HashMap;
 
 @RestController
 public class implReports implements contIntReports
@@ -14,8 +14,8 @@ public class implReports implements contIntReports
 	ServReports servReports;
 
 	@Override
-	public List<?> getMonthlySpecialitiesIncome()
+	public HashMap getReports()
 	{
-		return servReports.getMonthlySpecialityIncomeReport();
+		return servReports.getReports();
 	}
 }
