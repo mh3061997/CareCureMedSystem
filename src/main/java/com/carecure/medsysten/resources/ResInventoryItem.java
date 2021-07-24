@@ -21,6 +21,7 @@ import java.util.Map;
 @Entity
 @JsonIgnoreProperties("hibernateLazyInitializer")
 @ToString
+@Table(name = "resinventoryitem")
 public class ResInventoryItem
 {
 	private static final Logger logger = LoggerFactory.getLogger(ServInventoryOrder.class.getName());

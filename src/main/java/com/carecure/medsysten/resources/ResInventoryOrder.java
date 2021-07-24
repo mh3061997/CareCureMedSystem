@@ -16,6 +16,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Entity
 @JsonIgnoreProperties("hibernateLazyInitializer")
+@Table(name = "resinventoryorder")
 public class ResInventoryOrder
 {
 	@Id
