@@ -1,10 +1,8 @@
 package com.carecure.medsysten.dtos.appointment;
 
 import com.carecure.medsysten.dtos.doctor.GetDoctorSimpleDto;
+import com.carecure.medsysten.dtos.invoice.GetInvoiceSimpleDto;
 import com.carecure.medsysten.dtos.patient.GetPatientSimpleDto;
-import com.carecure.medsysten.enums.appointment.EnumAppointmentStatus;
-import com.carecure.medsysten.enums.appointment.EnumAppointmentType;
-import com.carecure.medsysten.enums.misc.EnumSpeciality;
 import com.carecure.medsysten.resources.resNoteAppointment;
 import lombok.Data;
 
@@ -15,16 +13,16 @@ import java.util.List;
 public class GetAppointmentFullDto
 {
 	private long code;
-	private EnumSpeciality speciality;
+	private String speciality;
 	private Date dateCreated;
 	private Date dateToVisit;
-	private EnumAppointmentStatus status;
-	private EnumAppointmentType type;
+	private String status;
+	private String type;
 	private String creationNote;
 	private String userCreatedBy;
 	private GetDoctorSimpleDto doctor;
 	private GetPatientSimpleDto patient;
 	private List<resNoteAppointment> doctorNotes;
-
-
+	private String notes;
+	private GetInvoiceSimpleDto invoice;
 }

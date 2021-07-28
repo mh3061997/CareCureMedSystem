@@ -1,8 +1,5 @@
 package com.carecure.medsysten.dtos.invoice;
 
-import com.carecure.medsysten.dtos.membership.GetMembershipSimpleDto;
-import com.carecure.medsysten.enums.invoice.EnumInvoiceStatus;
-import com.carecure.medsysten.enums.misc.EnumPaymentMethod;
 import lombok.Data;
 
 import java.util.Date;
@@ -13,12 +10,14 @@ public class GetInvoiceSimpleDto
 	private long code;
 	private Date dateCreated;
 	private Date dateFinalized;
+	private long totalDue;
+	private long totalAfterDiscount;
 	private long totalPaid;
-	private EnumInvoiceStatus status;
+	private long totalRemaining;
+	private String status;
 	private int discount;
 	private String userFinalizedBy;
 	private long appointmentCode;
-	private EnumPaymentMethod paymentMethod;
-	private GetMembershipSimpleDto usedMembership;
+	private String paymentMethod;
 	private String patientName;
 }

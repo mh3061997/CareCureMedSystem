@@ -1,7 +1,5 @@
 package com.carecure.medsysten.dtos.doctor;
 
-import com.carecure.medsysten.enums.misc.EnumGender;
-import com.carecure.medsysten.enums.misc.EnumSpeciality;
 import lombok.Data;
 
 @Data
@@ -11,9 +9,9 @@ public class GetDoctorSimpleDto
 	private String name;
 	private String mobile;
 	private String email;
-	private EnumGender gender;
+	private String gender;
 	private int age;
-	private EnumSpeciality speciality;
+	private String speciality;
 	private int priceVisit;
 	private int priceRevisit;
 }

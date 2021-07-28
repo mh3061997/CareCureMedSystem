@@ -16,6 +16,7 @@ public class GetAppointmentSimpleDto
 	private String notes;
 	private long patientCode;
 	private String patientName;
+	private String patientMobile;
 	private long doctorCode;
 	private String doctorName;
 	private String userLoggerName;
