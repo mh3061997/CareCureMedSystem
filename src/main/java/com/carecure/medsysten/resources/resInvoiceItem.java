@@ -18,7 +18,7 @@ public class resInvoiceItem {
     private int price;
 
     @JsonBackReference
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "invoiceCode")
     private resInvoice invoice;
 

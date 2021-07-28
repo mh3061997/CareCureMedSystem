@@ -22,11 +22,11 @@ public class resPackageMembership{
     private long usedAmount;
     private long remainingAmount;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "patientCode")
     private resPatient patient;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "packageCode")
     private resPackageBase packageBase;
 

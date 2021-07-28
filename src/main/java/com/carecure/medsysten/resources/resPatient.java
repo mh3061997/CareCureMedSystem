@@ -22,20 +22,20 @@ public class resPatient {
     private int age;
     private long totalDebt;
     private String notes;
-    @OneToMany(fetch = FetchType.EAGER,mappedBy = "patientMembershipSubscriber")
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "patientMembershipSubscriber")
     List<resInvoice> invoiceMemberships;
 
-    @OneToMany(fetch = FetchType.EAGER,mappedBy = "patient")
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "patient")
     List<resPackageMembership> memberships;
 
-    @OneToMany(fetch = FetchType.EAGER,mappedBy = "patient")
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "patient")
     List<resAppointment> appointments;
 
-    @OneToMany(fetch = FetchType.EAGER,mappedBy = "patient")
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "patient")
     List<resMedImage> medImages;
 
     @JsonIgnore
-    @OneToOne(fetch = FetchType.EAGER ,mappedBy = "patient")
+    @OneToOne(fetch = FetchType.LAZY ,mappedBy = "patient")
     private UserDao user;
 
     public List<resInvoice> getInvoiceMemberships()

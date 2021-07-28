@@ -30,14 +30,14 @@ public class resDoctor {
     private int priceRevisit;
 
     //@JsonBackReference
-    @OneToMany(fetch = FetchType.EAGER,mappedBy = "doctor")
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "doctor")
     List<resAppointment> appointments;
 
-    @OneToMany(fetch=FetchType.EAGER,mappedBy="doctor")
+    @OneToMany(fetch=FetchType.LAZY,mappedBy="doctor")
     List<resDoctorDayAvail> availableDays;
 
     @JsonIgnore
-    @OneToOne(fetch = FetchType.EAGER ,mappedBy = "doctor")
+    @OneToOne(fetch = FetchType.LAZY ,mappedBy = "doctor")
     private UserDao user;
 
     public UserDao getUser() {

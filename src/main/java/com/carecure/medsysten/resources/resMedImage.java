@@ -37,7 +37,7 @@ public class resMedImage {
         this.dateMade = dateMade;
     }
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "patientCode")
    @JsonBackReference //never will i access medimages directly to keep controller clean
     private resPatient patient;
