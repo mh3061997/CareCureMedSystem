@@ -1,5 +1,6 @@
 package com.carecure.medsysten.utils.mappers;
 
+import com.carecure.medsysten.dtos.appointment.GetAppointmentFullDto;
 import com.carecure.medsysten.dtos.appointment.GetAppointmentSimpleDto;
 import com.carecure.medsysten.resources.resAppointment;
 import org.modelmapper.ModelMapper;
@@ -30,4 +31,7 @@ public class AppointmentMapper
 
 	}
 
+	public GetAppointmentFullDto mapAppointmentDaoToFullDto(resAppointment dao){
+		return mapper.map(dao, GetAppointmentFullDto.class);
+	}
 }
