@@ -1,6 +1,7 @@
 package com.carecure.medsysten.resources;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -9,6 +10,7 @@ import java.util.List;
 @Entity
 @Table(name="resappointment")
 @JsonIgnoreProperties("hibernateLazyInitializer")
+@ToString
 public class resAppointment {
 
     @Id
@@ -35,9 +37,9 @@ public class resAppointment {
     @JoinColumn(name = "patientCode")
     private resPatient patient;
 
-    @OneToMany(fetch=FetchType.LAZY,mappedBy = "appointment")
+    @OneToMany(fetch=FetchType.EAGER,mappedBy = "appointment")
     private List<resNoteAppointment> doctorNotes;
-    @OneToOne(fetch = FetchType.LAZY,mappedBy = "appointment")
+    @OneToOne(fetch = FetchType.EAGER,mappedBy = "appointment")
     private resInvoice invoice;
 
     public String getUserLoggerName()

@@ -2,12 +2,14 @@ package com.carecure.medsysten.resources;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.ToString;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name="resnoteappointment")
 @JsonIgnoreProperties("hibernateLazyInitializer")
+@ToString
 public class resNoteAppointment {
 
     @Id
@@ -52,5 +54,11 @@ public class resNoteAppointment {
         this.code = code;
         this.note = note;
         this.appointment = appointment;
+    }
+
+    @Override
+    public boolean equals(Object obj){
+        resNoteAppointment note = (resNoteAppointment) obj;
+        return note.getNote().equals(this.getNote()) && note.getCode() == this.getCode();
     }
 }
