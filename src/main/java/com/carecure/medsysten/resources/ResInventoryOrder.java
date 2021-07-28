@@ -33,7 +33,7 @@ public class ResInventoryOrder
 	private EnumInventoryOrderType type;
 	private String userMadeBy;
 	private boolean isCancelled;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "itemCode",referencedColumnName = "code",nullable = false)
 	private ResInventoryItem item;
 	private String note;

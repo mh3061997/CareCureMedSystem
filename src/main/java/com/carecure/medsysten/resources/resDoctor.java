@@ -1,8 +1,6 @@
 package com.carecure.medsysten.resources;
 
 import com.carecure.medsysten.security.models.UserDao;
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -32,14 +30,14 @@ public class resDoctor {
     private int priceRevisit;
 
     //@JsonBackReference
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "doctor")
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "doctor")
     List<resAppointment> appointments;
 
-    @OneToMany(fetch=FetchType.LAZY,mappedBy="doctor")
+    @OneToMany(fetch=FetchType.EAGER,mappedBy="doctor")
     List<resDoctorDayAvail> availableDays;
 
     @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY ,mappedBy = "doctor")
+    @OneToOne(fetch = FetchType.EAGER ,mappedBy = "doctor")
     private UserDao user;
 
     public UserDao getUser() {

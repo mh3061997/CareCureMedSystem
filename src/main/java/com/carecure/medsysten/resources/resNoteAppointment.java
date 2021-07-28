@@ -18,7 +18,7 @@ public class resNoteAppointment {
 
     private String note;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "appointmentCode")
     @JsonBackReference
     private resAppointment appointment;

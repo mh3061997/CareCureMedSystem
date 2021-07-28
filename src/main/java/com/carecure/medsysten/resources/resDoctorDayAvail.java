@@ -21,7 +21,7 @@ public class resDoctorDayAvail {
     private String endTimeMinute;
     private String endTimeAMPM;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "doctorCode")
     @JsonBackReference
     private resDoctor doctor;

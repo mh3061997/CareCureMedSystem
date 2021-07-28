@@ -37,17 +37,17 @@ public class resInvoice {
 
     private String userFinalizedBy;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "appointmentCode")
     private resAppointment appointment;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "invoice")
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "invoice")
     private List<resInvoiceItem> invoiceItems;
 
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.EAGER)
     private resPackageMembership   usedMembership;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "patientMembershipSubscriberCode")
     private resPatient patientMembershipSubscriber;
 

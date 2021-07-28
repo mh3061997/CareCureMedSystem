@@ -29,7 +29,7 @@ public class resPackageBase {
     private long unitTotal;
     private String type;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "packageBase")
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "packageBase")
     private List<resPackageMembership> memberships;
 
     public long getCode() {

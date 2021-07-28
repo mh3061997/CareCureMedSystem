@@ -1,8 +1,6 @@
 package com.carecure.medsysten.resources;
 
 import com.carecure.medsysten.security.models.UserDao;
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -24,20 +22,20 @@ public class resPatient {
     private int age;
     private long totalDebt;
     private String notes;
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "patientMembershipSubscriber")
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "patientMembershipSubscriber")
     List<resInvoice> invoiceMemberships;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "patient")
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "patient")
     List<resPackageMembership> memberships;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "patient")
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "patient")
     List<resAppointment> appointments;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "patient")
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "patient")
     List<resMedImage> medImages;
 
     @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY ,mappedBy = "patient")
+    @OneToOne(fetch = FetchType.EAGER ,mappedBy = "patient")
     private UserDao user;
 
     public List<resInvoice> getInvoiceMemberships()
