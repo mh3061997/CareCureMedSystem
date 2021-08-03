@@ -1,10 +1,10 @@
 package com.carecure.medsysten.resources;
 
 import com.carecure.medsysten.security.models.UserDao;
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
@@ -12,7 +12,8 @@ import java.util.List;
 @Entity
 @Table(name="respatient")
 @JsonIgnoreProperties("hibernateLazyInitializer")
-
+@Data
+@NoArgsConstructor
 public class resPatient {
     @Id
     @GeneratedValue( strategy= GenerationType.IDENTITY )

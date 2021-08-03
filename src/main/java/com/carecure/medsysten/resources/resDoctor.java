@@ -1,10 +1,10 @@
 package com.carecure.medsysten.resources;
 
 import com.carecure.medsysten.security.models.UserDao;
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
@@ -13,7 +13,8 @@ import java.util.List;
 @Table(name="resdoctor")
 
 @JsonIgnoreProperties("hibernateLazyInitializer")
-
+@Data
+@NoArgsConstructor
 public class resDoctor {
 
     @Id
@@ -41,128 +42,6 @@ public class resDoctor {
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY ,mappedBy = "doctor")
     private UserDao user;
-
-    public UserDao getUser() {
-        return user;
-    }
-
-    public void setUser(UserDao user) {
-        this.user = user;
-    }
-
-    public resDoctor(long code, String name, String mobile, String email, String gender, int age, String speciality, int priceVisit, int priceRevisit, List<resAppointment> appointments, List<resDoctorDayAvail> availableDays, UserDao user) {
-        this.code = code;
-        this.name = name;
-        this.mobile = mobile;
-        this.email = email;
-        this.gender = gender;
-        this.age = age;
-        this.speciality = speciality;
-        this.priceVisit = priceVisit;
-        this.priceRevisit = priceRevisit;
-        this.appointments = appointments;
-        this.availableDays = availableDays;
-        this.user = user;
-    }
-
-    public List<resDoctorDayAvail> getAvailableDays() {
-        return availableDays;
-    }
-
-    public void setAvailableDays(List<resDoctorDayAvail> availableDays) {
-        this.availableDays = availableDays;
-    }
-
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
-
-    public int getPriceVisit() {
-        return priceVisit;
-    }
-
-    public void setPriceVisit(int priceVisit) {
-        this.priceVisit = priceVisit;
-    }
-
-    public int getPriceRevisit() {
-        return priceRevisit;
-    }
-
-    public void setPriceRevisit(int priceRevisit) {
-        this.priceRevisit = priceRevisit;
-    }
-
-    public List<resAppointment> getAppointments() {
-        return appointments;
-    }
-
-    public void setAppointments(List<resAppointment> appointments) {
-        this.appointments = appointments;
-    }
-
-    public long getCode() {
-        return code;
-    }
-
-    public void setCode(long code) {
-        this.code = code;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getGender() {
-        return this.gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public String getSpeciality() {
-        return this.speciality;
-    }
-
-    public void setSpeciality(String speciality) {
-        this.speciality = speciality;
-    }
-
-
-
-    public resDoctor() {
-    }
-
-    //appointments;
-
-    //upcoming appointements
-
-    //days available
 
 
 }
