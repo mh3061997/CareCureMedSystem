@@ -114,8 +114,8 @@ public class implInvoice implements contIntInvoice
 				packageBase.setMemberships(new ArrayList<>());
 				invoice.setUsedMembership(membership);
 			}
-			invoice.setUsedMembership(null);
-			invoice.setAppointment(null);
+
+
 
 			resPatient patient = invoice.getPatientMembershipSubscriber();
 			if (patient != null)
