@@ -5,197 +5,205 @@ import com.carecure.medsysten.interfaces.contIntInvoice;
 import com.carecure.medsysten.resources.*;
 import com.carecure.medsysten.services.servInvoice;
 import com.lowagie.text.DocumentException;
-import freemarker.template.Configuration;
 import freemarker.template.TemplateException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
-import javax.mail.MessagingException;
-import java.io.*;
-import java.util.*;
-import org.springframework.mail.javamail.JavaMailSender;
 
+import javax.mail.MessagingException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @CrossOrigin
 @RestController
 
-public class implInvoice implements contIntInvoice {
+public class implInvoice implements contIntInvoice
+{
 
-    @Autowired
-    private servInvoice servInvoice;
+	@Autowired
+	private servInvoice servInvoice;
 
-    @Autowired
-    private servEmail servEmail;
+	@Autowired
+	private servEmail servEmail;
 
+	@Override
+	public List<resInvoice> getInvoiceAll()
+	{
+		List<resInvoice> jsonInvoice = new ArrayList<>();
+		servInvoice.getInvoiceAll().forEach(invoice -> {
 
-    @Override
-    public List<resInvoice> getInvoiceAll() {
-        List<resInvoice> jsonInvoice = new ArrayList<>();
-        servInvoice.getInvoiceAll().forEach(invoice -> {
+			resAppointment appointment = invoice.getAppointment();
+			if (appointment != null)
+			{
+				resDoctor doctor = appointment.getDoctor();
+				doctor.setAppointments(new ArrayList<>());
+				doctor.setAvailableDays(new ArrayList<>());
+				appointment.setDoctor(doctor);
 
+				resPatient patient = appointment.getPatient();
+				patient.setMemberships(new ArrayList<>());
+				patient.setAppointments(new ArrayList<>());
+				patient.setMedImages(new ArrayList<>());
+				patient.setInvoiceMemberships(new ArrayList<>());
+				appointment.setPatient(patient);
+				appointment.setInvoice(null);
+				invoice.setAppointment(appointment);
+			}
 
-            resAppointment appointment = invoice.getAppointment();
-            if (appointment != null) {
-                resDoctor doctor = appointment.getDoctor();
-                doctor.setAppointments(new ArrayList<>());
-                doctor.setAvailableDays(new ArrayList<>());
-                appointment.setDoctor(doctor);
+			resPackageMembership membership = invoice.getUsedMembership();
+			if (membership != null)
+			{
 
-                resPatient patient = appointment.getPatient();
-                patient.setMemberships(new ArrayList<>());
-                patient.setAppointments(new ArrayList<>());
-                patient.setMedImages(new ArrayList<>());
-                patient.setInvoiceMemberships(new ArrayList<>());
-                appointment.setPatient(patient);
-                appointment.setInvoice(null);
-                invoice.setAppointment(appointment);
-            }
+				membership.setPatient(null);
 
-            resPackageMembership membership = invoice.getUsedMembership();
-            if (membership != null) {
+				resPackageBase packageBase = membership.getPackageBase();
+				packageBase.setMemberships(new ArrayList<>());
+				invoice.setUsedMembership(membership);
+			}
 
-                membership.setPatient(null);
+			resPatient patient = invoice.getPatientMembershipSubscriber();
+			if (patient != null)
+			{
+				patient.setInvoiceMemberships(new ArrayList<>());
+				patient.setMedImages(null);
+				patient.setAppointments(null);
+				patient.setMemberships(null);
+				invoice.setPatientMembershipSubscriber(patient);
 
+			}
 
-                resPackageBase packageBase = membership.getPackageBase();
-                packageBase.setMemberships(new ArrayList<>());
-                invoice.setUsedMembership(membership);
-            }
+			jsonInvoice.add(invoice);
+		});
 
+		return jsonInvoice;
 
-            resPatient patient = invoice.getPatientMembershipSubscriber();
-            if(patient !=null) {
-                patient.setInvoiceMemberships(new ArrayList<>());
-                patient.setMedImages(null);
-                patient.setAppointments(null);
-                patient.setMemberships(null);
-                invoice.setPatientMembershipSubscriber(patient);
+	}
 
-            }
+	@Override
+	public List<resInvoice> getInvoicesByDate(String date)
+	{
+		List<resInvoice> jsonInvoice = new ArrayList<>();
+		servInvoice.getInvoicesByDate(date).forEach(invoice -> {
 
-            jsonInvoice.add(invoice);
-        });
+			resAppointment appointment = invoice.getAppointment();
+			if (appointment != null)
+			{
+				resDoctor doctor = appointment.getDoctor();
+				doctor.setAppointments(new ArrayList<>());
+				doctor.setAvailableDays(new ArrayList<>());
+				appointment.setDoctor(doctor);
 
-        return jsonInvoice;
+				resPatient patient = appointment.getPatient();
+				patient.setMemberships(new ArrayList<>());
+				patient.setAppointments(new ArrayList<>());
+				patient.setMedImages(new ArrayList<>());
+				patient.setInvoiceMemberships(new ArrayList<>());
+				appointment.setPatient(patient);
+				appointment.setInvoice(null);
+				invoice.setAppointment(appointment);
+			}
 
-    }
+			resPackageMembership membership = invoice.getUsedMembership();
+			if (membership != null)
+			{
 
-    @Override
-    public List<resInvoice> getInvoicesByDate(String date) {
-        List<resInvoice> jsonInvoice = new ArrayList<>();
-        servInvoice.getInvoicesByDate(date).forEach(invoice -> {
+				membership.setPatient(null);
 
+				resPackageBase packageBase = membership.getPackageBase();
+				packageBase.setMemberships(new ArrayList<>());
+				invoice.setUsedMembership(membership);
+			}
+			invoice.setUsedMembership(null);
+			invoice.setAppointment(null);
 
-            resAppointment appointment = invoice.getAppointment();
-            if (appointment != null) {
-                resDoctor doctor = appointment.getDoctor();
-                doctor.setAppointments(new ArrayList<>());
-                doctor.setAvailableDays(new ArrayList<>());
-                appointment.setDoctor(doctor);
+			resPatient patient = invoice.getPatientMembershipSubscriber();
+			if (patient != null)
+			{
+				patient.setInvoiceMemberships(new ArrayList<>());
+				patient.setMedImages(null);
+				patient.setAppointments(null);
+				patient.setMemberships(null);
+				invoice.setPatientMembershipSubscriber(patient);
 
-                resPatient patient = appointment.getPatient();
-                patient.setMemberships(new ArrayList<>());
-                patient.setAppointments(new ArrayList<>());
-                patient.setMedImages(new ArrayList<>());
-                patient.setInvoiceMemberships(new ArrayList<>());
-                appointment.setPatient(patient);
-                appointment.setInvoice(null);
-                invoice.setAppointment(appointment);
-            }
+			}
 
-            resPackageMembership membership = invoice.getUsedMembership();
-            if (membership != null) {
+			jsonInvoice.add(invoice);
+		});
 
-                membership.setPatient(null);
+		return jsonInvoice;
 
+	}
 
-                resPackageBase packageBase = membership.getPackageBase();
-                packageBase.setMemberships(new ArrayList<>());
-                invoice.setUsedMembership(membership);
-            }
-            invoice.setUsedMembership(null);
-            invoice.setAppointment(null);
+	@Override
+	public resInvoice getInvoiceById(long code)
+	{
 
+		resInvoice invoice = servInvoice.getInvoiceByCode(code);
+		resAppointment appointment = invoice.getAppointment();
+		if (appointment != null)
+		{
+			resDoctor doctor = appointment.getDoctor();
+			doctor.setAppointments(new ArrayList<>());
 
-            resPatient patient = invoice.getPatientMembershipSubscriber();
-            if(patient !=null) {
-                patient.setInvoiceMemberships(new ArrayList<>());
-                patient.setMedImages(null);
-                patient.setAppointments(null);
-                patient.setMemberships(null);
-                invoice.setPatientMembershipSubscriber(patient);
+			appointment.setDoctor(doctor);
 
-            }
+			resPatient patient = appointment.getPatient();
+			patient.setMemberships(new ArrayList<>());
+			patient.setAppointments(new ArrayList<>());
+			patient.setMedImages(new ArrayList<>());
+			patient.setInvoiceMemberships(new ArrayList<>());
+			appointment.setPatient(patient);
+			appointment.setInvoice(null);
+			invoice.setAppointment(appointment);
+		}
 
-            jsonInvoice.add(invoice);
-        });
+		resPackageMembership membership = invoice.getUsedMembership();
+		if (membership != null)
+		{
 
-        return jsonInvoice;
+			membership.setPatient(null);
 
-    }
+			resPackageBase packageBase = membership.getPackageBase();
+			packageBase.setMemberships(new ArrayList<>());
+			invoice.setUsedMembership(membership);
+		}
 
-    @Override
-    public resInvoice getInvoiceById(long code) {
+		resPatient patient = invoice.getPatientMembershipSubscriber();
+		if (patient != null)
+		{
+			patient.setInvoiceMemberships(new ArrayList<>());
+			patient.setMedImages(null);
+			patient.setAppointments(null);
+			patient.setMemberships(null);
+			invoice.setPatientMembershipSubscriber(patient);
+		}
 
-        resInvoice invoice = servInvoice.getInvoiceByCode(code);
-        resAppointment appointment = invoice.getAppointment();
-        if (appointment != null) {
-            resDoctor doctor = appointment.getDoctor();
-            doctor.setAppointments(new ArrayList<>());
+		return invoice;
+	}
 
-            appointment.setDoctor(doctor);
+	@Override
+	public resInvoice addInvoice(resInvoice newInvoice)
+	{
+		return servInvoice.addInvoice(newInvoice);
+	}
 
-            resPatient patient = appointment.getPatient();
-            patient.setMemberships(new ArrayList<>());
-            patient.setAppointments(new ArrayList<>());
-            patient.setMedImages(new ArrayList<>());
-            appointment.setPatient(patient);
-            appointment.setInvoice(null);
-            invoice.setAppointment(appointment);
-        }
+	@Override
+	public void updateInvoice(long code, resInvoice updatedInvoice)
+	{
+		servInvoice.updateInvoice(code, updatedInvoice);
+	}
 
-        resPackageMembership membership = invoice.getUsedMembership();
-        if (membership != null) {
+	@Override
+	public void deleteInvoice(long code)
+	{
+		servInvoice.deleteInvoice(code);
+	}
 
-            membership.setPatient(null);
-
-
-            resPackageBase packageBase = membership.getPackageBase();
-            packageBase.setMemberships(new ArrayList<>());
-            invoice.setUsedMembership(membership);
-        }
-
-
-        resPatient patient = invoice.getPatientMembershipSubscriber();
-if(patient !=null) {
-    patient.setInvoiceMemberships(new ArrayList<>());
-    patient.setMedImages(null);
-    patient.setAppointments(null);
-    patient.setMemberships(null);
-    invoice.setPatientMembershipSubscriber(patient);
-}
-
-        return invoice;
-    }
-
-    @Override
-    public resInvoice addInvoice(resInvoice newInvoice) {
-        return servInvoice.addInvoice(newInvoice);
-    }
-
-    @Override
-    public void updateInvoice(long code, resInvoice updatedInvoice) {
-        servInvoice.updateInvoice(code, updatedInvoice);
-    }
-
-    @Override
-    public void deleteInvoice(long code) {
-        servInvoice.deleteInvoice(code);
-    }
-
-    @Override
-    public void sendInvoiceEmail(resInvoice invoice) throws MessagingException, IOException, TemplateException, DocumentException {
-        servEmail.sendInvoiceEmail(invoice);
-    }
+	@Override
+	public void sendInvoiceEmail(resInvoice invoice)
+	throws MessagingException, IOException, TemplateException, DocumentException
+	{
+		servEmail.sendInvoiceEmail(invoice);
+	}
 }
