@@ -4,14 +4,17 @@ import com.carecure.medsysten.resources.resDoctor;
 import com.carecure.medsysten.resources.resPatient;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "users")
+@Data
+@NoArgsConstructor
 public class UserDao {
     @Id
     @Column(name = "user_id")
@@ -47,81 +50,5 @@ public class UserDao {
     private resDoctor doctor;
 
 
-    public resDoctor getDoctor() {
-        return doctor;
-    }
 
-    public void setDoctor(resDoctor doctor) {
-        this.doctor = doctor;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public UserDao(long code, String name, String username, String password, boolean enabled, Set<role> roles, resPatient patient, resDoctor doctor) {
-        this.code = code;
-        this.name = name;
-        this.username = username;
-        this.password = password;
-        this.enabled = enabled;
-        this.roles = roles;
-        this.patient = patient;
-        this.doctor = doctor;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public long getCode() {
-        return code;
-    }
-
-    public void setCode(long code) {
-        this.code = code;
-    }
-
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    public Set<role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<role> roles) {
-        this.roles = roles;
-    }
-
-    public UserDao() {
-    }
-
-    public resPatient getPatient() {
-        return patient;
-    }
-
-    public void setPatient(resPatient patient) {
-        this.patient = patient;
-    }
 }
