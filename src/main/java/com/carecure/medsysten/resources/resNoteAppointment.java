@@ -8,23 +8,22 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name="resinvoiceitem")
+@Table(name="resnoteappointment")
 @JsonIgnoreProperties("hibernateLazyInitializer")
 @Data
 @NoArgsConstructor
-public class resInvoiceItem {
+public class resNoteAppointment {
 
     @Id
     @GeneratedValue( strategy= GenerationType.IDENTITY )
     private long code;
 
-    private String name;
-    private int price;
+    private String note;
 
-    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "invoiceCode")
-    private resInvoice invoice;
+    @JoinColumn(name = "appointmentCode")
+    @JsonBackReference
+    private resAppointment appointment;
 
 
 }

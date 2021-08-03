@@ -3,7 +3,8 @@ package com.carecure.medsysten.resources;
 import com.carecure.medsysten.enums.EnumInventoryItemCategory;
 import com.carecure.medsysten.services.ServInventoryOrder;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,14 +15,12 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Map;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+
 @Entity
-@JsonIgnoreProperties("hibernateLazyInitializer")
-@ToString
 @Table(name = "resinventoryitem")
+@JsonIgnoreProperties("hibernateLazyInitializer")
+@Data
+@NoArgsConstructor
 public class ResInventoryItem
 {
 	private static final Logger logger = LoggerFactory.getLogger(ServInventoryOrder.class.getName());
